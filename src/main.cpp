@@ -1,9 +1,9 @@
 #include "include/rltk.hpp"
 #include <sstream>
+#include "utils/gui.hpp"
+#include "systems/ActorSystem.hpp"
 
-enum gui_layer {
-	MAIN_LAYER,
-};
+ActorSystem player;
 
 void resize_main(rltk::layer_t *l, int w, int h) {
 	l->w = w;
@@ -12,10 +12,10 @@ void resize_main(rltk::layer_t *l, int w, int h) {
 
 void tick(double duration_ms) {
 	std::stringstream ss;
-	ss << "Frame duration: " << duration_ms << " ms (" << (1000.0 / duration_ms) << " FPS).";
+	//ss << "Frame duration: " << duration_ms << " ms (" << (1000.0 / duration_ms) << " FPS).";
 	rltk::term(MAIN_LAYER)->clear();
-	rltk::term(MAIN_LAYER)->print(1, 1, "Hello World", rltk::colors::WHITE, rltk::colors::BLACK);
-	rltk::term(MAIN_LAYER)->print(1, 2, ss.str(), rltk::colors::YELLOW, rltk::colors::BLUE);
+	player.update();
+	//rltk::term(MAIN_LAYER)->print(1, 2, ss.str(), rltk::colors::YELLOW, rltk::colors::BLUE);
 }
 
 int main()

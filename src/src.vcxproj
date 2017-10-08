@@ -116,11 +116,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="components\RenderComponent.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="systems\ActorSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="components\Position.hpp" />
-    <ClInclude Include="components\Renderable.hpp" />
+    <ClInclude Include="components\PositionComponent.hpp" />
+    <ClInclude Include="components\RenderComponent.hpp" />
+    <ClInclude Include="systems\ActorSystem.hpp" />
+    <ClInclude Include="utils\gui.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
