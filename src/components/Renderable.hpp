@@ -1,5 +1,5 @@
 #pragma once
-#include "include/rltk.hpp"
+#include "../include/rltk.hpp"
 
 struct Renderable {
 	Renderable(const char tile = ' ', const rltk::color_t foreground = rltk::colors::WHITE) : tile_(tile), fg_(foreground) {}

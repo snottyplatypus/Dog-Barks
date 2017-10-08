@@ -119,8 +119,8 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Position.hpp" />
-    <ClInclude Include="Renderable.hpp" />
+    <ClInclude Include="components\Position.hpp" />
+    <ClInclude Include="components\Renderable.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
