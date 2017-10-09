@@ -121,6 +121,7 @@
     <ClCompile Include="systems\ActorSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="components\Command.hpp" />
     <ClInclude Include="components\PositionComponent.hpp" />
     <ClInclude Include="components\RenderComponent.hpp" />
     <ClInclude Include="systems\ActorSystem.hpp" />
