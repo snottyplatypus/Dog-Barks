@@ -13,6 +13,7 @@ int main()
 {
 	rltk::init(rltk::config_advanced("../assets", 720, 480));
 	rltk::gui->add_layer(MAIN_LAYER, 0, 0, 720, 480, "8x8", resize_main);
+	rltk::get_window()->setFramerateLimit(60);
 	rltk::run(tick);
 	return 0;
 }
