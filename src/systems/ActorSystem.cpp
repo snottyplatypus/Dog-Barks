@@ -3,7 +3,7 @@
 ActorSystem::ActorSystem() 
 {
 	pos_ = std::make_shared<PositionComponent>(1, 1);
-	renderer_ = std::make_unique<RenderComponent>(pos_, '@');
+	renderer_ = std::make_unique<RenderComponent>('@');
 	input_ = std::make_unique<InputHandler<ActorSystem>>();
 	command_ = nullptr;
 }

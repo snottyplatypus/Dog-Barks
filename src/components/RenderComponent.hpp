@@ -4,7 +4,7 @@
 #include "PositionComponent.hpp"
 
 struct RenderComponent {
-	RenderComponent(const char tile = ' ', const rltk::color_t foreground = rltk::colors::WHITE) {}
+	RenderComponent(const char tile = ' ', const rltk::color_t foreground = rltk::colors::WHITE) : tile_(tile), fg_(foreground) {}
 	~RenderComponent() {}
 
 	void update(PositionComponent &pos) 
