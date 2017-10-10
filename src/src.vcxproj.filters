@@ -21,9 +21,6 @@
     <ClCompile Include="systems\ActorSystem.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="components\RenderComponent.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="systems\ActorSystem.hpp">

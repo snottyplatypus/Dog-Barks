@@ -116,7 +116,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="components\RenderComponent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="systems\ActorSystem.cpp" />
   </ItemGroup>
