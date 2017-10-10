@@ -7,7 +7,7 @@ struct RenderComponent {
 	RenderComponent(const char tile = ' ', const rltk::color_t foreground = rltk::colors::WHITE) {}
 	~RenderComponent() {}
 
-	void update(const PositionComponent &pos) 
+	void update(PositionComponent &pos) 
 	{
 		rltk::term(MAIN_LAYER)->set_char(pos.x_, pos.y_, rltk::vchar{ tile_, fg_, bg_ });
 	}
