@@ -1,8 +1,8 @@
 #include "include/rltk.hpp"
 #include "utils/gui.hpp"
-#include "systems/ActorSystem.hpp"
+#include "systems/PlayerSystem.hpp"
 
-ActorSystem player;
+PlayerSystem player;
 
 void tick(double duration_ms) {
 	rltk::term(MAIN_LAYER)->clear();

@@ -117,7 +117,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="systems\ActorSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="components\Command.hpp" />
@@ -125,6 +124,7 @@
     <ClInclude Include="components\PositionComponent.hpp" />
     <ClInclude Include="components\RenderComponent.hpp" />
     <ClInclude Include="systems\ActorSystem.hpp" />
+    <ClInclude Include="systems\PlayerSystem.hpp" />
     <ClInclude Include="utils\gui.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

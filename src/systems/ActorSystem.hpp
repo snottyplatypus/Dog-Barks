@@ -6,15 +6,20 @@
 
 struct ActorSystem
 {
-	ActorSystem();
-	~ActorSystem();
+	ActorSystem() 
+	{
+		pos_ = std::make_shared<PositionComponent>(1, 1);
+		renderer_ = std::make_unique<RenderComponent>('@');
+		command_ = nullptr;
+	}
 
-	void update();
+	virtual ~ActorSystem() {}
+
+	virtual void update() = 0;
 
 	std::shared_ptr<PositionComponent> pos_;
 
-private:
+protected:
 	std::unique_ptr<RenderComponent> renderer_;
-	std::unique_ptr<InputHandler<ActorSystem>> input_;
 	std::shared_ptr<Command<ActorSystem>> command_;
 };
