@@ -11,6 +11,10 @@ struct RenderComponent {
 	{
 		rltk::term(MAIN_LAYER)->set_char(pos.x_, pos.y_, rltk::vchar{ tile_, fg_, bg_ });
 	}
+	void update(int& x, int& y)
+	{
+		rltk::term(MAIN_LAYER)->set_char(x, y, rltk::vchar{ tile_, fg_, bg_ });
+	}
 
 	char tile_;
 	rltk::color_t fg_;
