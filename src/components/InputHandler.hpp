@@ -47,5 +47,4 @@ template<typename T> struct InputHandler
 private:
 	std::unordered_map<int, std::shared_ptr<Command<T>>> commands;
 	rltk::key_pressed_t key;
-	sf::Event event;
 };
