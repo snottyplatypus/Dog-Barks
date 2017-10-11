@@ -260,5 +260,6 @@ paket-files/
 __pycache__/
 *.pyc
 
-#other
+#libs
 include/
+rltk.lib
