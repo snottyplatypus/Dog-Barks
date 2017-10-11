@@ -1,25 +1,20 @@
 #pragma once
 #include "../include/rltk.hpp"
-#include "../components/PositionComponent.hpp"
-#include "../components/RenderComponent.hpp"
-#include "../components/InputHandler.hpp"
+#include "GameObjectSystem.hpp"
+#include "../components/Command.hpp"
 
-struct ActorSystem
+struct ActorSystem : public GameObjectSystem
 {
 	ActorSystem() 
 	{
-		pos_ = std::make_shared<PositionComponent>(1, 1);
-		renderer_ = std::make_unique<RenderComponent>('@');
+		renderer_->tile_ = '@';
 		command_ = nullptr;
 	}
 
 	virtual ~ActorSystem() {}
 
-	virtual void update() = 0;
-
-	std::shared_ptr<PositionComponent> pos_;
+	virtual void update() override = 0;
 
 protected:
-	std::unique_ptr<RenderComponent> renderer_;
 	std::shared_ptr<Command<ActorSystem>> command_;
 };

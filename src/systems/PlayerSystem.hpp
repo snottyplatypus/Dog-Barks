@@ -1,5 +1,6 @@
 #pragma once
 #include "ActorSystem.hpp"
+#include "../components/InputHandler.hpp"
 
 struct PlayerSystem : public ActorSystem
 {
