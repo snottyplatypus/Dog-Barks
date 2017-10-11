@@ -2,7 +2,7 @@
 #include <unordered_map>
 #include <queue>
 #include <memory>
-#include "../include/rltk.hpp"
+#include "../include/rltk/rltk.hpp"
 #include "Command.hpp"
 #include <iostream>
 

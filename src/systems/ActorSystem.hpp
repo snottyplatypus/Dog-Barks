@@ -1,5 +1,5 @@
 #pragma once
-#include "../include/rltk.hpp"
+#include "../include/rltk/rltk.hpp"
 #include "GameObjectSystem.hpp"
 #include "../components/Command.hpp"
 
