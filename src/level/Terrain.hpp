@@ -8,8 +8,8 @@ struct Terrain {
 	Terrain() {}
 	~Terrain() {}
 
-	char tile_;
+	char tile_ = 'X';
 	bool isTransparent_;
 	bool isWalkable_;
-	std::shared_ptr<ActorSystem> actor;
+	std::shared_ptr<ActorSystem> actor_;
 };

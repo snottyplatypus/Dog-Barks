@@ -1,12 +1,13 @@
 #include "include/rltk/rltk.hpp"
 #include "utils/gui.hpp"
 #include "systems/PlayerSystem.hpp"
+#include "level/Level.hpp"
 
-PlayerSystem player;
+Level level;
 
 void tick(double duration_ms) {
 	rltk::term(MAIN_LAYER)->clear();
-	player.update();
+	level.update();
 }
 
 int main()
