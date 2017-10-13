@@ -2,9 +2,10 @@
 #include "../include/rltk/rltk.hpp"
 #include "../utils/gui.hpp"
 #include "PositionComponent.hpp"
+#include "../Tile.hpp"
 
 struct RenderComponent {
-	RenderComponent(const char tile = ' ', const rltk::color_t foreground = rltk::colors::WHITE) : tile_(tile), fg_(foreground) {}
+	RenderComponent(const char tile = NOTHING, const rltk::color_t foreground = rltk::colors::WHITE) : tile_(tile), fg_(foreground) {}
 	~RenderComponent() {}
 
 	void update(PositionComponent &pos) 

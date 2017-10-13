@@ -123,6 +123,8 @@
     <ClInclude Include="components\InputHandler.hpp" />
     <ClInclude Include="components\PositionComponent.hpp" />
     <ClInclude Include="components\RenderComponent.hpp" />
+    <ClInclude Include="level\Terrain.hpp" />
+    <ClInclude Include="Tile.hpp" />
     <ClInclude Include="systems\ActorSystem.hpp" />
     <ClInclude Include="systems\GameObjectSystem.hpp" />
     <ClInclude Include="systems\PlayerSystem.hpp" />

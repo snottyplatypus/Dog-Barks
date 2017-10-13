@@ -7,7 +7,7 @@ struct ActorSystem : public GameObjectSystem
 {
 	ActorSystem() 
 	{
-		renderer_->tile_ = '@';
+		renderer_->tile_ = ACTOR;
 		command_ = nullptr;
 	}
 

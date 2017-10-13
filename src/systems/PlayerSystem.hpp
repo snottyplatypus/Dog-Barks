@@ -6,6 +6,7 @@ struct PlayerSystem : public ActorSystem
 {
 	PlayerSystem() 
 	{
+		renderer_->tile_ = PLAYER;
 		input_ = std::make_unique<InputHandler<ActorSystem>>();
 	}
 
