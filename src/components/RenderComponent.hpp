@@ -5,7 +5,8 @@
 #include "../Tile.hpp"
 
 struct RenderComponent {
-	RenderComponent(const char tile = NOTHING, const rltk::color_t foreground = rltk::colors::WHITE) : tile_(tile), fg_(foreground) {}
+	RenderComponent(const char tile = NOTHING, const rltk::color_t foreground = rltk::colors::WHITE, const std::string name = "Object") 
+		: tile_(tile), fg_(foreground), name_(name) {}
 	~RenderComponent() {}
 
 	void update(PositionComponent &pos) 
@@ -20,4 +21,5 @@ struct RenderComponent {
 	char tile_;
 	rltk::color_t fg_;
 	rltk::color_t bg_ = rltk::colors::BLACK;
+	std::string name_;
 };

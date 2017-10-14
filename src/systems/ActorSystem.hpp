@@ -5,9 +5,10 @@
 
 struct ActorSystem : public GameObjectSystem
 {
-	ActorSystem() 
+	ActorSystem(std::string name = "Actor")
 	{
 		renderer_->tile_ = ACTOR;
+		renderer_->name_ = "Actor";
 		command_ = nullptr;
 	}
 

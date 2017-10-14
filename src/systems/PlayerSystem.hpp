@@ -4,9 +4,10 @@
 
 struct PlayerSystem : public ActorSystem
 {
-	PlayerSystem() 
+	PlayerSystem()
 	{
 		renderer_->tile_ = PLAYER;
+		renderer_->name_ = "Player";
 		input_ = std::make_unique<InputHandler<ActorSystem>>();
 	}
 
