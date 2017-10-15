@@ -118,6 +118,7 @@
   <ItemGroup>
     <ClCompile Include="level\Level.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="systems\PlayerSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="components\Command.hpp" />

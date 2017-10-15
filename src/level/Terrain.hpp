@@ -5,7 +5,7 @@ struct ActorSystem;
 
 struct Terrain {
 
-	Terrain() {}
+	Terrain(): isTransparent_(true), isWalkable_(true), actor_(nullptr) {}
 	~Terrain() {}
 
 	char tile_ = 'X';

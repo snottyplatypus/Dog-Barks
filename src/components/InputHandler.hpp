@@ -1,10 +1,8 @@
 #pragma once
 #include <unordered_map>
-#include <queue>
 #include <memory>
 #include "../include/rltk/rltk.hpp"
 #include "Command.hpp"
-#include <iostream>
 
 template<typename T> struct InputHandler
 {
