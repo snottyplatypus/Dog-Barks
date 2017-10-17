@@ -1,25 +1,25 @@
 #pragma once
-#include "../include/rltk/rltk.hpp"
-#include "../utils/gui.hpp"
+#include "../include/libtcod/libtcod.hpp"
 #include "PositionComponent.hpp"
 #include "../Tile.hpp"
+#include <string>
 
 struct RenderComponent {
-	RenderComponent(const char tile = NOTHING, const std::string name = "Object", const rltk::color_t foreground = rltk::colors::WHITE)
-		: tile_(tile), fg_(foreground), name_(name) {}
+	RenderComponent(const char tile = NOTHING, const std::string name = "Object", const TCODColor foreground = TCODColor::white)
+		: tile_(tile), fg_(foreground), bg_(TCODColor::black), name_(name) {}
 	~RenderComponent() {}
 
 	void update(PositionComponent &pos) const
 	{
-		rltk::term(MAIN_LAYER)->set_char(pos.x_, pos.y_, rltk::vchar{ tile_, fg_, bg_ });
+		TCODConsole::root->setChar(pos.x_, pos.y_, tile_);
 	}
 	void update(int& x, int& y) const
 	{
-		rltk::term(MAIN_LAYER)->set_char(x, y, rltk::vchar{ tile_, fg_, bg_ });
+		TCODConsole::root->setChar(x, y, tile_);
 	}
 
 	char tile_;
-	rltk::color_t fg_;
-	rltk::color_t bg_ = rltk::colors::BLACK;
+	TCODColor fg_;
+	TCODColor bg_;
 	std::string name_;
 };

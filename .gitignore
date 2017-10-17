@@ -265,3 +265,5 @@ include/
 rltk.lib
 libtcod.lib
 libtcod.dll
+libtcod-gui.dll
+SDL2.dll
