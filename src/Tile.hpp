@@ -1,5 +1,6 @@
 #pragma once
-enum Tile {
+enum Tile 
+{
 	NOTHING = ' ',
 	ACTOR = 1,
 	PLAYER = 2,

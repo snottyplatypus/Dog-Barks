@@ -8,7 +8,7 @@ struct Terrain {
 
 	Terrain(): isTransparent_(true), isWalkable_(true), actor_(nullptr)
 	{
-		renderer_ = std::make_shared<RenderComponent>('X', "Ground");
+		renderer_ = std::make_shared<RenderComponent>('.', "Ground");
 	}
 	~Terrain() {}
 

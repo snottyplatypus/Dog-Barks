@@ -126,6 +126,7 @@
     <ClCompile Include="level\Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="systems\PlayerSystem.cpp" />
+    <ClCompile Include="utils\EventManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="components\Command.hpp" />
@@ -138,6 +139,8 @@
     <ClInclude Include="systems\ActorSystem.hpp" />
     <ClInclude Include="systems\GameObjectSystem.hpp" />
     <ClInclude Include="systems\PlayerSystem.hpp" />
+    <ClInclude Include="utils\Event.hpp" />
+    <ClInclude Include="utils\EventManager.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

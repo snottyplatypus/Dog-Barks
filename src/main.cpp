@@ -2,8 +2,10 @@
 #include "include/libtcod/libtcod.hpp"
 #include "systems/PlayerSystem.hpp"
 #include "level/Level.hpp"
+#include "utils/EventManager.hpp"
 
 Level level;
+EventManager eventManager;
 
 int main()
 {
