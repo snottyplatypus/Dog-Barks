@@ -7,7 +7,7 @@
 class Level
 {
 public:
-	Level(const int width = 32, const int height = 32);
+	Level(const int width = 3, const int height = 3);
 	~Level();
 	void update();
 

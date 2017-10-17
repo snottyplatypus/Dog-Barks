@@ -16,5 +16,4 @@ void PlayerSystem::update()
 	command_ = input_->update();
 	if (command_ != nullptr)
 		command_->execute(*this);
-	renderer_->update(*pos_);
 }
