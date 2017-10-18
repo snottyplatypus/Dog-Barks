@@ -9,7 +9,7 @@ enum Event
 
 struct MoveEvent
 {
-	int _id = NONE;
+	int _id = MOVE;
 	int _x;
 	int _y;
 };

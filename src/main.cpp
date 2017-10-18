@@ -4,6 +4,7 @@
 #include "level/Level.hpp"
 #include "utils/EventManager.hpp"
 
+TCODRandom rng;
 Level level;
 EventManager eventManager;
 

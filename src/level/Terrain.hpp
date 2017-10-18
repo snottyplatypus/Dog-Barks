@@ -6,9 +6,10 @@ struct ActorSystem;
 
 struct Terrain {
 
-	Terrain(): _isTransparent(true), _isWalkable(true), _actor(nullptr)
+	Terrain(char tile = 'X', std::string name = "Wall", bool isTransparent = false, bool isWalkable = false)
+		: _isTransparent(isTransparent), _isWalkable(isWalkable), _actor(nullptr)
 	{
-		_renderer = std::make_shared<RenderComponent>('.', "Ground");
+		_renderer = std::make_shared<RenderComponent>(tile, name);
 	}
 	~Terrain() {}
 

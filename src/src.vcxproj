@@ -139,6 +139,7 @@
     <ClInclude Include="systems\ActorSystem.hpp" />
     <ClInclude Include="systems\GameObjectSystem.hpp" />
     <ClInclude Include="systems\PlayerSystem.hpp" />
+    <ClInclude Include="utils\Global.hpp" />
     <ClInclude Include="utils\Event.hpp" />
     <ClInclude Include="utils\EventManager.hpp" />
   </ItemGroup>

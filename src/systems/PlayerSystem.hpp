@@ -4,7 +4,7 @@
 
 struct PlayerSystem : public ActorSystem
 {
-	PlayerSystem();
+	PlayerSystem(int x = 1, int y = 1);
 	~PlayerSystem();
 
 	void update() override;
