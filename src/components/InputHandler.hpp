@@ -36,11 +36,11 @@ template<typename T> struct InputHandler
 
 	std::shared_ptr<Command<T>> update()
 	{
-		TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS, &key, nullptr);
-		return commands[key.vk];
+		TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS, &_key, nullptr);
+		return commands[_key.vk];
 	}
 
 private:
 	std::unordered_map<int, std::shared_ptr<Command<T>>> commands;
-	TCOD_key_t key;
+	TCOD_key_t _key;
 };

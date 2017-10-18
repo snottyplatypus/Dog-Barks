@@ -15,11 +15,11 @@ public:
 	std::vector<std::shared_ptr<ActorSystem>> actors_;
 
 private:
-	int width_;
-	int height_;
+	int _width;
+	int _height;
 
 public:
-	boost::multi_array<Terrain, 2> terrain_;
+	boost::multi_array<Terrain, 2> _terrain;
 };
 
 extern Level level;

@@ -6,12 +6,12 @@
 struct GameObjectSystem 
 {
 	GameObjectSystem() {
-		pos_ = std::make_shared<PositionComponent>();
-		renderer_ = std::make_unique<RenderComponent>();
+		_pos = std::make_shared<PositionComponent>();
+		_renderer = std::make_unique<RenderComponent>();
 	}
 
 	virtual ~GameObjectSystem() {}
 
-	std::shared_ptr<PositionComponent> pos_;
-	std::unique_ptr<RenderComponent> renderer_;
+	std::shared_ptr<PositionComponent> _pos;
+	std::unique_ptr<RenderComponent> _renderer;
 };

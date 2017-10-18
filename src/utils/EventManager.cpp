@@ -17,9 +17,9 @@ void EventManager::onNotify(Event& event)
 
 void EventManager::onNotify(MoveEvent event, GameObjectSystem& object)
 {
-	if (level.terrain_[object.pos_->x_ + event._x][object.pos_->y_ + event._y].isWalkable_) {
-		level.terrain_[object.pos_->x_][object.pos_->y_].actor_ = nullptr;
-		object.pos_->x_ += event._x;
-		object.pos_->y_ += event._y;
+	if (level._terrain[object._pos->_x + event._x][object._pos->_y + event._y]._isWalkable) {
+		level._terrain[object._pos->_x][object._pos->_y]._actor = nullptr;
+		object._pos->_x += event._x;
+		object._pos->_y += event._y;
 	}
 }

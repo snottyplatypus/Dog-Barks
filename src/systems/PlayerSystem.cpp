@@ -2,9 +2,9 @@
 
 PlayerSystem::PlayerSystem()
 {
-	renderer_->tile_ = PLAYER;
-	renderer_->name_ = "Player";
-	input_ = std::make_unique<InputHandler<ActorSystem>>();
+	_renderer->_tile = PLAYER;
+	_renderer->_name = "Player";
+	_input = std::make_unique<InputHandler<ActorSystem>>();
 }
 
 PlayerSystem::~PlayerSystem()
@@ -13,7 +13,7 @@ PlayerSystem::~PlayerSystem()
 
 void PlayerSystem::update()
 {
-	command_ = input_->update();
-	if (command_ != nullptr)
-		command_->execute(*this);
+	_command = _input->update();
+	if (_command != nullptr)
+		_command->execute(*this);
 }

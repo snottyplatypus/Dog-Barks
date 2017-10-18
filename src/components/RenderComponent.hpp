@@ -6,20 +6,20 @@
 
 struct RenderComponent {
 	RenderComponent(const char tile = NOTHING, const std::string name = "Object", const TCODColor foreground = TCODColor::white)
-		: tile_(tile), fg_(foreground), bg_(TCODColor::black), name_(name) {}
+		: _tile(tile), _fg(foreground), _bg(TCODColor::black), _name(name) {}
 	~RenderComponent() {}
 
 	void update(PositionComponent &pos) const
 	{
-		TCODConsole::root->setChar(pos.x_, pos.y_, tile_);
+		TCODConsole::root->setChar(pos._x, pos._y, _tile);
 	}
 	void update(int& x, int& y) const
 	{
-		TCODConsole::root->setChar(x, y, tile_);
+		TCODConsole::root->setChar(x, y, _tile);
 	}
 
-	char tile_;
-	TCODColor fg_;
-	TCODColor bg_;
-	std::string name_;
+	char _tile;
+	TCODColor _fg;
+	TCODColor _bg;
+	std::string _name;
 };

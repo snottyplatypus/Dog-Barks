@@ -1,9 +1,9 @@
 #pragma once
 struct PositionComponent
 {
-	PositionComponent(const int x = 0, const int y = 0) : x_(x), y_(y) {}
+	PositionComponent(const int x = 0, const int y = 0) : _x(x), _y(y) {}
 	~PositionComponent() {}
 
-	int x_;
-	int y_;
+	int _x;
+	int _y;
 };

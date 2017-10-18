@@ -10,5 +10,5 @@ struct PlayerSystem : public ActorSystem
 	void update() override;
 
 private:
-	std::unique_ptr<InputHandler<ActorSystem>> input_;
+	std::unique_ptr<InputHandler<ActorSystem>> _input;
 };

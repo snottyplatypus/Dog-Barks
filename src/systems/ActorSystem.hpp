@@ -6,14 +6,14 @@ struct ActorSystem : public GameObjectSystem
 {
 	ActorSystem()
 	{
-		renderer_->tile_ = ACTOR;
-		renderer_->name_ = "Actor";
-		command_ = nullptr;
+		_renderer->_tile = ACTOR;
+		_renderer->_name = "Actor";
+		_command = nullptr;
 	}
 
 	virtual ~ActorSystem() {}
 	virtual void update() = 0;
 
 protected:
-	std::shared_ptr<Command<ActorSystem>> command_;
+	std::shared_ptr<Command<ActorSystem>> _command;
 };
