@@ -2,6 +2,6 @@
 enum Tile 
 {
 	NOTHING = ' ',
-	ACTOR = 1,
-	PLAYER = 2,
+	PLAYER = 1,
+	ACTOR = 2,
 };
