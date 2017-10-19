@@ -38,39 +38,47 @@ void Level::update()
 void Level::generateLevel(int type)
 {
 	if (type == CLASSIC)
-		generateClassic(1, 1);
+		generateClassic(1, 1, { 0, 0 });
 }
 
-void Level::generateClassic(int x, int y)
+void Level::generateClassic(int x, int y, PositionComponent lastRoom)
 {
 	//TODO
 	//tag adjacent walls
 	//tag walls between rooms
 	//put doors between rooms
-	setIntBounds(x, y);
 	int width = rng.getInt(MIN_ROOM_SIZE, MAX_ROOM_SIZE);
 	int height = rng.getInt(MIN_ROOM_SIZE, MAX_ROOM_SIZE);
+
+	if(x < lastRoom._x)
+		x = x - width;
+	if (y < lastRoom._y)
+		y = y - height;
 	int x2 = x + width;
 	int y2 = y + height;
-	setIntBounds(x2, y2);
+	setInBounds(x, y);
+	setInBounds(x2, y2);
+	width = x2 - x;
+	height = y2 - y;
 
-	if (x < _width - MAX_ROOM_SIZE && y < _height - MAX_ROOM_SIZE) {
-		if (!checkVisited(x, y, x2 - x, y2 - y)) {
-			fill(x, y, x2 - x, y2 - y, { FLOOR, "Ground", true, true });
+	if (x < _width - MAX_ROOM_SIZE && y < _height - MAX_ROOM_SIZE && x > 0 && y > 0) {
+		if (!checkVisited(x, y, width, height)) {
+			fill(x, y, width, height, { FLOOR, "Ground", true, true });
 
 			for (int i = x; i < x2; i++)
 				for (int j = y; j < y2; j++)
 					_visited[i][j] = true;
 
-			generateClassic(x2 + 1, y + rng.getInt(0, 5, -1));
-			generateClassic(x + rng.getInt(0, 5, -1), y2 + 1);
+			generateClassic(x - 1, y, { x, y });
+			generateClassic(x, y - 1, { x, y });
+			generateClassic(x2 + 1, y, { x, y });
+			generateClassic(x, y2 + 1, { x, y });
 		}
 	}
 }
 
 void Level::fill(int x, int y, int width, int height, Terrain terrain)
 {
-	
 	for (int i = x; i < x + width; ++i)
 		for (int j = y; j < y + height; ++j)
 			_terrain[i][j] = terrain;
@@ -85,7 +93,7 @@ bool Level::checkVisited(int x, int y, int width, int height)
 	return false;
 }
 
-void Level::setIntBounds(int& x, int& y)
+void Level::setInBounds(int& x, int& y)
 {
 	if (x < 0)
 		x = 0;

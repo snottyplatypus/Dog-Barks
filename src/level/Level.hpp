@@ -15,10 +15,10 @@ public:
 	~Level();
 	void update();
 	void generateLevel(int type);
-	void generateClassic(int x, int y);
+	void generateClassic(int x, int y, PositionComponent lastRoom);
 	void fill(int x, int y, int width, int height, Terrain terrain);
 	bool checkVisited(int x, int y, int width, int height);
-	void setIntBounds(int& x, int& y);
+	void setInBounds(int& x, int& y);
 
 	std::shared_ptr<PlayerSystem> _player;
 	std::vector<std::shared_ptr<ActorSystem>> _actors;
