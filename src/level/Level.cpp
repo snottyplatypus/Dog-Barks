@@ -43,6 +43,10 @@ void Level::generateLevel(int type)
 
 void Level::generateClassic(int x, int y)
 {
+	//TODO
+	//tag adjacent walls
+	//tag walls between rooms
+	//put doors between rooms
 	setIntBounds(x, y);
 	int width = rng.getInt(MIN_ROOM_SIZE, MAX_ROOM_SIZE);
 	int height = rng.getInt(MIN_ROOM_SIZE, MAX_ROOM_SIZE);
@@ -50,7 +54,7 @@ void Level::generateClassic(int x, int y)
 	int y2 = y + height;
 	setIntBounds(x2, y2);
 
-	if (x < _width - MIN_ROOM_SIZE && y < _height - MIN_ROOM_SIZE) {
+	if (x < _width - MAX_ROOM_SIZE && y < _height - MAX_ROOM_SIZE) {
 		if (!checkVisited(x, y, x2 - x, y2 - y)) {
 			fill(x, y, x2 - x, y2 - y, { '.', "Ground", true, true });
 
