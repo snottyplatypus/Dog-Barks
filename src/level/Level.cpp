@@ -1,6 +1,7 @@
 #include "Level.hpp"
 #include "../include/libtcod/libtcod.hpp"
 #include "../utils/Global.hpp"
+#include "../Tile.hpp"
 #include <algorithm>
 #include <iostream>
 
@@ -11,7 +12,6 @@ Level::Level(const int width, const int height)
 	_actors.push_back(_player);
 
 	std::fill(_visited.origin(), _visited.origin() + _visited.size(), false);
-	std::cout << _visited[0][0];
 	generateLevel(CLASSIC);
 }
 
@@ -56,7 +56,7 @@ void Level::generateClassic(int x, int y)
 
 	if (x < _width - MAX_ROOM_SIZE && y < _height - MAX_ROOM_SIZE) {
 		if (!checkVisited(x, y, x2 - x, y2 - y)) {
-			fill(x, y, x2 - x, y2 - y, { '.', "Ground", true, true });
+			fill(x, y, x2 - x, y2 - y, { FLOOR, "Ground", true, true });
 
 			for (int i = x; i < x2; i++)
 				for (int j = y; j < y2; j++)

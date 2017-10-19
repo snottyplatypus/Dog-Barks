@@ -1,12 +1,13 @@
 #pragma once
 #include <memory>
 #include "../components/RenderComponent.hpp"
+#include "../Tile.hpp"
 
 struct ActorSystem;
 
 struct Terrain {
 
-	Terrain(char tile = 'X', std::string name = "Wall", bool isTransparent = false, bool isWalkable = false)
+	Terrain(int tile = BLOCK3, std::string name = "Wall", bool isTransparent = false, bool isWalkable = false)
 		: _isTransparent(isTransparent), _isWalkable(isWalkable), _actor(nullptr)
 	{
 		_renderer = std::make_shared<RenderComponent>(tile, name);

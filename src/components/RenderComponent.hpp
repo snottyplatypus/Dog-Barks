@@ -5,7 +5,7 @@
 #include <string>
 
 struct RenderComponent {
-	RenderComponent(const char tile = NOTHING, const std::string name = "Object", const TCODColor foreground = TCODColor::white)
+	RenderComponent(const int tile = NOTHING, const std::string name = "Object", const TCODColor foreground = TCODColor::white)
 		: _tile(tile), _fg(foreground), _bg(TCODColor::black), _name(name) {}
 	~RenderComponent() {}
 
@@ -18,7 +18,7 @@ struct RenderComponent {
 		TCODConsole::root->setChar(x, y, _tile);
 	}
 
-	char _tile;
+	int _tile;
 	TCODColor _fg;
 	TCODColor _bg;
 	std::string _name;
