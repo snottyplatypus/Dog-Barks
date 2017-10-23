@@ -7,5 +7,5 @@ enum Tile {
 	ACTOR = 2,
 	FLOOR = '+',
 	BLOCK3 = TCOD_CHAR_BLOCK3,
-	DOOR = '%',
+	DOOR = '/',
 };
