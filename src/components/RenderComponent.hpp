@@ -9,13 +9,9 @@ struct RenderComponent {
 		: _tile(tile), _fg(foreground), _bg(TCODColor::black), _name(name) {}
 	~RenderComponent() {}
 
-	void update(PositionComponent &pos) const
+	void update(PositionComponent pos) const
 	{
-		TCODConsole::root->setChar(pos._x, pos._y, _tile);
-	}
-	void update(int& x, int& y) const
-	{
-		TCODConsole::root->setChar(x, y, _tile);
+		TCODConsole::root->putCharEx(pos._x, pos._y, _tile, _fg, _bg);
 	}
 
 	int _tile;
