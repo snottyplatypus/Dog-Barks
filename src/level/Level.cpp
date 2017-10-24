@@ -48,7 +48,7 @@ void Level::generateLevel()
 	std::sort(_rooms.begin(), _rooms.end(), [](const Room& a, const Room& b) -> bool { return a._y < b._y; });
 
 	_player->_pos->_x = _rooms[0]._x + 1;
-	_player->_pos->_y = _rooms[0]._y - 1;
+	_player->_pos->_y = _rooms[0]._y - DISTANCE_BORDERS / 2;
 	
 	for (auto i : _rooms)  {
 		for (auto j : _rooms)  {
