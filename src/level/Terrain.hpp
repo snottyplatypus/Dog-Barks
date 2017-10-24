@@ -7,9 +7,9 @@ struct ActorSystem;
 
 struct Terrain {
 
-	Terrain(int tile = '.', std::string name = "Ground", bool isTransparent = true, bool isWalkable = true, bool isWall = false,
-			TCODColor fg = TCODColor::white, TCODColor bg = TCODColor::black)
-		: _isTransparent(isTransparent), _isWalkable(isWalkable), _isWall(isWall), _actor(nullptr)
+	Terrain(int tile = NOTHING, std::string name = "Ground", bool isTransparent = true, bool isWalkable = false,
+			TCODColor fg = TCODColor::white, TCODColor bg = TCODColor::black, bool isEscape = false)
+		: _isTransparent(isTransparent), _isWalkable(isWalkable), _isEscape(isEscape), _actor(nullptr)
 	{
 		_renderer = std::make_shared<RenderComponent>(tile, name);
 		_renderer->_fg = fg;
@@ -19,7 +19,7 @@ struct Terrain {
 
 	bool _isTransparent;
 	bool _isWalkable;
-	bool _isWall;
+	bool _isEscape;
 	std::shared_ptr<ActorSystem> _actor;
 	std::shared_ptr<RenderComponent> _renderer;
 };

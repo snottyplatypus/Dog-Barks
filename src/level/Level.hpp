@@ -17,7 +17,7 @@ struct Room {
 class Level
 {
 public:
-	Level(const int width = 24, const int height = 24);
+	Level(const int width = 32, const int height = 32);
 	~Level();
 	void update();
 	void generateLevel();
