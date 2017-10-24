@@ -84,7 +84,7 @@ void Level::generateLevel()
 
 void Level::initTerrain()
 {
-	fill(1, 1, _width - 2, _height - 2, { BLOCK1, "Escape", true, true, TCODColor::desaturatedGreen, TCODColor::darkerSepia, true });
+	fill(1, 1, _width - 2, _height - 2, { BLOCK1, "Escape", true, true, TCODColor::desaturatedGreen, TCODColor::black, true });
 	for (int i = 2; i < _width - 2; ++i)
 		for (int j = 2; j < _height - 2; ++j)
 			switch (rng.getInt(0, 3)) {
