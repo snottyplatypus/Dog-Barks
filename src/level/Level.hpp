@@ -20,6 +20,7 @@ public:
 	~Level();
 	void update();
 	void generateLevel();
+	void initTerrain();
 	void generateRecursive(int x, int y, Room lastRoom);
 	void fill(int x, int y, int width, int height, Terrain terrain);
 	bool checkVisited(int x, int y, int width, int height);
@@ -28,9 +29,10 @@ public:
 	std::shared_ptr<PlayerSystem> _player;
 	std::vector<std::shared_ptr<ActorSystem>> _actors;
 
-private:
 	int _width;
 	int _height;
+
+private:
 	boost::multi_array<bool, 2> _generated;
 	std::vector<Room> _rooms;
 

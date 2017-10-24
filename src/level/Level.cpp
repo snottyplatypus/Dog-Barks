@@ -38,6 +38,7 @@ void Level::update()
 
 void Level::generateLevel()
 {
+	initTerrain();
 	generateRecursive(_width / 2 - (MAX_ROOM_SIZE - 2) / 2, _height / 2 - (MAX_ROOM_SIZE - 2) / 2, { 0, 0 });
 
 	std::sort(_rooms.begin(), _rooms.end(), [](const Room& a, const Room& b) -> bool { return a._x < b._x; });
@@ -58,7 +59,7 @@ void Level::generateLevel()
 						x = i._x + rng.getInt(1, i._width - 2);
 					if (i._doors < 3) {
 						i._doors++;
-						_terrain[x][i._y] = { DOOR, "Door", false, true, false };
+						_terrain[x][i._y] = { DOOR, "Door", false, true, false, TCODColor::sepia, TCODColor::darkestSepia * 0.5f };
 					}
 				}
 				if (j._y == i._y) {
@@ -70,12 +71,29 @@ void Level::generateLevel()
 						y = i._y + rng.getInt(1, i._height - 2);
 					if (i._doors < 3) {
 						i._doors++;
-						_terrain[i._x][y] = { DOOR, "Door", false, true, false };
+						_terrain[i._x][y] = { DOOR, "Door", false, true, false, TCODColor::sepia, TCODColor::darkestSepia * 0.5f };
 					}
 				}
 			}
 		}
 	}
+}
+
+void Level::initTerrain()
+{
+	fill(0, 0, _width, _height, { BLOCK1, "Ground", true, false, false, TCODColor::grey });
+	for (int i = 1; i < _width - 1; ++i)
+		for (int j = 1; j < _height - 1; ++j)
+			switch (rng.getInt(0, 3)) {
+			case 0:
+				_terrain[i][j] = { '.', "Ground", true, true, false, TCODColor::chartreuse, {0, 13, 0 } }; break;
+			case 1:
+				_terrain[i][j] = { ',', "Ground", true, true, false, TCODColor::chartreuse,{ 0, 13, 0 } }; break;
+			case 2:
+				_terrain[i][j] = { ';', "Ground", true, true, false, TCODColor::chartreuse,{ 0, 13, 0 } }; break;
+			case 3:
+				_terrain[i][j] = { '"', "Ground", true, true, false, TCODColor::chartreuse,{ 0, 13, 0 } }; break;
+			} 
 }
 
 void Level::generateRecursive(int x, int y, Room lastRoom)
@@ -98,8 +116,8 @@ void Level::generateRecursive(int x, int y, Room lastRoom)
 	if (x < _width - MAX_ROOM_SIZE && y < _height - MAX_ROOM_SIZE && x > 0 && y > 0) {
 		if (!checkVisited(x, y, width, height)) {
 
-			fill(x, y, width, height, { BLOCK3, "Wall", false, false, true, TCODColor::grey });
-			fill(x + 1, y + 1, width - 2, height - 2, { FLOOR, "Ground", true, true, false, TCODColor::brass });
+			fill(x, y, width, height, { BLOCK3, "Wall", false, false, true, TCODColor::lightestSepia });
+			fill(x + 1, y + 1, width - 2, height - 2, { FLOOR, "Ground", true, true, false, TCODColor::lightSepia, TCODColor::darkestSepia * 0.5f });
 
 			for (int i = x + 1; i < x2 - 1; i++)
 				for (int j = y + 1; j < y2 - 1; j++)

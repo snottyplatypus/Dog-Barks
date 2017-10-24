@@ -2,6 +2,7 @@
 #include "../include/libtcod/libtcod.hpp"
 #include "PositionComponent.hpp"
 #include "../Tile.hpp"
+#include "../utils/Global.hpp"
 #include <string>
 
 struct RenderComponent {
