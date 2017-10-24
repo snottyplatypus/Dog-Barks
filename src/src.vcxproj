@@ -135,6 +135,7 @@
     <ClInclude Include="components\RenderComponent.hpp" />
     <ClInclude Include="level\Level.hpp" />
     <ClInclude Include="level\Terrain.hpp" />
+    <ClInclude Include="systems\CameraSystem.hpp" />
     <ClInclude Include="Tile.hpp" />
     <ClInclude Include="systems\ActorSystem.hpp" />
     <ClInclude Include="systems\GameObjectSystem.hpp" />

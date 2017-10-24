@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include "Terrain.hpp"
 #include "../systems/PlayerSystem.hpp"
+#include "../systems/CameraSystem.hpp"
 
 struct Room {
 	int _x;
@@ -25,6 +26,8 @@ public:
 	void fill(int x, int y, int width, int height, Terrain terrain);
 	bool checkVisited(int x, int y, int width, int height);
 	void setInBounds(int& x, int& y);
+
+	CameraSystem camera;
 
 	std::shared_ptr<PlayerSystem> _player;
 	std::vector<std::shared_ptr<ActorSystem>> _actors;

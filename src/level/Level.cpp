@@ -12,6 +12,8 @@ Level::Level(const int width, const int height)
 	_player = std::make_shared<PlayerSystem>(2, 2);
 	_actors.push_back(_player);
 
+	camera.lockOn({ SCREEN_WIDTH / 2 - _width / 2, SCREEN_HEIGHT / 2 - _height / 2 });
+
 	std::fill(_generated.origin(), _generated.origin() + _generated.size(), false);
 	generateLevel();
 }
@@ -29,9 +31,9 @@ void Level::update()
 	for (int i = 0; i < _width; ++i) {
 		for (int j = 0; j < _height; ++j) {
 			if (_terrain[i][j]._actor == nullptr)
-				_terrain[i][j]._renderer->update({ i, j });
+				_terrain[i][j]._renderer->update({ i + camera._pos->_x, j + camera._pos->_y });
 			else
-				_terrain[i][j]._actor->_renderer->update({ i, j });
+				_terrain[i][j]._actor->_renderer->update({ i + camera._pos->_x, j + camera._pos->_y });
 		}
 	}
 }
