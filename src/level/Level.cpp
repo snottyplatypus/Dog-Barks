@@ -44,7 +44,7 @@ void Level::generateLevel()
 	std::sort(_rooms.begin(), _rooms.end(), [](const Room& a, const Room& b) -> bool { return a._y < b._y; });
 
 	_player->_pos->_x = _rooms[0]._x + 1;
-	_player->_pos->_y = _rooms[0]._y + 1;
+	_player->_pos->_y = _rooms[0]._y - 1;
 	
 	for (auto i : _rooms)  {
 		for (auto j : _rooms)  {
@@ -98,8 +98,8 @@ void Level::generateRecursive(int x, int y, Room lastRoom)
 	if (x < _width - MAX_ROOM_SIZE && y < _height - MAX_ROOM_SIZE && x > 0 && y > 0) {
 		if (!checkVisited(x, y, width, height)) {
 
-			fill(x, y, width, height, { BLOCK3, "Wall", false, false, true });
-			fill(x + 1, y + 1, width - 2, height - 2, { FLOOR, "Ground", true, true, false });
+			fill(x, y, width, height, { BLOCK3, "Wall", false, false, true, TCODColor::grey });
+			fill(x + 1, y + 1, width - 2, height - 2, { FLOOR, "Ground", true, true, false, TCODColor::brass });
 
 			for (int i = x + 1; i < x2 - 1; i++)
 				for (int j = y + 1; j < y2 - 1; j++)
