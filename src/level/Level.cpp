@@ -10,7 +10,7 @@ Level::Level(const int width, const int height)
 	: _gameState(PLAYER_TURN), _width(width), _height(height), _terrain(boost::extents[_width][_height]),
 	  _generated(boost::extents[_width][_height])
 {
-	_player = std::make_shared<CommandedSystem>(2, 2, PLAYER, "Player");
+	_player = std::make_shared<CommandedSystem>(2, 2, PLAYER, "You");
 	_actors.push_back(_player);
 
 	_camera.lockOn({ SCREEN_WIDTH / 2 - _width / 2, SCREEN_HEIGHT / 2 - _height / 2 });
@@ -138,7 +138,7 @@ void Level::generateRecursive(int x, int y, Room lastRoom)
 		if (!checkVisited(x, y, width, height)) {
 
 			fill(x, y, width, height, { BLOCK3, "Wall", false, false, TCODColor::lightestSepia });
-			fill(x + 1, y + 1, width - 2, height - 2, { FLOOR, "Ground", true, true, TCODColor::lightSepia, TCODColor::darkestSepia * 0.5f });
+			fill(x + 1, y + 1, width - 2, height - 2, { FLOOR, "Floor", true, true, TCODColor::lightSepia, TCODColor::darkestSepia * 0.5f });
 
 			for (int i = x + 1; i < x2 - 1; i++)
 				for (int j = y + 1; j < y2 - 1; j++)

@@ -10,6 +10,7 @@ public:
 	~EventManager();
 
 	void onNotify(Event event);
+	void onNotify(LookingEvent event);
 	void onNotify(MoveEvent event, GameObjectSystem& object);
 };
 

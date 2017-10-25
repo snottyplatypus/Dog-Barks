@@ -123,11 +123,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="gui\Gui.cpp" />
     <ClCompile Include="level\Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="utils\EventManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="gui\Gui.hpp" />
     <ClInclude Include="systems\LookingCursor.hpp" />
     <ClInclude Include="utils\Command.hpp" />
     <ClInclude Include="utils\InputHandler.hpp" />

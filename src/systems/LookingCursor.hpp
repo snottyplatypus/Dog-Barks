@@ -1,6 +1,7 @@
 #pragma once
 #include "CommandedSystem.hpp"
 #include "../utils/Tile.hpp"
+#include "../utils/EventManager.hpp"
 
 struct LookingCursor : public CommandedSystem
 {
@@ -14,5 +15,6 @@ struct LookingCursor : public CommandedSystem
 	{
 		if (_command != nullptr)
 			_command->execute(*this);
+		eventManager.onNotify({ LOOKING, _pos->_x, _pos->_y });
 	}
 };

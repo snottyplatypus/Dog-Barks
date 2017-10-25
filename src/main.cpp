@@ -3,11 +3,13 @@
 #include "level/Level.hpp"
 #include "utils/EventManager.hpp"
 #include "utils/InputHandler.hpp"
+#include "gui/Gui.hpp"
 #include <iostream>
 
 TCODRandom rng;
 TCOD_key_t key;
 Level level;
+Gui gui;
 InputHandler inputHandler;
 EventManager eventManager;
 

@@ -1,6 +1,7 @@
 #include "EventManager.hpp"
 #include "../systems/CommandedSystem.hpp"
 #include "../level/Level.hpp"
+#include "../gui/Gui.hpp"
 #include <iostream>
 
 EventManager::EventManager()
@@ -24,6 +25,15 @@ void EventManager::onNotify(Event event)
 			level._gameState = PLAYER_TURN;
 		break;
 	}
+}
+
+void EventManager::onNotify(LookingEvent event)
+{
+	std::vector<std::string> looking;
+	looking.push_back(level._terrain[event._x][event._y]._renderer->_name);
+	if (level._terrain[event._x][event._y]._actor != nullptr)
+		looking.push_back(level._terrain[event._x][event._y]._actor->_renderer->_name);
+	gui.lookingInfo(looking);
 }
 
 void EventManager::onNotify(MoveEvent event, GameObjectSystem& object)
