@@ -9,7 +9,7 @@ public:
 	EventManager();
 	~EventManager();
 
-	void onNotify(Event& event);
+	void onNotify(Event event);
 	void onNotify(MoveEvent event, GameObjectSystem& object);
 };
 

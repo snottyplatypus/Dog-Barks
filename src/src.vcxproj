@@ -128,6 +128,7 @@
     <ClCompile Include="utils\EventManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="systems\LookingCursor.hpp" />
     <ClInclude Include="utils\Command.hpp" />
     <ClInclude Include="utils\InputHandler.hpp" />
     <ClInclude Include="components\PositionComponent.hpp" />
@@ -136,7 +137,7 @@
     <ClInclude Include="level\Terrain.hpp" />
     <ClInclude Include="systems\CameraSystem.hpp" />
     <ClInclude Include="utils\Tile.hpp" />
-    <ClInclude Include="systems\ActorSystem.hpp" />
+    <ClInclude Include="systems\CommandedSystem.hpp" />
     <ClInclude Include="systems\GameObjectSystem.hpp" />
     <ClInclude Include="utils\Global.hpp" />
     <ClInclude Include="utils\Event.hpp" />

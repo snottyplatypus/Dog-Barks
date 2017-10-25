@@ -11,4 +11,5 @@ enum Tile {
 	BLOCK2 = TCOD_CHAR_BLOCK2,
 	BLOCK3 = TCOD_CHAR_BLOCK3,
 	DOOR = '/',
+	CURSOR = 'X',
 };

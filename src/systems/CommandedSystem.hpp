@@ -1,17 +1,18 @@
 #pragma once
 #include "GameObjectSystem.hpp"
 
-struct ActorSystem : public GameObjectSystem
+struct CommandedSystem : public GameObjectSystem
 {
-	ActorSystem(int x, int y, int tile = ACTOR, std::string name = "Actor")
+	CommandedSystem(int x = 1, int y = 1, int tile = ACTOR, std::string name = "Actor")
 	{
 		_pos->_x = x;
 		_pos->_y = y;
 		_renderer->_tile = tile;
 		_renderer->_name = name;
+		_id = "actor";
 	}
 
-	~ActorSystem() {}
+	~CommandedSystem() {}
 	void update() 
 	{
 		if (_command != nullptr)

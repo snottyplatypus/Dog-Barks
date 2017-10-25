@@ -7,13 +7,13 @@
 #include <iostream>
 
 Level::Level(const int width, const int height) 
-	: _width(width), _height(height), _terrain(boost::extents[_width][_height]),
+	: _gameState(PLAYER_TURN), _width(width), _height(height), _terrain(boost::extents[_width][_height]),
 	  _generated(boost::extents[_width][_height])
 {
-	_player = std::make_shared<ActorSystem>(2, 2, PLAYER, "Player");
+	_player = std::make_shared<CommandedSystem>(2, 2, PLAYER, "Player");
 	_actors.push_back(_player);
 
-	camera.lockOn({ SCREEN_WIDTH / 2 - _width / 2, SCREEN_HEIGHT / 2 - _height / 2 });
+	_camera.lockOn({ SCREEN_WIDTH / 2 - _width / 2, SCREEN_HEIGHT / 2 - _height / 2 });
 
 	std::fill(_generated.origin(), _generated.origin() + _generated.size(), false);
 	generateLevel();
@@ -23,21 +23,32 @@ Level::~Level()
 {
 }
 
-void Level::update() 
+void Level::update()
 {
-	inputHandler.onObject(*_player);
+	switch (_gameState) {
+	case PLAYER_TURN:
+		inputHandler.onObject(*_player);
+		_player->update();
+		break;
+	case CURSOR_MODE_L:
+		inputHandler.onObject(_lookingCursor);
+		_lookingCursor.update();
+		break;
+	}
 	for (auto i : _actors) {
-		i->update();
 		_terrain[i->_pos->_x][i->_pos->_y]._actor = i;
 		i->_renderer->_bg = _terrain[i->_pos->_x][i->_pos->_y]._renderer->_bg;
 	}
 	for (int i = 0; i < _width; ++i) {
 		for (int j = 0; j < _height; ++j) {
 			if (_terrain[i][j]._actor == nullptr)
-				_terrain[i][j]._renderer->update({ i + camera._pos->_x, j + camera._pos->_y });
+				_terrain[i][j]._renderer->update({ i + _camera._pos->_x, j + _camera._pos->_y });
 			else
-				_terrain[i][j]._actor->_renderer->update({ i + camera._pos->_x, j + camera._pos->_y });
+				_terrain[i][j]._actor->_renderer->update({ i + _camera._pos->_x, j + _camera._pos->_y });
 		}
+	}
+	if (_gameState == CURSOR_MODE_L) {
+		_lookingCursor._renderer->update({ _lookingCursor._pos->_x + _camera._pos->_x, _lookingCursor._pos->_y + _camera._pos->_y });
 	}
 }
 
@@ -86,6 +97,9 @@ void Level::generateLevel()
 
 void Level::initTerrain()
 {
+	for (int i = 0; i < _width; ++i)
+		for (int j = 0; j < _height; ++j)
+			_terrain[i][j]._void = true;
 	fill(1, 1, _width - 2, _height - 2, { BLOCK1, "Escape", true, true, TCODColor::desaturatedGreen, TCODColor::black, true });
 	for (int i = 2; i < _width - 2; ++i)
 		for (int j = 2; j < _height - 2; ++j)

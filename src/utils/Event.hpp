@@ -5,6 +5,7 @@ enum Event
 {
 	NONE,
 	MOVE,
+	TRIGGER_LOOKING_CURSOR,
 };
 
 struct MoveEvent

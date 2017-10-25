@@ -47,3 +47,8 @@ template<typename T> struct MoveSW : public Command<T>
 {
 	void execute(T& system) override { eventManager.onNotify({ MOVE, -1, 1 }, system); }
 };
+
+template<typename T> struct LookingCursorMode : public Command<T>
+{
+	void execute(T& system) override { eventManager.onNotify(TRIGGER_LOOKING_CURSOR); }
+};

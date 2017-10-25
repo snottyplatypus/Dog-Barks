@@ -3,8 +3,15 @@
 #include <vector>
 #include <unordered_map>
 #include "Terrain.hpp"
-#include "../systems/ActorSystem.hpp"
+#include "../systems/ComMandedSystem.hpp"
 #include "../systems/CameraSystem.hpp"
+#include "../systems/LookingCursor.hpp"
+
+enum GameState {
+	PLAYER_TURN,
+	CURSOR_MODE_L,
+	CURSOR_MODE_F,
+};
 
 struct Room {
 	int _x;
@@ -27,13 +34,18 @@ public:
 	bool checkVisited(int x, int y, int width, int height);
 	void setInBounds(int& x, int& y);
 
-	CameraSystem camera;
+	GameState _gameState;
 
-	std::shared_ptr<ActorSystem> _player;
-	std::vector<std::shared_ptr<ActorSystem>> _actors;
+	CameraSystem _camera;
+
+	LookingCursor _lookingCursor;
+
+	std::shared_ptr<CommandedSystem> _player;
+	std::vector<std::shared_ptr<CommandedSystem>> _actors;
 
 	int _width;
 	int _height;
+
 
 private:
 	boost::multi_array<bool, 2> _generated;
