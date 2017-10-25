@@ -25,7 +25,7 @@ Level::~Level()
 
 void Level::update() 
 {
-	inputHandler.onObject(*_player, key);
+	inputHandler.onObject(*_player);
 	for (auto i : _actors) {
 		i->update();
 		_terrain[i->_pos->_x][i->_pos->_y]._actor = i;
