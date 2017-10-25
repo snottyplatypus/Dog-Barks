@@ -1,19 +1,20 @@
 #pragma once
 #include "GameObjectSystem.hpp"
-#include "../components/Command.hpp"
 
 struct ActorSystem : public GameObjectSystem
 {
-	ActorSystem()
+	ActorSystem(int x, int y, int tile = ACTOR, std::string name = "Actor")
 	{
-		_renderer->_tile = ACTOR;
-		_renderer->_name = "Actor";
-		_command = nullptr;
+		_pos->_x = x;
+		_pos->_y = y;
+		_renderer->_tile = tile;
+		_renderer->_name = name;
 	}
 
-	virtual ~ActorSystem() {}
-	virtual void update() = 0;
-
-protected:
-	std::shared_ptr<Command<ActorSystem>> _command;
+	~ActorSystem() {}
+	void update() 
+	{
+		if (_command != nullptr)
+			_command->execute(*this);
+	}
 };

@@ -1,7 +1,8 @@
 #include "Level.hpp"
 #include "../include/libtcod/libtcod.hpp"
 #include "../utils/Global.hpp"
-#include "../Tile.hpp"
+#include "../utils/InputHandler.hpp"
+#include "../utils/Tile.hpp"
 #include <algorithm>
 #include <iostream>
 
@@ -9,7 +10,7 @@ Level::Level(const int width, const int height)
 	: _width(width), _height(height), _terrain(boost::extents[_width][_height]),
 	  _generated(boost::extents[_width][_height])
 {
-	_player = std::make_shared<PlayerSystem>(2, 2);
+	_player = std::make_shared<ActorSystem>(2, 2, PLAYER, "Player");
 	_actors.push_back(_player);
 
 	camera.lockOn({ SCREEN_WIDTH / 2 - _width / 2, SCREEN_HEIGHT / 2 - _height / 2 });
@@ -24,6 +25,7 @@ Level::~Level()
 
 void Level::update() 
 {
+	inputHandler.onObject(*_player, key);
 	for (auto i : _actors) {
 		i->update();
 		_terrain[i->_pos->_x][i->_pos->_y]._actor = i;

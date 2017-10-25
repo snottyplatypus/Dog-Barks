@@ -125,21 +125,19 @@
   <ItemGroup>
     <ClCompile Include="level\Level.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="systems\PlayerSystem.cpp" />
     <ClCompile Include="utils\EventManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="components\Command.hpp" />
-    <ClInclude Include="components\InputHandler.hpp" />
+    <ClInclude Include="utils\Command.hpp" />
+    <ClInclude Include="utils\InputHandler.hpp" />
     <ClInclude Include="components\PositionComponent.hpp" />
     <ClInclude Include="components\RenderComponent.hpp" />
     <ClInclude Include="level\Level.hpp" />
     <ClInclude Include="level\Terrain.hpp" />
     <ClInclude Include="systems\CameraSystem.hpp" />
-    <ClInclude Include="Tile.hpp" />
+    <ClInclude Include="utils\Tile.hpp" />
     <ClInclude Include="systems\ActorSystem.hpp" />
     <ClInclude Include="systems\GameObjectSystem.hpp" />
-    <ClInclude Include="systems\PlayerSystem.hpp" />
     <ClInclude Include="utils\Global.hpp" />
     <ClInclude Include="utils\Event.hpp" />
     <ClInclude Include="utils\EventManager.hpp" />

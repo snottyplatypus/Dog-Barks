@@ -1,6 +1,5 @@
 #pragma once
 #include "../utils/EventManager.hpp"
-#include <iostream>
 
 template<typename T> struct Command
 {

@@ -1,5 +1,5 @@
 #include "EventManager.hpp"
-#include "../systems/PlayerSystem.hpp"
+#include "../systems/ActorSystem.hpp"
 #include "../level/Level.hpp"
 #include <iostream>
 

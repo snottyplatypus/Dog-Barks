@@ -1,5 +1,5 @@
 #pragma once
-#include "include/libtcod/libtcod.hpp"
+#include "../include/libtcod/libtcod.hpp"
 
 enum Tile {
 	NOTHING = ' ',

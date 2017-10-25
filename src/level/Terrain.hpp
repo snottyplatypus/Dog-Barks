@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
 #include "../components/RenderComponent.hpp"
-#include "../Tile.hpp"
+#include "../utils/Tile.hpp"
 
 struct ActorSystem;
 

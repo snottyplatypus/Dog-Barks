@@ -3,7 +3,7 @@
 #include <vector>
 #include <unordered_map>
 #include "Terrain.hpp"
-#include "../systems/PlayerSystem.hpp"
+#include "../systems/ActorSystem.hpp"
 #include "../systems/CameraSystem.hpp"
 
 struct Room {
@@ -29,7 +29,7 @@ public:
 
 	CameraSystem camera;
 
-	std::shared_ptr<PlayerSystem> _player;
+	std::shared_ptr<ActorSystem> _player;
 	std::vector<std::shared_ptr<ActorSystem>> _actors;
 
 	int _width;
