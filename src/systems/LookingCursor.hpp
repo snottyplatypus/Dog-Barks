@@ -10,7 +10,9 @@ struct LookingCursor : public CommandedSystem
 		_renderer->_tile = CURSOR;
 		_id = "cursor";
 	}
+
 	~LookingCursor() {}
+
 	void update()
 	{
 		if (_command != nullptr)

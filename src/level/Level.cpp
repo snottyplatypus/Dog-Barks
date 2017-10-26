@@ -62,7 +62,7 @@ void Level::update()
 	}
 	if (_gameState == CURSOR_MODE_F) {
 		if (std::fmodf(_time, 1.0f) >= 0.5f)
-			_fireCursor._renderer->update({ _fireCursor._pos->_x + _camera._pos->_x, _fireCursor._pos->_y + _camera._pos->_y });
+			_fireCursor.render(*_player->_pos, *_camera._pos);
 	}
 }
 
