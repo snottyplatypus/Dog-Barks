@@ -130,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gui\Gui.hpp" />
+    <ClInclude Include="systems\FireCursor.hpp" />
     <ClInclude Include="systems\LookingCursor.hpp" />
     <ClInclude Include="utils\Command.hpp" />
     <ClInclude Include="utils\InputHandler.hpp" />

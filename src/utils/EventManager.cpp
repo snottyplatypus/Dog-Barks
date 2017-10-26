@@ -24,13 +24,24 @@ void EventManager::onNotify(Event event)
 		else if (level._gameState == CURSOR_MODE_L)
 			level._gameState = PLAYER_TURN;
 		break;
+	case TRIGGER_FIRE_CURSOR:
+		if (level._gameState == PLAYER_TURN) {
+			level._gameState = CURSOR_MODE_F;
+			level._fireCursor._pos->_x = level._player->_pos->_x;
+			level._fireCursor._pos->_y = level._player->_pos->_y;
+		}
+		else if (level._gameState == CURSOR_MODE_F)
+			level._gameState = PLAYER_TURN;
+		break;
 	}
+
 }
 
 void EventManager::onNotify(LookingEvent event)
 {
 	std::vector<std::string> looking;
-	looking.push_back(level._terrain[event._x][event._y]._renderer->_name);
+	if(event._id == LOOKING_TERRAIN)
+		looking.push_back(level._terrain[event._x][event._y]._renderer->_name);
 	if (level._terrain[event._x][event._y]._actor != nullptr)
 		looking.push_back(level._terrain[event._x][event._y]._actor->_renderer->_name);
 	gui.lookingInfo(looking);

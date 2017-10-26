@@ -6,6 +6,7 @@
 #include "../systems/ComMandedSystem.hpp"
 #include "../systems/CameraSystem.hpp"
 #include "../systems/LookingCursor.hpp"
+#include "../systems/FireCursor.hpp"
 
 enum GameState {
 	PLAYER_TURN,
@@ -39,6 +40,7 @@ public:
 	CameraSystem _camera;
 
 	LookingCursor _lookingCursor;
+	FireCursor _fireCursor;
 
 	std::shared_ptr<CommandedSystem> _player;
 	std::vector<std::shared_ptr<CommandedSystem>> _actors;

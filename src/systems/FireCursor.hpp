@@ -3,18 +3,19 @@
 #include "../utils/Tile.hpp"
 #include "../utils/EventManager.hpp"
 
-struct LookingCursor : public CommandedSystem
+struct FireCursor : public CommandedSystem
 {
-	LookingCursor(int x = 1, int y = 1) 
+	FireCursor(int x = 1, int y = 1)
 	{
 		_renderer->_tile = CURSOR;
 		_id = "cursor";
+		_renderer->_bg = TCODColor::desaturatedYellow * 1.5f;
 	}
-	~LookingCursor() {}
+	~FireCursor() {}
 	void update()
 	{
 		if (_command != nullptr)
 			_command->execute(*this);
-		eventManager.onNotify({ LOOKING_TERRAIN, _pos->_x, _pos->_y });
+		eventManager.onNotify({ LOOKING_ACTOR, _pos->_x, _pos->_y });
 	}
 };

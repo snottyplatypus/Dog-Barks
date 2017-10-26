@@ -6,7 +6,9 @@ enum Event
 	NONE,
 	MOVE,
 	TRIGGER_LOOKING_CURSOR,
-	LOOKING,
+	TRIGGER_FIRE_CURSOR,
+	LOOKING_TERRAIN,
+	LOOKING_ACTOR,
 };
 
 struct MoveEvent
@@ -18,7 +20,7 @@ struct MoveEvent
 
 struct LookingEvent
 {
-	int _id = LOOKING;
+	int _id;
 	int _x;
 	int _y;
 };

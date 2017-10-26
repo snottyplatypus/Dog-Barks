@@ -37,7 +37,12 @@ void Level::update()
 		inputHandler.onObject(_lookingCursor);
 		_lookingCursor.update();
 		break;
+	case CURSOR_MODE_F:
+		inputHandler.onObject(_fireCursor);
+		_fireCursor.update();
+		break;
 	}
+
 	for (auto i : _actors) {
 		_terrain[i->_pos->_x][i->_pos->_y]._actor = i;
 		i->_renderer->_bg = _terrain[i->_pos->_x][i->_pos->_y]._renderer->_bg;
@@ -52,8 +57,12 @@ void Level::update()
 	}
 	if (_gameState == CURSOR_MODE_L) {
 		_lookingCursor._renderer->_bg = _terrain[_lookingCursor._pos->_x][_lookingCursor._pos->_y]._renderer->_bg;
-		if (std::fmodf(_time, 1) >= 0.5f)
+		if (std::fmodf(_time, 1.0f) >= 0.5f)
 			_lookingCursor._renderer->update({ _lookingCursor._pos->_x + _camera._pos->_x, _lookingCursor._pos->_y + _camera._pos->_y });
+	}
+	if (_gameState == CURSOR_MODE_F) {
+		if (std::fmodf(_time, 1.0f) >= 0.5f)
+			_fireCursor._renderer->update({ _fireCursor._pos->_x + _camera._pos->_x, _fireCursor._pos->_y + _camera._pos->_y });
 	}
 }
 

@@ -34,8 +34,9 @@ struct InputHandler
 		actor[TCODK_KP2] = std::make_shared<MoveSouth<GameObjectSystem>>();
 		actor[TCODK_KP1] = std::make_shared<MoveSW<GameObjectSystem>>();
 
-		//LookingCursor
+		//Cursors
 		actor['l'] = std::make_shared<LookingCursorMode<GameObjectSystem>>();
+		actor['f'] = std::make_shared<FireCursorMode<GameObjectSystem>>();
 	}
 	~InputHandler() {}
 

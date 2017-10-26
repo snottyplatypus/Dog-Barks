@@ -52,3 +52,8 @@ template<typename T> struct LookingCursorMode : public Command<T>
 {
 	void execute(T& system) override { eventManager.onNotify(TRIGGER_LOOKING_CURSOR); }
 };
+
+template<typename T> struct FireCursorMode : public Command<T>
+{
+	void execute(T& system) override { eventManager.onNotify(TRIGGER_FIRE_CURSOR); }
+};
