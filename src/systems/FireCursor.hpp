@@ -33,10 +33,11 @@ struct FireCursor : public CommandedSystem
 		eventManager.onNotify({ LOOKING_ACTOR, _pos->_x, _pos->_y });
 	}
 
-	void render(const PositionComponent& origin, const PositionComponent& mod)
+	void render(const PositionComponent& origin, const PositionComponent& mod, float time)
 	{
 		TCODLine::line(origin._x + mod._x, origin._y + mod._y, _pos->_x + mod._x, _pos->_y + mod._y, &_fireLine);
-		_renderer->update({ _pos->_x + mod._x, _pos->_y + mod._y });
+		if (std::fmodf(time, 1.0f) >= 0.5f)
+			_renderer->update({ _pos->_x + mod._x, _pos->_y + mod._y });
 	}
 
 	FireLine _fireLine;
