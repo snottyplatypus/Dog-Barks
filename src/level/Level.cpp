@@ -5,17 +5,17 @@
 #include "../utils/Tile.hpp"
 #include <algorithm>
 #include <iostream>
+#include <cmath>
 
 Level::Level(const int width, const int height) 
 	: _gameState(PLAYER_TURN), _width(width), _height(height), _terrain(boost::extents[_width][_height]),
-	  _generated(boost::extents[_width][_height])
+	  _generated(boost::extents[_width][_height]), _time(0.0f)
 {
 	_player = std::make_shared<CommandedSystem>(2, 2, PLAYER, "You");
 	_actors.push_back(_player);
 
 	_camera.lockOn({ SCREEN_WIDTH / 2 - _width / 2, SCREEN_HEIGHT / 2 - _height / 2 });
 
-	std::fill(_generated.origin(), _generated.origin() + _generated.size(), false);
 	generateLevel();
 }
 
@@ -25,6 +25,9 @@ Level::~Level()
 
 void Level::update()
 {
+
+	_time += TCODSystem::getLastFrameLength();
+
 	switch (_gameState) {
 	case PLAYER_TURN:
 		inputHandler.onObject(*_player);
@@ -48,12 +51,15 @@ void Level::update()
 		}
 	}
 	if (_gameState == CURSOR_MODE_L) {
-		_lookingCursor._renderer->update({ _lookingCursor._pos->_x + _camera._pos->_x, _lookingCursor._pos->_y + _camera._pos->_y });
+		_lookingCursor._renderer->_bg = _terrain[_lookingCursor._pos->_x][_lookingCursor._pos->_y]._renderer->_bg;
+		if (std::fmodf(_time, 1) >= 0.5f)
+			_lookingCursor._renderer->update({ _lookingCursor._pos->_x + _camera._pos->_x, _lookingCursor._pos->_y + _camera._pos->_y });
 	}
 }
 
 void Level::generateLevel()
 {
+	std::fill(_generated.origin(), _generated.origin() + _generated.size(), false);
 	initTerrain();
 	generateRecursive(_width / 2 - (MAX_ROOM_SIZE - 2) / 2, _height / 2 - (MAX_ROOM_SIZE - 2) / 2, { 0, 0 });
 

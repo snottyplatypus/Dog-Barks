@@ -14,10 +14,10 @@ struct RenderComponent {
 	{
 		TCODConsole::root->putCharEx(pos._x, pos._y, _tile, _fg, _bg);
 	}
-	void update(PositionComponent pos, TCODColor fg) const
+	/*void update(PositionComponent pos, TCODColor fg) const
 	{
 		TCODConsole::root->putCharEx(pos._x, pos._y, _tile, fg, _bg);
-	}
+	}*/
 
 	int _tile;
 	TCODColor _fg;
