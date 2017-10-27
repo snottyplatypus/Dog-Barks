@@ -51,7 +51,6 @@ public:
 private:
 	boost::multi_array<bool, 2> _generated;
 	std::vector<Room> _rooms;
-	float _time;
 
 public:
 	boost::multi_array<Terrain, 2> _terrain;

@@ -9,7 +9,7 @@
 
 Level::Level(const int width, const int height) 
 	: _gameState(PLAYER_TURN), _width(width), _height(height), _terrain(boost::extents[_width][_height]),
-	  _generated(boost::extents[_width][_height]), _time(0.0f)
+	  _generated(boost::extents[_width][_height])
 {
 	_player = std::make_shared<CommandedSystem>(2, 2, PLAYER, "You");
 	_actors.push_back(_player);
@@ -25,9 +25,6 @@ Level::~Level()
 
 void Level::update()
 {
-
-	_time += TCODSystem::getLastFrameLength();
-
 	switch (_gameState) {
 	case PLAYER_TURN:
 		inputHandler.onObject(*_player);
@@ -57,11 +54,11 @@ void Level::update()
 	}
 	if (_gameState == CURSOR_MODE_L) {
 		_lookingCursor._renderer->_bg = _terrain[_lookingCursor._pos->_x][_lookingCursor._pos->_y]._renderer->_bg;
-		if (std::fmodf(_time, 1.0f) >= 0.5f)
+		if (std::fmodf(time, 1.0f) >= 0.5f)
 			_lookingCursor._renderer->update({ _lookingCursor._pos->_x + _camera._pos->_x, _lookingCursor._pos->_y + _camera._pos->_y });
 	}
 	if (_gameState == CURSOR_MODE_F)
-		_fireCursor.render(*_player->_pos, *_camera._pos, _time);
+		_fireCursor.render(*_player->_pos, *_camera._pos);
 }
 
 void Level::generateLevel()

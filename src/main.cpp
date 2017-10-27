@@ -12,6 +12,7 @@ Level level;
 Gui gui;
 InputHandler inputHandler;
 EventManager eventManager;
+float time;
 
 int main()
 {
@@ -20,6 +21,7 @@ int main()
 	TCODSystem::setFps(60);
 	while (!TCODConsole::isWindowClosed())
 	{
+		time += TCODSystem::getLastFrameLength();
 		TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS, &key, nullptr);
 		TCODConsole::root->clear();
 		level.update();
