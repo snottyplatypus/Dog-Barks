@@ -73,13 +73,13 @@ void Level::generateLevel()
 	_player->_pos->_x = _rooms[0]._x + 1;
 	_player->_pos->_y = _rooms[0]._y - DISTANCE_BORDERS / 2;
 	
-	for (auto i : _rooms)  {
-		for (auto j : _rooms)  {
+	for (auto i : _rooms) {
+		for (auto j : _rooms) {
 			if (j._x != i._x || j._y != i._y) {
 				if (j._x == i._x) {
 
 					int x = 0;
-					if(j._width <= i._width)
+					if (j._width <= i._width)
 						x = i._x + rng.getInt(1, j._width - 2);
 					else
 						x = i._x + rng.getInt(1, i._width - 2);
@@ -103,6 +103,9 @@ void Level::generateLevel()
 			}
 		}
 	}
+
+	_actors.push_back(std::make_shared<CommandedSystem>(_rooms[0]._x + _rooms[0]._width / 2, _rooms[0]._y + _rooms[0]._height / 2));
+
 }
 
 void Level::initTerrain()
