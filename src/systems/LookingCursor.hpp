@@ -15,8 +15,10 @@ struct LookingCursor : public CommandedSystem
 
 	void update()
 	{
-		if (_command != nullptr)
-			_command->execute(*this);
-		eventManager.onNotify({ LOOKING_TERRAIN, _pos->_x, _pos->_y });
+		if (_move != nullptr)
+			_move->execute(*this);
+		if (_interaction != nullptr)
+			_interaction->execute(*this);
+		eventManager.onLook({ LOOKING_TERRAIN, _pos->_x, _pos->_y });
 	}
 };

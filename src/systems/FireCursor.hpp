@@ -27,11 +27,13 @@ struct FireCursor : public CommandedSystem
 
 	~FireCursor() {}
 
-	void update()
+	void update(CommandedSystem& origin)
 	{
-		if (_command != nullptr)
-			_command->execute(*this);
-		eventManager.onNotify({ LOOKING_ACTOR, _pos->_x, _pos->_y });
+		if (_move != nullptr)
+			_move->execute(*this);
+		if (_interaction != nullptr)
+			_interaction->execute(*this);
+		eventManager.onLook({ LOOKING_ACTOR, _pos->_x, _pos->_y });
 	}
 
 	void render(const PositionComponent& origin, const PositionComponent& mod)

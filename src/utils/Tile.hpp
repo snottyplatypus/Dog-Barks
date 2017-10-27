@@ -1,7 +1,8 @@
 #pragma once
 #include "../include/libtcod/libtcod.hpp"
 
-enum Tile {
+enum Tile 
+{
 	NOTHING = ' ',
 	PLAYER = 1,
 	ACTOR = 2,

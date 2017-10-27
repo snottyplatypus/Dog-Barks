@@ -129,6 +129,7 @@
     <ClCompile Include="utils\EventManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="components\InventoryComponent.hpp" />
     <ClInclude Include="gui\Gui.hpp" />
     <ClInclude Include="systems\FireCursor.hpp" />
     <ClInclude Include="systems\LookingCursor.hpp" />

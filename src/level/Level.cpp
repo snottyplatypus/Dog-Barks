@@ -36,7 +36,7 @@ void Level::update()
 		break;
 	case CURSOR_MODE_F:
 		inputHandler.onObject(_fireCursor);
-		_fireCursor.update();
+		_fireCursor.update(*_player);
 		break;
 	}
 

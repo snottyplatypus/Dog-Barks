@@ -12,7 +12,7 @@ EventManager::~EventManager()
 {
 }
 
-void EventManager::onNotify(Event event)
+void EventManager::onNotify(Event event, CommandedSystem& object)
 {
 	switch (event) {
 	case TRIGGER_LOOKING_CURSOR:
@@ -38,7 +38,7 @@ void EventManager::onNotify(Event event)
 
 }
 
-void EventManager::onNotify(LookingEvent event)
+void EventManager::onLook(LookingEvent event)
 {
 	std::vector<std::string> looking;
 	if(event._id == LOOKING_TERRAIN)
@@ -48,7 +48,7 @@ void EventManager::onNotify(LookingEvent event)
 	gui.lookingInfo(looking);
 }
 
-void EventManager::onNotify(MoveEvent event, GameObjectSystem& object)
+void EventManager::onMove(MoveEvent event, GameObjectSystem& object)
 {
 	if (object._id != "cursor") {
 		if (level._terrain[object._pos->_x + event._x][object._pos->_y + event._y]._isWalkable) {

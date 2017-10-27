@@ -2,6 +2,7 @@
 #include "Event.hpp"
 
 struct GameObjectSystem;
+struct CommandedSystem;
 
 class EventManager
 {
@@ -9,9 +10,9 @@ public:
 	EventManager();
 	~EventManager();
 
-	void onNotify(Event event);
-	void onNotify(LookingEvent event);
-	void onNotify(MoveEvent event, GameObjectSystem& object);
+	void onNotify(Event event, CommandedSystem& object);
+	void onLook(LookingEvent event);
+	void onMove(MoveEvent event, GameObjectSystem& object);
 };
 
 extern EventManager eventManager;

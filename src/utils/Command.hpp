@@ -10,55 +10,55 @@ template<typename T> struct Command
 
 template<typename T> struct Cancel : public Command<T>
 {
-	void execute(T& system) override { eventManager.onNotify( CANCEL ); }
+	void execute(T& system) override { eventManager.onNotify( CANCEL, system ); }
 };
 
 template<typename T> struct MoveNorth : public Command<T>
 {
-	void execute(T& system) override { eventManager.onNotify( {MOVE, 0, -1}, system ); }
+	void execute(T& system) override { eventManager.onMove( {MOVE, 0, -1}, system ); }
 };
 
 template<typename T> struct MoveEast : public Command<T>
 {
-	void execute(T& system) override { eventManager.onNotify( { MOVE, 1, 0 }, system); }
+	void execute(T& system) override { eventManager.onMove( { MOVE, 1, 0 }, system); }
 };
 
 template<typename T> struct MoveSouth : public Command<T>
 {
-	void execute(T& system) override { eventManager.onNotify( { MOVE, 0, 1 }, system); }
+	void execute(T& system) override { eventManager.onMove( { MOVE, 0, 1 }, system); }
 };
 
 template<typename T> struct MoveWest : public Command<T>
 {
-	void execute(T& system) override { eventManager.onNotify( { MOVE, -1, 0 }, system); }
+	void execute(T& system) override { eventManager.onMove( { MOVE, -1, 0 }, system); }
 };
 
 template<typename T> struct MoveNE : public Command<T>
 {
-	void execute(T& system) override { eventManager.onNotify( { MOVE, 1, -1 }, system); }
+	void execute(T& system) override { eventManager.onMove( { MOVE, 1, -1 }, system); }
 };
 
 template<typename T> struct MoveSE : public Command<T>
 {
-	void execute(T& system) override { eventManager.onNotify( { MOVE, 1, 1 }, system); }
+	void execute(T& system) override { eventManager.onMove( { MOVE, 1, 1 }, system); }
 };
 
 template<typename T> struct MoveNW : public Command<T>
 {
-	void execute(T& system) override { eventManager.onNotify( { MOVE, -1, -1 }, system); }
+	void execute(T& system) override { eventManager.onMove( { MOVE, -1, -1 }, system); }
 };
 
 template<typename T> struct MoveSW : public Command<T>
 {
-	void execute(T& system) override { eventManager.onNotify( { MOVE, -1, 1 }, system); }
+	void execute(T& system) override { eventManager.onMove( { MOVE, -1, 1 }, system); }
 };
 
 template<typename T> struct LookingCursorMode : public Command<T>
 {
-	void execute(T& system) override { eventManager.onNotify( TRIGGER_LOOKING_CURSOR ); }
+	void execute(T& system) override { eventManager.onNotify( TRIGGER_LOOKING_CURSOR, system ); }
 };
 
 template<typename T> struct FireCursorMode : public Command<T>
 {
-	void execute(T& system) override { eventManager.onNotify( TRIGGER_FIRE_CURSOR ); }
+	void execute(T& system) override { eventManager.onNotify( TRIGGER_FIRE_CURSOR, system ); }
 };
