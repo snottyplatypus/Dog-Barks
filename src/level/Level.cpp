@@ -147,7 +147,7 @@ void Level::generateRecursive(int x, int y, Room lastRoom)
 	if (x < _width - MAX_ROOM_SIZE - dist && y < _height - MAX_ROOM_SIZE - dist && x > dist && y > dist) {
 		if (!checkVisited(x, y, width, height)) {
 
-			fill(x, y, width, height, { BLOCK3, "Wall", false, false, TCODColor::lightestSepia });
+			fill(x, y, width, height, { BLOCK3, "Wall", false, false, TCODColor::lightestSepia, TCODColor::darkestSepia * 0.5f });
 			fill(x + 1, y + 1, width - 2, height - 2, { FLOOR, "Floor", true, true, TCODColor::lightSepia, TCODColor::darkestSepia * 0.5f });
 
 			for (int i = x + 1; i < x2 - 1; i++)

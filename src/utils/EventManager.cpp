@@ -45,7 +45,10 @@ void EventManager::onNotify(Event event, CommandedSystem& object)
 
 void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiver)
 {
-	std::cout << attacker._renderer->_name << " | " << receiver._x << " " << receiver._y << std::endl;
+	if (level._terrain[receiver._x][receiver._y]._renderer->_tile == BLOCK3)
+		level._terrain[receiver._x][receiver._y] = { BLOCK2, "Damaged wall", true, false, TCODColor::lightestSepia, TCODColor::darkestSepia * 0.5f };
+	else if (level._terrain[receiver._x][receiver._y]._renderer->_tile == BLOCK2)
+		level._terrain[receiver._x][receiver._y] = { BLOCK1, "Destroyed wall", true, true, TCODColor::lightSepia, TCODColor::darkestSepia * 0.5f };
 }
 
 void EventManager::onLook(LookingEvent event)
