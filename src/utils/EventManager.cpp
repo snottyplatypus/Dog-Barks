@@ -21,8 +21,6 @@ void EventManager::onNotify(Event event)
 			level._lookingCursor._pos->_x = level._player->_pos->_x;
 			level._lookingCursor._pos->_y = level._player->_pos->_y;
 		}
-		else if (level._gameState == CURSOR_MODE_L)
-			level._gameState = PLAYER_TURN;
 		break;
 	case TRIGGER_FIRE_CURSOR:
 		if (level._gameState == PLAYER_TURN) {
@@ -30,9 +28,12 @@ void EventManager::onNotify(Event event)
 			level._fireCursor._pos->_x = level._player->_pos->_x;
 			level._fireCursor._pos->_y = level._player->_pos->_y;
 		}
-		else if (level._gameState == CURSOR_MODE_F)
-			level._gameState = PLAYER_TURN;
 		break;
+	case CANCEL:
+		if (level._gameState == CURSOR_MODE_L)
+			level._gameState = PLAYER_TURN;
+		if (level._gameState == CURSOR_MODE_F)
+			level._gameState = PLAYER_TURN;
 	}
 
 }

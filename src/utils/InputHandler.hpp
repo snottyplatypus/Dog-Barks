@@ -37,6 +37,9 @@ struct InputHandler
 		//Cursors
 		actor['l'] = std::make_shared<LookingCursorMode<GameObjectSystem>>();
 		actor['f'] = std::make_shared<FireCursorMode<GameObjectSystem>>();
+
+		//Pause menu & cancel
+		actor[TCODK_ESCAPE] = std::make_shared<Cancel<GameObjectSystem>>();
 	}
 	~InputHandler() {}
 
