@@ -11,6 +11,7 @@ public:
 	~EventManager();
 
 	void onNotify(Event event, CommandedSystem& object);
+	void onAttack(CommandedSystem& attacker, PositionComponent& receiver);
 	void onLook(LookingEvent event);
 	void onMove(MoveEvent event, GameObjectSystem& object);
 };

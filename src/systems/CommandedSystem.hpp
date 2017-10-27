@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObjectSystem.hpp"
 #include "../components/InventoryComponent.hpp"
+#include <iostream>
 
 struct CommandedSystem : public GameObjectSystem
 {
@@ -21,8 +22,10 @@ struct CommandedSystem : public GameObjectSystem
 	{
 		if (_move != nullptr)
 			_move->execute(*this);
-		if (_interaction != nullptr)
+		if (_interaction != nullptr) {
 			_interaction->execute(*this);
+			_interaction = nullptr;
+		}
 	}
 
 	std::shared_ptr<InventoryComponent> _inventory;

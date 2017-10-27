@@ -1,4 +1,5 @@
 #include "EventManager.hpp"
+#include "../include/libtcod/libtcod.hpp"
 #include "../systems/CommandedSystem.hpp"
 #include "../level/Level.hpp"
 #include "../gui/Gui.hpp"
@@ -28,6 +29,10 @@ void EventManager::onNotify(Event event, CommandedSystem& object)
 			level._fireCursor._pos->_x = level._player->_pos->_x;
 			level._fireCursor._pos->_y = level._player->_pos->_y;
 		}
+		else if (level._gameState == CURSOR_MODE_F) {
+			onAttack(object, level._fireCursor._lastPos);
+			level._gameState = PLAYER_TURN;
+		}
 		break;
 	case CANCEL:
 		if (level._gameState == CURSOR_MODE_L)
@@ -36,6 +41,11 @@ void EventManager::onNotify(Event event, CommandedSystem& object)
 			level._gameState = PLAYER_TURN;
 	}
 
+}
+
+void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiver)
+{
+	std::cout << attacker._renderer->_name << " | " << receiver._x << " " << receiver._y << std::endl;
 }
 
 void EventManager::onLook(LookingEvent event)

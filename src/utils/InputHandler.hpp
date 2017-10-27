@@ -51,10 +51,10 @@ struct InputHandler
 		}
 		else if (_move.find(key.vk) != _move.end())
 			system._move = _move[key.vk];
-		else if (_interaction.find(key.c) != _interaction.end())
-			system._interaction = _interaction[key.c];
 		else if (_interaction.find(key.vk) != _interaction.end())
 			system._interaction = _interaction[key.vk];
+		else if (_interaction.find(key.c) != _interaction.end())
+			system._interaction = _interaction[key.c];
 	}
 
 private:
