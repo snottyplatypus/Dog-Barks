@@ -16,7 +16,7 @@ float time;
 
 int main()
 {
-	TCODConsole::setCustomFont("../assets/font10x10.png", TCOD_FONT_LAYOUT_ASCII_INROW, 16, 16);
+	TCODConsole::setCustomFont("assets/font10x10.png", TCOD_FONT_LAYOUT_ASCII_INROW, 16, 16);
 	TCODConsole::initRoot(SCREEN_WIDTH, SCREEN_HEIGHT, "Dog Barks");
 	TCODSystem::setFps(60);
 	while (!TCODConsole::isWindowClosed())
