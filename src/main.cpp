@@ -7,6 +7,7 @@
 #include "gui/Gui.hpp"
 #include <iostream>
 
+Config config;
 DataManager dataManager;
 TCODRandom rng;
 TCOD_key_t key;
@@ -19,8 +20,8 @@ float time;
 int main()
 {
 	dataManager.init();
-	TCODConsole::setCustomFont("assets/font10x10.png", TCOD_FONT_LAYOUT_ASCII_INROW, 16, 16);
-	TCODConsole::initRoot(SCREEN_WIDTH, SCREEN_HEIGHT, "Dog Barks");
+	TCODConsole::setCustomFont(config.font.c_str(), TCOD_FONT_LAYOUT_ASCII_INROW, 16, 16);
+	TCODConsole::initRoot(config.screenWidth, config.screenHeight, "Dog Barks");
 	TCODSystem::setFps(60);
 	level.init();
 	while (!TCODConsole::isWindowClosed())

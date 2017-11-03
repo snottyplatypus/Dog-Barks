@@ -1,0 +1,4 @@
+#width and height are not in pixel but represent number of chars
+width: 80 
+height: 50
+font: assets/font10x10.png

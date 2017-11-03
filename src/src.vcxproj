@@ -138,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="components\InventoryComponent.hpp" />
     <ClInclude Include="components\Item.hpp" />
+    <ClInclude Include="utils\Config.hpp" />
     <ClInclude Include="utils\DataManager.hpp" />
     <ClInclude Include="gui\Gui.hpp" />
     <ClInclude Include="systems\FireCursor.hpp" />
