@@ -27,6 +27,7 @@ class Level
 public:
 	Level(const int width = 32, const int height = 32);
 	~Level();
+	void init();
 	void update();
 	void generateLevel();
 	void initTerrain();

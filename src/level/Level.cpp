@@ -9,7 +9,15 @@
 
 Level::Level(const int width, const int height) 
 	: _gameState(PLAYER_TURN), _width(width), _height(height), _terrain(boost::extents[_width][_height]),
-	  _generated(boost::extents[_width][_height])
+	  _generated(boost::extents[_width][_height]), _player(nullptr)
+{
+}
+
+Level::~Level()
+{
+}
+
+void Level::init()
 {
 	_player = std::make_shared<CommandedSystem>(2, 2, PLAYER, "You");
 	_actors.push_back(_player);
@@ -17,10 +25,6 @@ Level::Level(const int width, const int height)
 	_camera.lockOn({ SCREEN_WIDTH / 2 - _width / 2, SCREEN_HEIGHT / 2 - _height / 2 });
 
 	generateLevel();
-}
-
-Level::~Level()
-{
 }
 
 void Level::update()

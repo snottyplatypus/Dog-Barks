@@ -262,8 +262,8 @@ __pycache__/
 
 #libs
 include/
-rltk.lib
 libtcod.lib
 libtcod.dll
 libtcod-gui.dll
+libyaml-cppmd.lib
 SDL2.dll

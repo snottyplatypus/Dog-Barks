@@ -2,6 +2,7 @@
 #include "GameObjectSystem.hpp"
 #include "../components/InventoryComponent.hpp"
 #include <iostream>
+#include "../utils/DataManager.hpp"
 
 struct CommandedSystem : public GameObjectSystem
 {
@@ -13,7 +14,7 @@ struct CommandedSystem : public GameObjectSystem
 		_renderer->_name = name;
 		_id = "actor";
 		_inventory = std::make_shared<InventoryComponent>();
-		_inventory->held = SHOTGUN;
+		_inventory->_held = dataManager._weapons["Shotgun"];
 	}
 
 	~CommandedSystem() {}

@@ -1,13 +1,10 @@
 #pragma once
-enum Item
-{
-	NOTHING_HELD,
-	SHOTGUN,
-};
+#include "Item.hpp"
+
 struct InventoryComponent
 {
-	InventoryComponent() : held(NOTHING_HELD) {}
+	InventoryComponent() {}
 	~InventoryComponent() {}
 
-	int held;
+	Weapon _held;
 };

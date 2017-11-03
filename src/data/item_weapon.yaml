@@ -1,0 +1,7 @@
+- shotgun:
+  name: Shotgun
+  canDestroyWall: true
+
+- uzi:
+  name: Uzi
+  canDestroyWall: false
