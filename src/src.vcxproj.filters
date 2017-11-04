@@ -102,4 +102,8 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="data\config.yaml" />
+    <None Include="data\item\item_weapon.yaml" />
+  </ItemGroup>
 </Project>

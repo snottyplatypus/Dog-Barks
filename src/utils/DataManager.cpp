@@ -22,6 +22,8 @@ void DataManager::init()
 	for (std::size_t i = 0; i < weapons.size(); i++) {
 		std::string name = weapons[i]["name"].as<std::string>();
 		_weapons[name]._name = weapons[i]["name"].as<std::string>();
-		_weapons[name]._canDestroyWall = weapons[i]["canDestroyWall"];
+		_weapons[name]._canDestroyWall = weapons[i]["canDestroyWall"].as<bool>;
+		_weapons[name]._mag = weapons[i]["mag"].as<int>;
+		_weapons[name]._projectiles = weapons[i]["projectiles"].as<int>;
 	}
 }
