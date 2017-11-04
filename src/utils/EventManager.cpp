@@ -67,17 +67,14 @@ void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiv
 				break;
 			}
 		}
-		level._effect._shootEffect->_from._x = attacker._pos->_x + level._camera._pos->_x;
-		level._effect._shootEffect->_from._y = attacker._pos->_y + level._camera._pos->_y;
-		level._effect._shootEffect->_to._x = receiver._x + level._camera._pos->_x;
-		level._effect._shootEffect->_to._y = receiver._y + level._camera._pos->_y;
+		level._effect._shootEffect->_from = *attacker._pos + *level._camera._pos;
+		level._effect._shootEffect->_to = receiver + *level._camera._pos;
 		level._effect._shootEffect->_launch = true;
 	}
 	else {
-		level._effect._shootEffect->_from._x = attacker._pos->_x + level._camera._pos->_x;
-		level._effect._shootEffect->_from._y = attacker._pos->_y + level._camera._pos->_y;
-		level._effect._shootEffect->_to._x = receiver._x + rng.getInt(-2, 2) + level._camera._pos->_x;
-		level._effect._shootEffect->_to._y = receiver._y + rng.getInt(-2, 2) + level._camera._pos->_y;
+		level._effect._shootEffect->_from = *attacker._pos + *level._camera._pos;
+		level._effect._shootEffect->_to._x = receiver._x + level._camera._pos->_x + rng.getInt(-2, 2);
+		level._effect._shootEffect->_to._y = receiver._y + level._camera._pos->_y + rng.getInt(-2, 2);
 		level._effect._shootEffect->_launch = true;
 	}
 }

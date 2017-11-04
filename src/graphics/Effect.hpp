@@ -21,7 +21,7 @@ struct BaseEffect
 
 struct ShootEffect : public BaseEffect
 {
-	ShootEffect() : _repeat(3), _stop(0), _duration(0.15f), _inc(false) { _line._bg = TCODColor::white; }
+	ShootEffect() : _repeat(1), _stop(0), _duration(0.15f), _inc(false) { _line._bg = TCODColor::white; }
 	~ShootEffect() {}
 	void update() override 
 	{
@@ -46,6 +46,7 @@ struct ShootEffect : public BaseEffect
 	{
 		_active = false;
 		_launch = false;
+		_repeat = 1;
 		_stop = 0;
 		_from = { 0, 0 };
 		_to = { 0, 0 };
