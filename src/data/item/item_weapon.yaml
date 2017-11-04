@@ -1,7 +1,7 @@
-- shotgun:
+- SHOTGUN:
   name: Shotgun
   canDestroyWall: true
 
-- uzi:
+- UZI:
   name: Uzi
-  canDestroyWall: false
+  canDestroyWall: false  

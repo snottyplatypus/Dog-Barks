@@ -3,6 +3,7 @@
 #include "../systems/CommandedSystem.hpp"
 #include "../level/Level.hpp"
 #include "../gui/Gui.hpp"
+#include "Geometry.hpp"
 #include <iostream>
 
 EventManager::EventManager()
@@ -46,11 +47,26 @@ void EventManager::onNotify(Event event, CommandedSystem& object)
 void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiver)
 {
 	if (attacker._inventory->_held._canDestroyWall) {
-		if (level._terrain[receiver._x][receiver._y]._renderer->_tile == BLOCK3)
+		switch (level._terrain[receiver._x][receiver._y]._renderer->_tile) 
+		{
+		case BLOCK3:
 			level._terrain[receiver._x][receiver._y] = { BLOCK2, "Damaged wall", true, false, TCODColor::lightestSepia, TCODColor::darkestSepia * 0.5f };
-		else if (level._terrain[receiver._x][receiver._y]._renderer->_tile == BLOCK2)
+			break;
+		case BLOCK2:
+		case DOOR:
 			level._terrain[receiver._x][receiver._y] = { BLOCK1, "Destroyed wall", true, true, TCODColor::lightSepia, TCODColor::darkestSepia * 0.5f };
+			break;
+		default:
+			break;
+		}
 	}
+	float rs = static_cast<float>(1);
+	int mw = 0;
+	int mh = 0;
+	float shot = (1 / rs * rng.getInt(0, 100) + mw) * (1 - mh / 10);
+	std::cout << db::dist_cb<float>(*attacker._pos, receiver) << " " << shot << std::endl;
+	if (db::dist_cb<float>(*attacker._pos, receiver) <= shot )
+		std::cout << "Shot " << receiver._x << " " << receiver._y << std::endl;
 }
 
 void EventManager::onLook(LookingEvent event)

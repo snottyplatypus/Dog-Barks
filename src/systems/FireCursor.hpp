@@ -10,8 +10,16 @@ class FireLine : public TCODLineListener {
 public:
 	bool putPoint(int x, int y) {
 		_lastPos = { x, y };
-		if (TCODConsole::root->getChar(x, y) == BLOCK3)
+		switch (TCODConsole::root->getChar(x, y)) 
+		{
+		case BLOCK3:
+		case ACTOR:
+		case DOOR:
 			return false;
+			break;
+		default:
+			break;
+		}
 		TCODConsole::root->putCharEx(x, y, TCODConsole::root->getChar(x, y),
 									 TCODConsole::root->getCharForeground(x, y), TCODColor::darkFlame);
 		return true;
