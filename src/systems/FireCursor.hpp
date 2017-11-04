@@ -2,8 +2,8 @@
 #include "CommandedSystem.hpp"
 #include "CameraSystem.hpp"
 #include "../utils/Global.hpp"
-#include "../utils/Tile.hpp"
 #include "../utils/EventManager.hpp"
+#include "../level/Tile.hpp"
 #include <iostream>
 
 class FireLine : public TCODLineListener {

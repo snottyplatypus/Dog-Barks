@@ -1,5 +1,5 @@
 #pragma once
-#include "Item.hpp"
+#include "../level/Item.hpp"
 
 struct InventoryComponent
 {

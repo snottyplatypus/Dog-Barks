@@ -2,7 +2,7 @@
 #include "../include/libtcod/libtcod.hpp"
 #include "../utils/Global.hpp"
 #include "../utils/InputHandler.hpp"
-#include "../utils/Tile.hpp"
+#include "Tile.hpp"
 #include <algorithm>
 #include <iostream>
 #include <cmath>

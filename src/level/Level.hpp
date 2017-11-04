@@ -7,7 +7,7 @@
 #include "../systems/CameraSystem.hpp"
 #include "../systems/LookingCursor.hpp"
 #include "../systems/FireCursor.hpp"
-#include "../graphics/Effect.hpp"
+#include "../ui/Effect.hpp"
 
 enum GameState {
 	PLAYER_TURN,

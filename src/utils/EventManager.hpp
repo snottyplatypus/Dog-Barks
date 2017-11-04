@@ -12,7 +12,6 @@ public:
 
 	void onNotify(Event event, CommandedSystem& object);
 	void onAttack(CommandedSystem& attacker, PositionComponent& receiver);
-	void triggerEffect();
 	void onLook(LookingEvent event);
 	void onMove(MoveEvent event, GameObjectSystem& object);
 };

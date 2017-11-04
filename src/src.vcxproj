@@ -129,20 +129,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="graphics\Effect.cpp" />
+    <ClCompile Include="ui\Effect.cpp" />
     <ClCompile Include="utils\DataManager.cpp" />
-    <ClCompile Include="graphics\Gui.cpp" />
+    <ClCompile Include="ui\Gui.cpp" />
     <ClCompile Include="level\Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="utils\EventManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="components\InventoryComponent.hpp" />
-    <ClInclude Include="components\Item.hpp" />
-    <ClInclude Include="graphics\Effect.hpp" />
+    <ClInclude Include="level\Item.hpp" />
+    <ClInclude Include="ui\Effect.hpp" />
     <ClInclude Include="utils\Config.hpp" />
     <ClInclude Include="utils\DataManager.hpp" />
-    <ClInclude Include="graphics\Gui.hpp" />
+    <ClInclude Include="ui\Gui.hpp" />
     <ClInclude Include="systems\FireCursor.hpp" />
     <ClInclude Include="systems\LookingCursor.hpp" />
     <ClInclude Include="utils\Command.hpp" />
@@ -153,7 +153,7 @@
     <ClInclude Include="level\Level.hpp" />
     <ClInclude Include="level\Terrain.hpp" />
     <ClInclude Include="systems\CameraSystem.hpp" />
-    <ClInclude Include="utils\Tile.hpp" />
+    <ClInclude Include="level\Tile.hpp" />
     <ClInclude Include="systems\CommandedSystem.hpp" />
     <ClInclude Include="systems\GameObjectSystem.hpp" />
     <ClInclude Include="utils\Global.hpp" />

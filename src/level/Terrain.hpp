@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
 #include "../components/RenderComponent.hpp"
-#include "../utils/Tile.hpp"
+#include "Tile.hpp"
 
 struct CommandedSystem;
 

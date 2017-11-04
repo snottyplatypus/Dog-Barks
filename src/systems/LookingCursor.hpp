@@ -1,6 +1,6 @@
 #pragma once
 #include "CommandedSystem.hpp"
-#include "../utils/Tile.hpp"
+#include "../level/Tile.hpp"
 #include "../utils/EventManager.hpp"
 
 struct LookingCursor : public CommandedSystem

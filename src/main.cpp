@@ -4,8 +4,8 @@
 #include "utils/EventManager.hpp"
 #include "utils/InputHandler.hpp"
 #include "utils/DataManager.hpp"
-#include "graphics/Gui.hpp"
-#include "graphics/Effect.hpp"
+#include "ui/Gui.hpp"
+#include "ui/Effect.hpp"
 #include <iostream>
 
 Config config;

@@ -1,5 +1,5 @@
 #pragma once
-#include "../components/Item.hpp"
+#include "../level/Item.hpp"
 #include "Config.hpp"
 #include <map>
 

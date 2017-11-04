@@ -2,7 +2,7 @@
 #include "../include/libtcod/libtcod.hpp"
 #include "../systems/CommandedSystem.hpp"
 #include "../level/Level.hpp"
-#include "../graphics/Gui.hpp"
+#include "../ui/Gui.hpp"
 #include "Geometry.hpp"
 #include <iostream>
 
