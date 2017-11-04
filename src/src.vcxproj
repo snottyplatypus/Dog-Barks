@@ -129,8 +129,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="graphics\Effect.cpp" />
     <ClCompile Include="utils\DataManager.cpp" />
-    <ClCompile Include="gui\Gui.cpp" />
+    <ClCompile Include="graphics\Gui.cpp" />
     <ClCompile Include="level\Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="utils\EventManager.cpp" />
@@ -138,10 +139,10 @@
   <ItemGroup>
     <ClInclude Include="components\InventoryComponent.hpp" />
     <ClInclude Include="components\Item.hpp" />
-    <ClInclude Include="systems\LivingSystem.hpp" />
+    <ClInclude Include="graphics\Effect.hpp" />
     <ClInclude Include="utils\Config.hpp" />
     <ClInclude Include="utils\DataManager.hpp" />
-    <ClInclude Include="gui\Gui.hpp" />
+    <ClInclude Include="graphics\Gui.hpp" />
     <ClInclude Include="systems\FireCursor.hpp" />
     <ClInclude Include="systems\LookingCursor.hpp" />
     <ClInclude Include="utils\Command.hpp" />

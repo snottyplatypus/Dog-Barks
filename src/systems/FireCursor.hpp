@@ -20,11 +20,11 @@ public:
 		default:
 			break;
 		}
-		TCODConsole::root->putCharEx(x, y, TCODConsole::root->getChar(x, y),
-									 TCODConsole::root->getCharForeground(x, y), TCODColor::darkFlame);
+		TCODConsole::root->putCharEx(x, y, TCODConsole::root->getChar(x, y), TCODConsole::root->getCharForeground(x, y), _bg);
 		return true;
 	}
 
+	TCODColor _bg;
 	PositionComponent _lastPos;
 };
 
@@ -32,6 +32,7 @@ struct FireCursor : public CommandedSystem
 {
 	FireCursor(int x = 1, int y = 1)
 	{
+		_fireLine._bg = TCODColor::darkFlame;
 		_renderer->_tile = CURSOR;
 		_id = "cursor";
 		_renderer->_bg = TCODColor::darkFlame;

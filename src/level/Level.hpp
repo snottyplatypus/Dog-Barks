@@ -7,6 +7,7 @@
 #include "../systems/CameraSystem.hpp"
 #include "../systems/LookingCursor.hpp"
 #include "../systems/FireCursor.hpp"
+#include "../graphics/Effect.hpp"
 
 enum GameState {
 	PLAYER_TURN,
@@ -37,6 +38,7 @@ public:
 	void setInBounds(int& x, int& y);
 
 	GameState _gameState;
+	Effect _effect;
 
 	CameraSystem _camera;
 

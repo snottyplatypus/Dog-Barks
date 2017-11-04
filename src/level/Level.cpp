@@ -63,6 +63,8 @@ void Level::update()
 	}
 	if (_gameState == CURSOR_MODE_F)
 		_fireCursor.render(*_player->_pos, *_camera._pos);
+
+	_effect.update();
 }
 
 void Level::generateLevel()

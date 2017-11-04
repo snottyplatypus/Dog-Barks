@@ -24,10 +24,13 @@
     <ClCompile Include="utils\EventManager.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="gui\Gui.cpp">
+    <ClCompile Include="utils\DataManager.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="utils\DataManager.cpp">
+    <ClCompile Include="graphics\Gui.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\Effect.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,9 +77,6 @@
     <ClInclude Include="systems\CommandedSystem.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="gui\Gui.hpp">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="systems\FireCursor.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -95,7 +95,10 @@
     <ClInclude Include="utils\Geometry.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="systems\LivingSystem.hpp">
+    <ClInclude Include="graphics\Gui.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\Effect.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

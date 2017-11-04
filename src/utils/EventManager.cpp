@@ -2,7 +2,7 @@
 #include "../include/libtcod/libtcod.hpp"
 #include "../systems/CommandedSystem.hpp"
 #include "../level/Level.hpp"
-#include "../gui/Gui.hpp"
+#include "../graphics/Gui.hpp"
 #include "Geometry.hpp"
 #include <iostream>
 
@@ -46,27 +46,40 @@ void EventManager::onNotify(Event event, CommandedSystem& object)
 
 void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiver)
 {
-	if (attacker._inventory->_held._canDestroyWall) {
-		switch (level._terrain[receiver._x][receiver._y]._renderer->_tile) 
-		{
-		case BLOCK3:
-			level._terrain[receiver._x][receiver._y] = { BLOCK2, "Damaged wall", true, false, TCODColor::lightestSepia, TCODColor::darkestSepia * 0.5f };
-			break;
-		case BLOCK2:
-		case DOOR:
-			level._terrain[receiver._x][receiver._y] = { BLOCK1, "Destroyed wall", true, true, TCODColor::lightSepia, TCODColor::darkestSepia * 0.5f };
-			break;
-		default:
-			break;
-		}
-	}
 	float rs = static_cast<float>(1);
 	int mw = 0;
 	int mh = 0;
 	float shot = (1 / rs * rng.getInt(0, 100) + mw) * (1 - mh / 10);
-	std::cout << db::dist_cb<float>(*attacker._pos, receiver) << " " << shot << std::endl;
-	if (db::dist_cb<float>(*attacker._pos, receiver) <= shot )
+	std::cout << db::dist_sq<float>(*attacker._pos, receiver) << " " << shot << std::endl;
+	if (db::dist_sq<float>(*attacker._pos, receiver) <= shot) {
 		std::cout << "Shot " << receiver._x << " " << receiver._y << std::endl;
+		if (attacker._inventory->_held._canDestroyWall) {
+			switch (level._terrain[receiver._x][receiver._y]._renderer->_tile)
+			{
+			case BLOCK3:
+				level._terrain[receiver._x][receiver._y] = { BLOCK2, "Damaged wall", true, false, TCODColor::lightestSepia, TCODColor::darkestSepia * 0.5f };
+				break;
+			case BLOCK2:
+			case DOOR:
+				level._terrain[receiver._x][receiver._y] = { BLOCK1, "Destroyed wall", true, true, TCODColor::lightSepia, TCODColor::darkestSepia * 0.5f };
+				break;
+			default:
+				break;
+			}
+		}
+		level._effect._shootEffect->_from._x = attacker._pos->_x + level._camera._pos->_x;
+		level._effect._shootEffect->_from._y = attacker._pos->_y + level._camera._pos->_y;
+		level._effect._shootEffect->_to._x = receiver._x + level._camera._pos->_x;
+		level._effect._shootEffect->_to._y = receiver._y + level._camera._pos->_y;
+		level._effect._shootEffect->_launch = true;
+	}
+	else {
+		level._effect._shootEffect->_from._x = attacker._pos->_x + level._camera._pos->_x;
+		level._effect._shootEffect->_from._y = attacker._pos->_y + level._camera._pos->_y;
+		level._effect._shootEffect->_to._x = receiver._x + rng.getInt(-2, 2) + level._camera._pos->_x;
+		level._effect._shootEffect->_to._y = receiver._y + rng.getInt(-2, 2) + level._camera._pos->_y;
+		level._effect._shootEffect->_launch = true;
+	}
 }
 
 void EventManager::onLook(LookingEvent event)
