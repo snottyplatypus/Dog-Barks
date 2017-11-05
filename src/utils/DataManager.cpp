@@ -29,16 +29,16 @@ void DataManager::init()
 
 	file = YAML::LoadFile("data/living/body_part.yaml");
 	for (std::size_t i = 0; i < file.size(); i++) {
-		std::string name = file[i]["specie"].as<std::string>() + "_" + file[i]["type"].as<std::string>();
+		std::string name = file[i]["species"].as<std::string>() + "_" + file[i]["type"].as<std::string>();
 		_bodyParts[name]._name = file[i]["type"].as<std::string>();
 		_bodyParts[name]._hp = file[i]["hp"].as<int>();
 		_bodyParts[name]._abilityName = file[i]["ability"].as<std::string>();
 	}
 	
-	file = YAML::LoadFile("data/living/specie.yaml");
+	file = YAML::LoadFile("data/living/species.yaml");
 	for (std::size_t i = 0; i < file.size(); i++) {
 		std::string name = file[i]["name"].as<std::string>();
-		_species[name]._specie = name;
+		_species[name]._species = name;
 		for (std::size_t j = 0; j < file[i]["parts"].size(); j++)
 			for (YAML::const_iterator it = file[i]["parts"][j].begin(); it != file[i]["parts"][j].end(); ++it)
 				_species[name]._body[it->first.as<std::string>()] = _bodyParts[it->second.as<std::string>()];

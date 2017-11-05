@@ -16,6 +16,6 @@ struct LivingComponent
 	LivingComponent() {}
 	~LivingComponent() {}
 	
-	std::string _specie;
+	std::string _species;
 	std::map<std::string, BodyPart> _body;
 };

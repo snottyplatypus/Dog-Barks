@@ -109,6 +109,6 @@
     <None Include="data\config.yaml" />
     <None Include="data\living\body_part.yaml" />
     <None Include="data\item\item_weapon.yaml" />
-    <None Include="data\living\specie.yaml" />
+    <None Include="data\living\species.yaml" />
   </ItemGroup>
 </Project>
