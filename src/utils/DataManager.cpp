@@ -13,25 +13,25 @@ DataManager::~DataManager()
 
 void DataManager::init()
 {
-	YAML::Node configFile = YAML::LoadFile("data/config.yaml");
-	config.screenWidth = configFile["width"].as<int>();
-	config.screenHeight = configFile["height"].as<int>();
-	config.font = configFile["font"].as<std::string>();
+	YAML::Node file = YAML::LoadFile("data/config.yaml");
+	config.screenWidth = file["width"].as<int>();
+	config.screenHeight = file["height"].as<int>();
+	config.font = file["font"].as<std::string>();
 
-	YAML::Node weapons = YAML::LoadFile("data/item/item_weapon.yaml");
-	for (std::size_t i = 0; i < weapons.size(); i++) {
-		std::string name = weapons[i]["name"].as<std::string>();
-		_weapons[name]._name = weapons[i]["name"].as<std::string>();
-		_weapons[name]._canDestroyWall = weapons[i]["canDestroyWall"].as<bool>();
-		_weapons[name]._mag = weapons[i]["mag"].as<int>();
-		_weapons[name]._projectiles = weapons[i]["projectiles"].as<int>();
+	file = YAML::LoadFile("data/item/item_weapon.yaml");
+	for (std::size_t i = 0; i < file.size(); i++) {
+		std::string name = file[i]["name"].as<std::string>();
+		_weapons[name]._name = file[i]["name"].as<std::string>();
+		_weapons[name]._canDestroyWall = file[i]["canDestroyWall"].as<bool>();
+		_weapons[name]._mag = file[i]["mag"].as<int>();
+		_weapons[name]._projectiles = file[i]["projectiles"].as<int>();
 	}
 
-	YAML::Node bodyparts = YAML::LoadFile("data/living/body_part.yaml");
-	for (std::size_t i = 0; i < bodyparts.size(); i++) {
-		std::string name = bodyparts[i]["specie"].as<std::string>() + "_" + bodyparts[i]["type"].as<std::string>();
-		_bodyParts[name]._name = bodyparts[i]["type"].as<std::string>();
-		_bodyParts[name]._hp = bodyparts[i]["hp"].as<int>();
-		_bodyParts[name]._ability = bodyparts[i]["ability"].as<bool>();
+	file = YAML::LoadFile("data/living/body_part.yaml");
+	for (std::size_t i = 0; i < file.size(); i++) {
+		std::string name = file[i]["specie"].as<std::string>() + "_" + file[i]["type"].as<std::string>();
+		_bodyParts[name]._name = file[i]["type"].as<std::string>();
+		_bodyParts[name]._hp = file[i]["hp"].as<int>();
+		_bodyParts[name]._ability = file[i]["ability"].as<bool>();
 	}
 }

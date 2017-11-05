@@ -4,16 +4,16 @@
 
 struct BodyPart
 {
-	std::string name;
-	int hp;
-	bool ability;
-	bool bleeding;
+	std::string _name;
+	int _hp;
+	bool _ability;
+	bool _bleeding;
 };
 
 struct LivingComponent
 {
 	LivingComponent() {}
-	LivingComponent() {}
+	~LivingComponent() {}
 	
 	std::map<std::string, BodyPart> _body;
 };

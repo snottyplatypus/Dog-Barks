@@ -14,7 +14,7 @@ public:
 	void init();
 
 	std::map<std::string, Weapon> _weapons;
-	std::map<std::string, Bodypart> _bodyParts;
+	std::map<std::string, BodyPart> _bodyParts;
 
 	std::string  font;
 };
