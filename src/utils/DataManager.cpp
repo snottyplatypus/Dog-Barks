@@ -26,4 +26,12 @@ void DataManager::init()
 		_weapons[name]._mag = weapons[i]["mag"].as<int>();
 		_weapons[name]._projectiles = weapons[i]["projectiles"].as<int>();
 	}
+
+	YAML::Node bodyparts = YAML::LoadFile("data/living/body_part.yaml");
+	for (std::size_t i = 0; i < bodyparts.size(); i++) {
+		std::string name = bodyparts[i]["specie"].as<std::string>() + "_" + bodyparts[i]["type"].as<std::string>();
+		_bodyParts[name]._name = bodyparts[i]["type"].as<std::string>();
+		_bodyParts[name]._hp = bodyparts[i]["hp"].as<int>();
+		_bodyParts[name]._ability = bodyparts[i]["ability"].as<bool>();
+	}
 }

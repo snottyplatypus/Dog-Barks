@@ -1,11 +1,11 @@
 - SHOTGUN:
-  name: Shotgun
-  canDestroyWall: true
-  mag: 21
-  projectiles: 9
+	name: Shotgun
+	canDestroyWall: true
+	mag: 21
+	projectiles: 9
 
 - UZI:
-  name: Uzi
-  canDestroyWall: false
-  mag: 21
-  projectiles: 1
+	name: Uzi
+	canDestroyWall: false
+	mag: 21
+	projectiles: 1

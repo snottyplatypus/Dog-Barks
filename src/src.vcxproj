@@ -138,6 +138,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="components\InventoryComponent.hpp" />
+    <ClInclude Include="components\LivingComponent.hpp" />
     <ClInclude Include="level\Item.hpp" />
     <ClInclude Include="ui\Effect.hpp" />
     <ClInclude Include="utils\Config.hpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="utils\EventManager.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="data\living\body_part.yaml" />
     <None Include="data\config.yaml" />
     <None Include="data\item\item_weapon.yaml" />
   </ItemGroup>

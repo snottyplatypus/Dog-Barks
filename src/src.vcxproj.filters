@@ -101,9 +101,13 @@
     <ClInclude Include="ui\Gui.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="components\LivingComponent.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="data\config.yaml" />
     <None Include="data\item\item_weapon.yaml" />
+    <None Include="data\living\body_part.yaml" />
   </ItemGroup>
 </Project>
