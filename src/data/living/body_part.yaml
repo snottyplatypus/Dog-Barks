@@ -1,23 +1,23 @@
 - HUMAN_HEAD:
-  specie: Human
-  type: Head
+  specie: human
+  type: head
   hp: 5
   ability: live
 
 - HUMAN_ChEST:
-  name: Human
-  specie: Chest
+  specie: human
+  type: chest
   hp: 15
   ability: live
 
 - HUMAN_ARM:
-  specie: Human
-  type: Arm
+  specie: human
+  type: arm
   hp: 10
   ability: carry
 
 - HUMAN_LEG:
-  specie: Human
-  type: Leg
+  specie: human
+  type: leg
   hp: 10
   ability: move

@@ -32,6 +32,6 @@ void DataManager::init()
 		std::string name = file[i]["specie"].as<std::string>() + "_" + file[i]["type"].as<std::string>();
 		_bodyParts[name]._name = file[i]["type"].as<std::string>();
 		_bodyParts[name]._hp = file[i]["hp"].as<int>();
-		_bodyParts[name]._ability = file[i]["ability"].as<bool>();
+		_bodyParts[name]._abilityName = file[i]["ability"].as<std::string>();
 	}
 }

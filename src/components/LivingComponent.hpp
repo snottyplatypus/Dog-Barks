@@ -6,6 +6,7 @@ struct BodyPart
 {
 	std::string _name;
 	int _hp;
+	std::string _abilityName;
 	bool _ability;
 	bool _bleeding;
 };
