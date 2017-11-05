@@ -10,6 +10,7 @@ struct LookingCursor : public CommandedSystem
 		_renderer->_tile = CURSOR;
 		_id = "cursor";
 		_inventory = nullptr;
+		_body = nullptr;
 	}
 
 	~LookingCursor() {}
