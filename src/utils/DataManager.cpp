@@ -34,4 +34,13 @@ void DataManager::init()
 		_bodyParts[name]._hp = file[i]["hp"].as<int>();
 		_bodyParts[name]._abilityName = file[i]["ability"].as<std::string>();
 	}
+	
+	file = YAML::LoadFile("data/living/specie.yaml");
+	for (std::size_t i = 0; i < file.size(); i++) {
+		std::string name = file[i]["name"].as<std::string>();
+		_species[name]._specie = name;
+		for (std::size_t j = 0; j < file[i]["parts"].size(); j++)
+			for (YAML::const_iterator it = file[i]["parts"][j].begin(); it != file[i]["parts"][j].end(); ++it)
+				_species[name]._body[it->first.as<std::string>()] = _bodyParts[it->second.as<std::string>()];
+	}
 }

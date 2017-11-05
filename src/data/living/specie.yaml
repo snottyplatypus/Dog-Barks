@@ -1,0 +1,9 @@
+- HUMAN:
+  name: human
+  parts:
+    - head: human_head
+    - chest: human_chest
+    - arm_l: human_arm
+    - arm_r: human_arm
+    - leg_l: human_leg
+    - leg_r: human_leg

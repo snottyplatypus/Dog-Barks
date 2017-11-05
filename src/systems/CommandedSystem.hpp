@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObjectSystem.hpp"
 #include "../components/InventoryComponent.hpp"
+#include "../components/LivingComponent.hpp"
 #include <iostream>
 #include "../utils/DataManager.hpp"
 
@@ -15,6 +16,7 @@ struct CommandedSystem : public GameObjectSystem
 		_id = "actor";
 		_inventory = std::make_shared<InventoryComponent>();
 		_inventory->_held = dataManager._weapons["Shotgun"];
+		_body = std::make_shared<LivingComponent>(dataManager._species["human"]);
 	}
 
 	~CommandedSystem() {}
@@ -30,5 +32,6 @@ struct CommandedSystem : public GameObjectSystem
 	}
 
 	std::shared_ptr<InventoryComponent> _inventory;
+	std::shared_ptr<LivingComponent> _body;
 	std::shared_ptr<Command<CommandedSystem>> _interaction;
 };
