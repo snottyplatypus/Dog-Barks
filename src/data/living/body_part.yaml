@@ -3,21 +3,25 @@
   type: head
   hp: 5
   ability: live
+  size: 3
 
-- HUMAN_ChEST:
+- HUMAN_CHEST:
   species: human
   type: chest
   hp: 15
   ability: live
+  size: 6
 
 - HUMAN_ARM:
   species: human
   type: arm
   hp: 10
   ability: carry
+  size: 4
 
 - HUMAN_LEG:
   species: human
   type: leg
   hp: 10
   ability: move
+  size: 5

@@ -37,7 +37,7 @@ bool BloodLine::putPoint(int x, int y)
 							level._terrain[x][y]._renderer->_name, 
 							level._terrain[x][y]._isTransparent,
 							level._terrain[x][y]._isWalkable,
-							TCODColor::darkRed, 
+							TCODColor::darkerRed, 
 							TCODColor::darkestRed
 						   };
 	return true;

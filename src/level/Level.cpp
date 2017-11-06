@@ -20,8 +20,7 @@ Level::~Level()
 void Level::init()
 {
 	_player = std::make_shared<CommandedSystem>(2, 2, PLAYER, "You");
-	_actors.push_back(_player);
-
+	
 	_camera.lockOn({ SCREEN_WIDTH / 2 - _width / 2, SCREEN_HEIGHT / 2 - _height / 2 });
 
 	generateLevel();
@@ -32,7 +31,6 @@ void Level::update()
 	switch (_gameState) {
 	case PLAYER_TURN:
 		inputHandler.onObject(*_player);
-		_player->update();
 		break;
 	case CURSOR_MODE_L:
 		inputHandler.onObject(_lookingCursor);
@@ -44,7 +42,12 @@ void Level::update()
 		break;
 	}
 
+	_player->update();
+	_terrain[_player->_pos->_x][_player->_pos->_y]._actor = _player;
+	_player->_renderer->_bg = _terrain[_player->_pos->_x][_player->_pos->_y]._renderer->_bg;
+
 	for (auto i : _actors) {
+		i->update();
 		_terrain[i->_pos->_x][i->_pos->_y]._actor = i;
 		i->_renderer->_bg = _terrain[i->_pos->_x][i->_pos->_y]._renderer->_bg;
 	}

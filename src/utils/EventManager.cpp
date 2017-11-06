@@ -68,8 +68,9 @@ void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiv
 			}
 		}
 		if (level._terrain[receiver._x][receiver._y]._actor != nullptr) {
-			std::cout << db::vec_2p(*attacker._pos, receiver)._x << " " << db::vec_2p(*attacker._pos, receiver)._y << std::endl;
-			level._effect._bloodEffect->create(receiver, db::vec_2p(*attacker._pos, receiver));
+			auto temp = level._terrain[receiver._x][receiver._y]._actor;
+			temp->_body->handleDamage(attacker._inventory->_held, temp->_body->_body["chest"], 1);
+			level._effect._bloodEffect->create(receiver, db::vec_2p(*attacker._pos, receiver), (attacker._inventory->_held._projectiles / 2 + 1) * 1);
 		}
 		level._effect._shootEffect->create(*attacker._pos, receiver, *level._camera._pos);
 	}
@@ -107,5 +108,14 @@ void EventManager::onMove(MoveEvent event, GameObjectSystem& object)
 			object._pos->_x += event._x;
 			object._pos->_y += event._y;
 		}
+	}
+}
+
+void EventManager::onDeath(CommandedSystem& system)
+{
+	if (system._body->_dead) {
+		system._renderer->_fg = TCODColor::darkRed;
+		if (system._renderer->_name.find(" - dead") == std::string::npos)
+			system._renderer->_name += " - dead";
 	}
 }

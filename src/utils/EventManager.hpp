@@ -14,6 +14,7 @@ public:
 	void onAttack(CommandedSystem& attacker, PositionComponent& receiver);
 	void onLook(LookingEvent event);
 	void onMove(MoveEvent event, GameObjectSystem& object);
+	void onDeath(CommandedSystem& system);
 };
 
 extern EventManager eventManager;
