@@ -57,25 +57,24 @@ void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiv
 			switch (level._terrain[receiver._x][receiver._y]._renderer->_tile)
 			{
 			case BLOCK3:
-				level._terrain[receiver._x][receiver._y] = { BLOCK2, "Damaged wall", true, false, TCODColor::lightestSepia, TCODColor::darkestSepia * 0.5f };
+				level._terrain[receiver._x][receiver._y] = { BLOCK2, "Damaged wall", true, false, level._terrain[receiver._x][receiver._y]._renderer->_fg, level._terrain[receiver._x][receiver._y]._renderer->_bg };
 				break;
 			case BLOCK2:
 			case DOOR:
-				level._terrain[receiver._x][receiver._y] = { BLOCK1, "Destroyed wall", true, true, TCODColor::lightSepia, TCODColor::darkestSepia * 0.5f };
+				level._terrain[receiver._x][receiver._y] = { BLOCK1, "Destroyed wall", true, true, level._terrain[receiver._x][receiver._y]._renderer->_fg, level._terrain[receiver._x][receiver._y]._renderer->_bg };
 				break;
 			default:
 				break;
 			}
 		}
-		level._effect._shootEffect->_from = *attacker._pos + *level._camera._pos;
-		level._effect._shootEffect->_to = receiver + *level._camera._pos;
-		level._effect._shootEffect->_launch = true;
+		if (level._terrain[receiver._x][receiver._y]._actor != nullptr) {
+			std::cout << db::vec_2p(*attacker._pos, receiver)._x << " " << db::vec_2p(*attacker._pos, receiver)._y << std::endl;
+			level._effect._bloodEffect->create(receiver, db::vec_2p(*attacker._pos, receiver));
+		}
+		level._effect._shootEffect->create(*attacker._pos, receiver, *level._camera._pos);
 	}
 	else {
-		level._effect._shootEffect->_from = *attacker._pos + *level._camera._pos;
-		level._effect._shootEffect->_to._x = receiver._x + level._camera._pos->_x + rng.getInt(-2, 2);
-		level._effect._shootEffect->_to._y = receiver._y + level._camera._pos->_y + rng.getInt(-2, 2);
-		level._effect._shootEffect->_launch = true;
+		level._effect._shootEffect->create(*attacker._pos, receiver, *level._camera._pos, PositionComponent{ rng.getInt(-2, 2), rng.getInt(-2, 2) });
 	}
 }
 

@@ -2,7 +2,7 @@
 #include "../include/libtcod/libtcod.hpp"
 #include "../components/PositionComponent.hpp"
 #include "../utils/Global.hpp"
-#include "../systems/FireCursor.hpp"
+#include "../utils/Line.hpp"
 #include <vector>
 #include <memory>
 #include <iostream>
@@ -12,7 +12,6 @@ struct BaseEffect
 	BaseEffect() : _active(false), _timer(0) {}
 	virtual ~BaseEffect() {}
 	virtual void update() = 0;
-	virtual void reset() = 0;
 
 	bool _active;
 	bool _launch;
@@ -23,42 +22,33 @@ struct ShootEffect : public BaseEffect
 {
 	ShootEffect() : _repeat(1), _stop(0), _duration(0.15f), _inc(false) { _line._bg = TCODColor::white; }
 	~ShootEffect() {}
-	void update() override 
-	{
-		if ( _launch ) {
-			_timer = time;
-			_active = true;
-			_launch = false;
-		}
-		if (std::fmodf(time - _timer, _duration) <= _duration/2.0f && _stop < _repeat) {
-			TCODLine::line(_from._x, _from._y, _to._x, _to._y, &_line);
-			_inc = true;
-		}
-		if (std::fmodf(time - _timer, _duration) >= _duration/2.0f && _inc) {
-			_stop++;
-			_inc = false;
-		}
-		if (time - _timer > _duration * static_cast<float>(_repeat))
-			reset();
-	}
+	void update() override;
+	void reset();
+	void create(PositionComponent& from, PositionComponent& to, PositionComponent& mod, PositionComponent& modDir = PositionComponent{ 0, 0 });
 
-	void reset() override
-	{
-		_active = false;
-		_launch = false;
-		_repeat = 1;
-		_stop = 0;
-		_from = { 0, 0 };
-		_to = { 0, 0 };
-	}
-
+private:
 	int _repeat;
 	int _stop;
 	bool _inc;
 	float _duration;
-	FireLine _line;
+	PhysicalLine _line;
 	PositionComponent _from;
 	PositionComponent _to;
+};
+
+struct BloodEffect : public BaseEffect
+{
+	BloodEffect()
+	{ 
+		_active = true;
+		_line._bg = TCODColor::red; 
+	}
+	~BloodEffect() {}
+	void update() override {}
+	void create(PositionComponent from, PositionComponent dir, int time = 1);
+
+private:
+	BloodLine _line;
 };
 
 class Effect
@@ -69,5 +59,6 @@ public:
 	void update();
 
 	std::shared_ptr<ShootEffect> _shootEffect;
+	std::shared_ptr<BloodEffect> _bloodEffect;
 	std::vector<std::shared_ptr<BaseEffect>> _effects;
 };

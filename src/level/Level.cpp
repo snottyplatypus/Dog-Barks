@@ -56,6 +56,7 @@ void Level::update()
 				_terrain[i][j]._actor->_renderer->update({ i + _camera._pos->_x, j + _camera._pos->_y });
 		}
 	}
+
 	if (_gameState == CURSOR_MODE_L) {
 		_lookingCursor._renderer->_bg = _terrain[_lookingCursor._pos->_x][_lookingCursor._pos->_y]._renderer->_bg;
 		if (std::fmodf(time, 1.0f) >= 0.5f)
@@ -65,6 +66,7 @@ void Level::update()
 		_fireCursor.render(*_player->_pos, *_camera._pos);
 
 	_effect.update();
+
 }
 
 void Level::generateLevel()

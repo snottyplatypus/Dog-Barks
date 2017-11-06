@@ -135,6 +135,7 @@
     <ClCompile Include="level\Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="utils\EventManager.cpp" />
+    <ClCompile Include="utils\Line.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="components\InventoryComponent.hpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="utils\Global.hpp" />
     <ClInclude Include="utils\Event.hpp" />
     <ClInclude Include="utils\EventManager.hpp" />
+    <ClInclude Include="utils\Line.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\item\item_weapon.yaml" />

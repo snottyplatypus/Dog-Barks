@@ -4,38 +4,17 @@
 #include "../utils/Global.hpp"
 #include "../utils/EventManager.hpp"
 #include "../level/Tile.hpp"
+#include "../utils/Line.hpp"
 #include <iostream>
-
-class FireLine : public TCODLineListener {
-public:
-	bool putPoint(int x, int y) {
-		_lastPos = { x, y };
-		switch (TCODConsole::root->getChar(x, y)) 
-		{
-		case BLOCK3:
-		case ACTOR:
-		case DOOR:
-			return false;
-			break;
-		default:
-			break;
-		}
-		TCODConsole::root->putCharEx(x, y, TCODConsole::root->getChar(x, y), TCODConsole::root->getCharForeground(x, y), _bg);
-		return true;
-	}
-
-	TCODColor _bg;
-	PositionComponent _lastPos;
-};
 
 struct FireCursor : public CommandedSystem
 {
 	FireCursor(int x = 1, int y = 1)
 	{
-		_fireLine._bg = TCODColor::darkFlame;
+		_fireLine._bg = TCODColor::desaturatedYellow;
 		_renderer->_tile = CURSOR;
 		_id = "cursor";
-		_renderer->_bg = TCODColor::darkFlame;
+		_renderer->_bg = TCODColor::desaturatedYellow;
 		_inventory = nullptr;
 		_body = nullptr;
 	}
@@ -62,6 +41,6 @@ struct FireCursor : public CommandedSystem
 			_renderer->update(*_pos, mod);
 	}
 
-	FireLine _fireLine;
+	PhysicalLine _fireLine;
 	PositionComponent _lastPos;
 };
