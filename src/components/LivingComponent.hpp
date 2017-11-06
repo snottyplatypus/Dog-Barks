@@ -1,4 +1,5 @@
 #pragma once
+#include "../level/Item.hpp"
 #include <string>
 #include <map>
 
@@ -15,7 +16,12 @@ struct LivingComponent
 {
 	LivingComponent() {}
 	~LivingComponent() {}
+	void handleDamage(Weapon& weapon)
+	{
+
+	}
 	
 	std::string _species;
 	std::map<std::string, BodyPart> _body;
+	bool _dead;
 };

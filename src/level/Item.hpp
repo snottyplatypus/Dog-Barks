@@ -16,4 +16,5 @@ struct Weapon
 	bool _canDestroyWall;
 	int _mag;
 	int _projectiles;
+	int _damage;
 };

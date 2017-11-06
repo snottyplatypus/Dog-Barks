@@ -46,10 +46,10 @@ void EventManager::onNotify(Event event, CommandedSystem& object)
 
 void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiver)
 {
-	float rs = static_cast<float>(1);
-	int mw = 0;
-	int mh = 0;
-	float shot = (1 / rs * rng.getInt(0, 100) + mw) * (1 - mh / 10);
+	float roundShot = static_cast<float>(1);
+	int modWeapon = 0;
+	int modHealth = 0;
+	float shot = (1 / roundShot * rng.getInt(0, 100) + modWeapon) * (1 - modHealth / 10);
 	std::cout << db::dist_sq<float>(*attacker._pos, receiver) << " " << shot << std::endl;
 	if (db::dist_sq<float>(*attacker._pos, receiver) <= shot) {
 		std::cout << "Shot " << receiver._x << " " << receiver._y << std::endl;

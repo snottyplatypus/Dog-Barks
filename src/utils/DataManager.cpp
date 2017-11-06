@@ -25,6 +25,7 @@ void DataManager::init()
 		_weapons[name]._canDestroyWall = file[i]["canDestroyWall"].as<bool>();
 		_weapons[name]._mag = file[i]["mag"].as<int>();
 		_weapons[name]._projectiles = file[i]["projectiles"].as<int>();
+		_weapons[name]._damage = file[i]["damage"].as<int>();
 	}
 
 	file = YAML::LoadFile("data/living/body_part.yaml");
