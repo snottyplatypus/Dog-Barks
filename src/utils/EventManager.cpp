@@ -92,6 +92,11 @@ void EventManager::onMove(MoveEvent event, GameObjectSystem& object)
 {
 	if (object._id != "cursor") {
 		if (level._terrain[object._pos->_x + event._x][object._pos->_y + event._y]._isWalkable) {
+			if (level._terrain[object._pos->_x + event._x][object._pos->_y + event._y]._actor != nullptr) {
+				level._terrain[object._pos->_x + event._x][object._pos->_y + event._y]._actor->_pos->_x -= event._x;
+				level._terrain[object._pos->_x + event._x][object._pos->_y + event._y]._actor->_pos->_y -= event._y;
+				level._terrain[object._pos->_x + event._x][object._pos->_y + event._y]._actor = nullptr;
+			}
 			level._terrain[object._pos->_x][object._pos->_y]._actor = nullptr;
 			object._pos->_x += event._x;
 			object._pos->_y += event._y;
