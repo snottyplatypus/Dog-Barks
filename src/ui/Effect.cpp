@@ -38,6 +38,10 @@ void ShootEffect::create(PositionComponent& from, PositionComponent& to, Positio
 
 void BloodEffect::create(PositionComponent from, PositionComponent dir, int time)
 {
+	if (dir._x > 3)
+		dir._x = 3;
+	if (dir._y > 3)
+		dir._y = 3;
 	for (int i = 0; i < time; i++) {
 		PositionComponent to = from + dir + PositionComponent{ rng.getInt(-2, 2), rng.getInt(-2, 2) };
 		TCODLine::line(from._x, from._y, to._x, to._y, &_line);
