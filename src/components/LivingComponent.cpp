@@ -21,7 +21,7 @@ void LivingComponent::update()
 {
 	for (int i = 0; i < _body.size(); i++) {
 		if (_body[i]._bleeding)
-			_body[i]._hp -= 2;
+			_body[i]._hp -= 1;
 		if (_body[i]._shot)
 			_body[i]._bleeding = true;
 		if (_body[i]._hp <= 0)
@@ -46,6 +46,7 @@ void LivingComponent::handleDamage(Weapon& weapon, BodyPart& target, int bullet)
 		target2._hp -= bullet * weapon._projectiles * weapon._damage;
 		target2._shot = true;
 	}
+	update();
 }
 
 void LivingComponent::bodyInfo()

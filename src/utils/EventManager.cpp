@@ -79,7 +79,7 @@ void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiv
 		}
 		if (level._terrain[receiver._x][receiver._y]._actor != nullptr) {
 			auto temp = level._terrain[receiver._x][receiver._y]._actor->_body;
-			temp->handleDamage(attacker._inventory->_held, temp->_body[temp->_keys["chest"]], 1);
+			temp->handleDamage(attacker._inventory->_held, (*temp)["chest"], 1);
 			level._effect._bloodEffect->create(receiver, db::vec_2p(*attacker._pos, receiver), *level._camera._pos, (attacker._inventory->_held._projectiles / 2 + 1) * 1);
 		}
 		level._effect._shootEffect->create(*attacker._pos, receiver, *level._camera._pos);

@@ -37,7 +37,7 @@ namespace db
 		return static_cast<T>(std::pow(dx, 2) + std::pow(dy, 2));
 	}
 
-	PositionComponent vec_2p(PositionComponent& pos1, PositionComponent& pos2)
+	inline PositionComponent vec_2p(PositionComponent& pos1, PositionComponent& pos2)
 	{
 		return { pos2._x - pos1._x, pos2._y - pos1._y };
 	}

@@ -35,4 +35,6 @@ struct LivingComponent
 	std::vector<BodyPart> _body;
 	bool _dead;
 	std::weak_ptr<CommandedSystem> _system;
+
+	BodyPart& operator[] (std::string key) { return _body[_keys[key]]; }
 };
