@@ -22,6 +22,8 @@ void LivingComponent::update()
 	for (int i = 0; i < _body.size(); i++) {
 		if (_body[i]._bleeding)
 			_body[i]._hp -= 2;
+		if (_body[i]._shot)
+			_body[i]._bleeding = true;
 		if (_body[i]._hp <= 0)
 			_body[i]._ability = false;
 		if (_body[i]._abilityName == "live")
@@ -37,14 +39,13 @@ void LivingComponent::handleDamage(Weapon& weapon, BodyPart& target, int bullet)
 	int bullet2 = rng.getInt(0, bullet - 1);
 	bullet -= bullet2;
 	target._hp -= bullet * weapon._projectiles * weapon._damage;
-	target._bleeding = true;
+	target._shot = true;
 	if (bullet2 > 0) {
 		int part = rng.getInt(1, static_cast<int>(_body.size()));
 		BodyPart& target2 = _body[part];
 		target2._hp -= bullet * weapon._projectiles * weapon._damage;
-		target2._bleeding = true;
+		target2._shot = true;
 	}
-	update();
 }
 
 void LivingComponent::bodyInfo()

@@ -16,6 +16,7 @@ struct BodyPart
 	std::string _abilityName;
 	bool _ability;
 	bool _bleeding;
+	bool _shot;
 	int _size;
 };
 

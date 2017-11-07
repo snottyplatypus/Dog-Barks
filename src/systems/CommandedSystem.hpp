@@ -17,20 +17,19 @@ struct CommandedSystem : public GameObjectSystem, public std::enable_shared_from
 		_id = "actor";
 		_inventory = std::make_shared<InventoryComponent>();
 		_body = std::make_shared<LivingComponent>(dataManager._species["human"]);
+		_inventory->_held = dataManager._weapons["Shotgun"];
 	}
 
 	~CommandedSystem() {}
 
 	void init()
 	{
-		_inventory->_held = dataManager._weapons["Shotgun"];
 		_body->init(shared_from_this());
 	}
 
 	void update() 
 	{
 		_body->update();
-		_body->bodyInfo();
 	}
 
 	void command()

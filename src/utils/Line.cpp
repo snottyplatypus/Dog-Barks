@@ -20,7 +20,6 @@ bool PhysicalLine::putPoint(int x, int y)
 
 bool BloodLine::putPoint(int x, int y)
 {
-	_lastPos = { x, y };
 	switch (TCODConsole::root->getChar(x + _mod._x, y + _mod._y))
 	{
 	case BLOCK3:

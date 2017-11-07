@@ -1,10 +1,12 @@
 #include "DataManager.hpp"
 #include "../include/yaml-cpp/yaml.h"
+#include "../systems/CommandedSystem.hpp"
 #include <iostream>
 
 DataManager::DataManager()
 {
 	_weapons["Nothing"];
+	_player = std::make_shared<CommandedSystem>();
 }
 
 DataManager::~DataManager()
@@ -36,6 +38,8 @@ void DataManager::init()
 		_bodyParts[name]._abilityName = file[i]["ability"].as<std::string>();
 		_bodyParts[name]._ability = true;
 		_bodyParts[name]._size = file[i]["size"].as<int>();
+		_bodyParts[name]._bleeding = false;
+		_bodyParts[name]._shot = false;
 	}
 	
 	file = YAML::LoadFile("data/living/species.yaml");
@@ -47,4 +51,10 @@ void DataManager::init()
 			_species[name]._body.back()._name = it->first.as<std::string>();
 		}
 	}
+
+	file = YAML::LoadFile("data/living/player.yaml");
+	_player->_inventory->_held = _weapons[file["PLAYER"]["weapon"].as<std::string>()];
+	*_player->_body = _species[file["PLAYER"]["species"].as<std::string>()];
+	_player->_renderer->_tile = PLAYER;
+	_player->_renderer->_name = "You";
 }

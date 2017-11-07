@@ -30,7 +30,6 @@ void EventManager::onNotify(Event event, CommandedSystem& object)
 		}
 		break;
 	case TRIGGER_LOOKING_CURSOR:
-		std::cout << "CURSOR\n";
 		if (level._gameState == PLAYER_TURN) {
 			level._gameState = CURSOR_MODE_L;
 			level._lookingCursor._pos->_x = level._player->_pos->_x;

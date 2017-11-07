@@ -16,6 +16,5 @@ public:
 	bool putPoint(int x, int y);
 
 	TCODColor _bg;
-	PositionComponent _lastPos;
 	PositionComponent _mod;
 };

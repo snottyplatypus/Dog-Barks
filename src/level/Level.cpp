@@ -19,7 +19,7 @@ Level::~Level()
 
 void Level::init()
 {
-	_player = std::make_shared<CommandedSystem>(2, 2, PLAYER, "You");
+	_player = dataManager._player;
 	_player->_id = "player";
 	_player->init();
 	
