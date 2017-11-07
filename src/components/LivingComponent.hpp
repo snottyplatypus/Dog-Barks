@@ -41,7 +41,6 @@ struct LivingComponent
 
 	void handleDamage(Weapon& weapon, BodyPart& target, int bullet)
 	{
-		bodyInfo();
 		int bullet2 = rng.getInt(0, bullet - 1);
 		bullet -= bullet2;
 		target._hp -= bullet * weapon._projectiles * weapon._damage;
@@ -55,7 +54,6 @@ struct LivingComponent
 			if (target2._hp <= 0)
 				target2._ability = false;
 		}
-		bodyInfo();
 	} 
 
 	void bodyInfo()

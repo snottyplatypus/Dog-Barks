@@ -17,4 +17,5 @@ public:
 
 	TCODColor _bg;
 	PositionComponent _lastPos;
+	PositionComponent _mod;
 };

@@ -21,7 +21,7 @@ void Level::init()
 {
 	_player = std::make_shared<CommandedSystem>(2, 2, PLAYER, "You");
 	
-	_camera.lockOn({ SCREEN_WIDTH / 2 - _width / 2, SCREEN_HEIGHT / 2 - _height / 2 });
+	_camera.lockOn({ config.screenWidth / 2 - _width / 2, config.screenHeight / 2 - _height / 2 });
 
 	generateLevel();
 }
@@ -196,12 +196,8 @@ bool Level::checkVisited(int x, int y, int width, int height)
 
 void Level::setInBounds(int& x, int& y)
 {
-	if (x < DISTANCE_BORDERS - 1)
-		x = DISTANCE_BORDERS - 1;
-	if (y < DISTANCE_BORDERS - 1)
-		y = DISTANCE_BORDERS - 1;
-	if (x > _width + DISTANCE_BORDERS - 1)
-		x = _width - DISTANCE_BORDERS;
-	if (y > _height + DISTANCE_BORDERS - 1)
-		y = _height - DISTANCE_BORDERS;
+	x = std::max(x, DISTANCE_BORDERS - 1);
+	y = std::max(y, DISTANCE_BORDERS - 1);
+	x = std::min(x, _width + DISTANCE_BORDERS - 1);
+	y = std::min(y, _height + DISTANCE_BORDERS - 1);
 }

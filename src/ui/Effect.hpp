@@ -45,7 +45,7 @@ struct BloodEffect : public BaseEffect
 	}
 	~BloodEffect() {}
 	void update() override {}
-	void create(PositionComponent from, PositionComponent dir, int time = 1);
+	void create(PositionComponent& from, PositionComponent& dir, PositionComponent& mod, int time = 1);
 
 private:
 	BloodLine _line;

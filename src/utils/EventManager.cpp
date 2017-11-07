@@ -50,9 +50,7 @@ void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiv
 	int modWeapon = 0;
 	int modHealth = 0;
 	float shot = (1 / roundShot * rng.getInt(0, 100) + modWeapon) * (1 - modHealth / 10);
-	std::cout << db::dist_sq<float>(*attacker._pos, receiver) << " " << shot << std::endl;
 	if (db::dist_sq<float>(*attacker._pos, receiver) <= shot) {
-		std::cout << "Shot " << receiver._x << " " << receiver._y << std::endl;
 		if (attacker._inventory->_held._canDestroyWall) {
 			switch (level._terrain[receiver._x][receiver._y]._renderer->_tile)
 			{
@@ -70,7 +68,7 @@ void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiv
 		if (level._terrain[receiver._x][receiver._y]._actor != nullptr) {
 			auto temp = level._terrain[receiver._x][receiver._y]._actor;
 			temp->_body->handleDamage(attacker._inventory->_held, temp->_body->_body["chest"], 1);
-			level._effect._bloodEffect->create(receiver, db::vec_2p(*attacker._pos, receiver), (attacker._inventory->_held._projectiles / 2 + 1) * 1);
+			level._effect._bloodEffect->create(receiver, db::vec_2p(*attacker._pos, receiver), *level._camera._pos, (attacker._inventory->_held._projectiles / 2 + 1) * 1);
 		}
 		level._effect._shootEffect->create(*attacker._pos, receiver, *level._camera._pos);
 	}
