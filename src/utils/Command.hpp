@@ -8,6 +8,11 @@ template<typename T> struct Command
 	virtual void execute(T& system) = 0;
 };
 
+template<typename T> struct Nothing : public Command<T>
+{
+	void execute(T& system) override {}
+};
+
 template<typename T> struct Cancel : public Command<T>
 {
 	void execute(T& system) override { eventManager.onNotify( CANCEL, system ); }

@@ -8,7 +8,7 @@
 #include <cmath>
 
 Level::Level(const int width, const int height) 
-	: _gameState(PLAYER_TURN), _width(width), _height(height), _terrain(boost::extents[_width][_height]),
+	: _gameState(PLAYER_UPDATE), _width(width), _height(height), _terrain(boost::extents[_width][_height]),
 	  _generated(boost::extents[_width][_height]), _player(nullptr)
 {
 }
@@ -20,6 +20,8 @@ Level::~Level()
 void Level::init()
 {
 	_player = std::make_shared<CommandedSystem>(2, 2, PLAYER, "You");
+	_player->_id = "player";
+	_player->init();
 	
 	_camera.lockOn({ config.screenWidth / 2 - _width / 2, config.screenHeight / 2 - _height / 2 });
 
@@ -29,8 +31,22 @@ void Level::init()
 void Level::update()
 {
 	switch (_gameState) {
+	case PLAYER_UPDATE:
+		_player->update();
+		_gameState = PLAYER_TURN;
+		break;
+	case OTHERS_UPDATE:
+		for (auto i : _actors)
+			i->update();
+		_gameState = OTHERS_TURN;
+		break;
 	case PLAYER_TURN:
 		inputHandler.onObject(*_player);
+		_player->command();
+		break;
+	case OTHERS_TURN:
+		for (auto i : _actors)
+			i->command();
 		break;
 	case CURSOR_MODE_L:
 		inputHandler.onObject(_lookingCursor);
@@ -42,12 +58,10 @@ void Level::update()
 		break;
 	}
 
-	_player->update();
 	_terrain[_player->_pos->_x][_player->_pos->_y]._actor = _player;
 	_player->_renderer->_bg = _terrain[_player->_pos->_x][_player->_pos->_y]._renderer->_bg;
 
 	for (auto i : _actors) {
-		i->update();
 		_terrain[i->_pos->_x][i->_pos->_y]._actor = i;
 		i->_renderer->_bg = _terrain[i->_pos->_x][i->_pos->_y]._renderer->_bg;
 	}
@@ -116,7 +130,7 @@ void Level::generateLevel()
 	}
 
 	_actors.push_back(std::make_shared<CommandedSystem>(_rooms[0]._x + _rooms[0]._width / 2, _rooms[0]._y + _rooms[0]._height / 2));
-
+	_actors.back()->init();
 }
 
 void Level::initTerrain()

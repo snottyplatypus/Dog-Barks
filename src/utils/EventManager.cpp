@@ -17,7 +17,20 @@ EventManager::~EventManager()
 void EventManager::onNotify(Event event, CommandedSystem& object)
 {
 	switch (event) {
+	case END_TURN:
+		if (level._gameState == PLAYER_TURN) {
+			if (object._id == "player") {
+				object._updated = false;
+				level._gameState = OTHERS_UPDATE;
+			}
+		}
+		else if (level._gameState == OTHERS_TURN) {
+			[&]() { for (auto i : level._actors) { if (!i->_updated) { std::cout << "n"; } std::cout << "y"; } };
+			level._gameState = PLAYER_UPDATE;
+		}
+		break;
 	case TRIGGER_LOOKING_CURSOR:
+		std::cout << "CURSOR\n";
 		if (level._gameState == PLAYER_TURN) {
 			level._gameState = CURSOR_MODE_L;
 			level._lookingCursor._pos->_x = level._player->_pos->_x;
@@ -66,8 +79,8 @@ void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiv
 			}
 		}
 		if (level._terrain[receiver._x][receiver._y]._actor != nullptr) {
-			auto temp = level._terrain[receiver._x][receiver._y]._actor;
-			temp->_body->handleDamage(attacker._inventory->_held, temp->_body->_body["chest"], 1);
+			auto temp = level._terrain[receiver._x][receiver._y]._actor->_body;
+			temp->handleDamage(attacker._inventory->_held, temp->_body[temp->_keys["chest"]], 1);
 			level._effect._bloodEffect->create(receiver, db::vec_2p(*attacker._pos, receiver), *level._camera._pos, (attacker._inventory->_held._projectiles / 2 + 1) * 1);
 		}
 		level._effect._shootEffect->create(*attacker._pos, receiver, *level._camera._pos);

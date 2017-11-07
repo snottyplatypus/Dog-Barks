@@ -10,7 +10,10 @@
 #include "../ui/Effect.hpp"
 
 enum GameState {
+	PLAYER_UPDATE,
+	OTHERS_UPDATE,
 	PLAYER_TURN,
+	OTHERS_TURN,
 	CURSOR_MODE_L,
 	CURSOR_MODE_F,
 };

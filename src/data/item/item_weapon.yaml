@@ -3,7 +3,7 @@
   canDestroyWall: true
   mag: 21
   projectiles: 9
-  damage: 2
+  damage: 1
 
 - UZI:
   name: Uzi
