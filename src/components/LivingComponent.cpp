@@ -36,7 +36,6 @@ void LivingComponent::update()
 
 void LivingComponent::handleDamage(Weapon& weapon, BodyPart& target, int bullet)
 {
-	std::cout << bullet << std::endl;
 	int bullet2 = rng.getInt(0, bullet - 1);
 	bullet -= bullet2;
 	target._hp -= bullet * weapon._projectiles * weapon._damage;
