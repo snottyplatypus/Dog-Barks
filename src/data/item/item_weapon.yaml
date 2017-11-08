@@ -1,7 +1,7 @@
 - SHOTGUN:
   name: shotgun
   canDestroyWall: true
-  mag: 21
+  mag: 2
   projectiles: 9
   damage: 2
 

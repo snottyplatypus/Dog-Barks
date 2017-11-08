@@ -18,6 +18,11 @@ template<typename T> struct Cancel : public Command<T>
 	void execute(T& system) override { eventManager.onNotify( CANCEL, system ); }
 };
 
+template<typename T> struct Enter : public Command<T>
+{
+	void execute(T& system) override { eventManager.onNotify(TRIGGER_ENTER, system); }
+};
+
 template<typename T> struct MoveNorth : public Command<T>
 {
 	void execute(T& system) override { eventManager.onMove( {MOVE, 0, -1}, system ); }

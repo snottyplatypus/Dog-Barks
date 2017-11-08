@@ -1,5 +1,6 @@
 #include "Level.hpp"
 #include "../include/libtcod/libtcod.hpp"
+#include "../ui/Gui.hpp"
 #include "../utils/Global.hpp"
 #include "../utils/InputHandler.hpp"
 #include <algorithm>
@@ -55,6 +56,11 @@ void Level::update()
 		inputHandler.onObject(_fireCursor);
 		_fireCursor.update(*_player);
 		break;
+	}
+
+	if (gui._state != NOTHING_SPECIAL) {
+		inputHandler.onMenu(gui);
+		//std::cout << static_cast<char>(gui._choice);
 	}
 
 	_terrain[_player->_pos->_x][_player->_pos->_y]._actor = _player;

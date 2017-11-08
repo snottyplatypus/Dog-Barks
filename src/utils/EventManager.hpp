@@ -1,5 +1,6 @@
 #pragma once
 #include "Event.hpp"
+#include <string>
 
 struct GameObjectSystem;
 struct CommandedSystem;
@@ -11,7 +12,7 @@ public:
 	~EventManager();
 
 	void onNotify(Event event, CommandedSystem& object);
-	void onAttack(CommandedSystem& attacker, PositionComponent& receiver);
+	void onAttack(CommandedSystem& attacker, PositionComponent& receiver, std::string part, int bullet = 1);
 	void onLook(LookingEvent event);
 	void onMove(MoveEvent event, GameObjectSystem& object);
 	void onDeath(CommandedSystem& system);

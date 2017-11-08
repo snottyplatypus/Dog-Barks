@@ -26,8 +26,12 @@ void EventManager::onNotify(Event event, CommandedSystem& object)
 			}
 		}
 		else if (level._gameState == OTHERS_TURN) {
-			[&]() { for (auto i : level._actors) { if (!i->_updated) { std::cout << "n"; } std::cout << "y"; } };
-			level._gameState = PLAYER_UPDATE;
+			bool upd = true;
+			for (auto i : level._actors)
+				if (!i->_updated)
+					upd = false; 
+			if(upd)
+				level._gameState = PLAYER_UPDATE;
 		}
 		break;
 	case TRIGGER_LOOKING_CURSOR:
@@ -42,10 +46,14 @@ void EventManager::onNotify(Event event, CommandedSystem& object)
 			level._gameState = CURSOR_MODE_F;
 			level._fireCursor._pos->_x = level._player->_pos->_x;
 			level._fireCursor._pos->_y = level._player->_pos->_y;
+			gui._state = START_MENU;
 		}
-		else if (level._gameState == CURSOR_MODE_F) {
-			onAttack(object, level._fireCursor._lastPos);
+		break;
+	case TRIGGER_ENTER:
+		if (level._gameState == CURSOR_MODE_F) {
+			onAttack(object, level._fireCursor._lastPos, gui._attackSelect->_bodyPart, gui._attackSelect->_bullets);
 			level._gameState = PLAYER_TURN;
+			gui._state = NOTHING_SPECIAL;
 		}
 		break;
 	case CANCEL:
@@ -59,12 +67,11 @@ void EventManager::onNotify(Event event, CommandedSystem& object)
 
 }
 
-void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiver)
+void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiver, std::string part, int bullet)
 {
-	float roundShot = static_cast<float>(1);
 	int modWeapon = 0;
 	int modHealth = 0;
-	float shot = (1 / roundShot * rng.getInt(0, 100) + modWeapon) * (1 - modHealth / 10);
+	float shot = (1 / static_cast<float>(bullet) * rng.getInt(0, 100) + modWeapon) * (1 - modHealth / 10);
 	if (db::dist_sq<float>(*attacker._pos, receiver) <= shot) {
 		if (attacker._inventory->_held._canDestroyWall) {
 			switch (db::str2int(level._terrain[receiver._x][receiver._y]._renderer->_tile.c_str()))
@@ -82,7 +89,7 @@ void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiv
 		}
 		if (level._terrain[receiver._x][receiver._y]._actor != nullptr) {
 			auto temp = level._terrain[receiver._x][receiver._y]._actor->_body;
-			temp->handleDamage(attacker._inventory->_held, (*temp)["chest"], 1);
+			temp->handleDamage(attacker._inventory->_held, (*temp)[part], bullet);
 			level._effect._bloodEffect->create(receiver, db::vec_2p(*attacker._pos, receiver), *level._camera._pos, (attacker._inventory->_held._projectiles / 2 + 1) * 1);
 		}
 		level._effect._shootEffect->create(*attacker._pos, receiver, *level._camera._pos);
@@ -94,12 +101,24 @@ void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiv
 
 void EventManager::onLook(LookingEvent event)
 {
+	auto object = level._terrain[event._x][event._y]._actor;
+	auto origin = level._terrain[event._from._x][event._from._y]._actor;
 	std::vector<std::string> looking;
+
 	if(event._id == LOOKING_TERRAIN)
 		looking.push_back(level._terrain[event._x][event._y]._renderer->_name);
+
 	if (level._terrain[event._x][event._y]._actor != nullptr)
 		looking.push_back(level._terrain[event._x][event._y]._actor->_renderer->_name);
-	gui.lookingInfo(looking);
+
+	if(event._id == LOOKING_TERRAIN)
+		gui.lookingInfo(looking);
+
+	if (event._id == AIMING) {
+		if (object != nullptr) {
+			gui.attackMenu(*origin, *object);
+		}
+	}
 }
 
 void EventManager::onMove(MoveEvent event, GameObjectSystem& object)
@@ -120,6 +139,7 @@ void EventManager::onMove(MoveEvent event, GameObjectSystem& object)
 		if (!level._terrain[object._pos->_x + event._x][object._pos->_y + event._y]._void) {
 			object._pos->_x += event._x;
 			object._pos->_y += event._y;
+			gui._state = START_MENU;
 		}
 	}
 }

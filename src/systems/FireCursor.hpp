@@ -29,7 +29,7 @@ struct FireCursor : public CommandedSystem
 			_interaction->execute(origin);
 			_interaction = nullptr;
 		}
-		eventManager.onLook({ LOOKING_ACTOR, _pos->_x, _pos->_y });
+		eventManager.onLook({ AIMING, _pos->_x, _pos->_y, *origin._pos });
 	}
 
 	void render(PositionComponent& origin, PositionComponent& mod)
