@@ -2,6 +2,7 @@
 #include "../include/libtcod/libtcod.hpp"
 #include "../systems/CommandedSystem.hpp"
 #include "../level/Level.hpp"
+#include "../utils/Util.hpp"
 #include "../ui/Gui.hpp"
 #include "Geometry.hpp"
 #include <iostream>
@@ -66,14 +67,14 @@ void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiv
 	float shot = (1 / roundShot * rng.getInt(0, 100) + modWeapon) * (1 - modHealth / 10);
 	if (db::dist_sq<float>(*attacker._pos, receiver) <= shot) {
 		if (attacker._inventory->_held._canDestroyWall) {
-			switch (level._terrain[receiver._x][receiver._y]._renderer->_tile)
+			switch (db::str2int(level._terrain[receiver._x][receiver._y]._renderer->_tile.c_str()))
 			{
-			case BLOCK3:
-				level._terrain[receiver._x][receiver._y] = { BLOCK2, "Damaged wall", true, false, level._terrain[receiver._x][receiver._y]._renderer->_fg, level._terrain[receiver._x][receiver._y]._renderer->_bg };
+			case db::str2int("block3"):
+				level._terrain[receiver._x][receiver._y] = { "block2", "Damaged wall", true, false, level._terrain[receiver._x][receiver._y]._renderer->_fg, level._terrain[receiver._x][receiver._y]._renderer->_bg };
 				break;
-			case BLOCK2:
-			case DOOR:
-				level._terrain[receiver._x][receiver._y] = { BLOCK1, "Destroyed wall", true, true, level._terrain[receiver._x][receiver._y]._renderer->_fg, level._terrain[receiver._x][receiver._y]._renderer->_bg };
+			case db::str2int("block2"):
+			case db::str2int("door"):
+				level._terrain[receiver._x][receiver._y] = { "block3", "Destroyed wall", true, true, level._terrain[receiver._x][receiver._y]._renderer->_fg, level._terrain[receiver._x][receiver._y]._renderer->_bg };
 				break;
 			default:
 				break;
@@ -129,19 +130,6 @@ void EventManager::onDeath(CommandedSystem& system)
 		system._renderer->_fg = TCODColor::darkRed;
 		if (system._renderer->_name.find(" - dead") == std::string::npos)
 			system._renderer->_name += " - dead";
-		switch (system._renderer->_tile) {
-		case CIVILIAN:
-			system._renderer->_tile = CIVILIAN_DEAD;
-			break;
-		case GANG_A:
-			system._renderer->_tile = GANG_A_DEAD;
-			break;
-		case GANG_B:
-			system._renderer->_tile = GANG_B_DEAD;
-			break;
-		case POLICEMAN:
-			system._renderer->_tile = POLICEMAN_DEAD;
-			break;
-		}
+		system._renderer->_tile += "_dead";
 	}
 }

@@ -4,11 +4,12 @@
 #include "../components/InventoryComponent.hpp"
 #include "../components/LivingComponent.hpp"
 #include <iostream>
+#include <string>
 #include "../utils/DataManager.hpp"
 
 struct CommandedSystem : public GameObjectSystem, public std::enable_shared_from_this<CommandedSystem>
 {
-	CommandedSystem(int x = 1, int y = 1, int tile = GANG_B, std::string name = "Actor") : _updated(false)
+	CommandedSystem(int x = 1, int y = 1, std::string tile = "gang_a", std::string name = "Actor") : _updated(false)
 	{
 		_pos->_x = x;
 		_pos->_y = y;
@@ -16,8 +17,8 @@ struct CommandedSystem : public GameObjectSystem, public std::enable_shared_from
 		_renderer->_name = name;
 		_id = "actor";
 		_inventory = std::make_shared<InventoryComponent>();
-		_body = std::make_shared<LivingComponent>(dataManager._species["human"]);
-		_inventory->_held = dataManager._weapons["Shotgun"];
+		_body = std::make_shared<LivingComponent>(data._species["human"]);
+		_inventory->_held = data._weapons["Shotgun"];
 	}
 
 	~CommandedSystem() {}

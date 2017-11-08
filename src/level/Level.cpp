@@ -2,7 +2,6 @@
 #include "../include/libtcod/libtcod.hpp"
 #include "../utils/Global.hpp"
 #include "../utils/InputHandler.hpp"
-#include "Tile.hpp"
 #include <algorithm>
 #include <iostream>
 #include <cmath>
@@ -19,7 +18,7 @@ Level::~Level()
 
 void Level::init()
 {
-	_player = dataManager._player;
+	_player = data._player;
 	_player->_id = "player";
 	_player->init();
 	
@@ -110,7 +109,7 @@ void Level::generateLevel()
 						x = i._x + rng.getInt(1, i._width - 2);
 					if (i._doors < 3) {
 						i._doors++;
-						_terrain[x][i._y] = { DOOR, "Door", false, true, TCODColor::lightSepia, TCODColor::darkestSepia * 0.5f };
+						_terrain[x][i._y] = { "door", "Door", false, true, TCODColor::lightSepia, TCODColor::darkestSepia * 0.5f };
 					}
 				}
 				if (j._y == i._y) {
@@ -122,7 +121,7 @@ void Level::generateLevel()
 						y = i._y + rng.getInt(1, i._height - 2);
 					if (i._doors < 3) {
 						i._doors++;
-						_terrain[i._x][y] = { DOOR, "Door", false, true, TCODColor::lightSepia, TCODColor::darkestSepia * 0.5f };
+						_terrain[i._x][y] = { "door", "Door", false, true, TCODColor::lightSepia, TCODColor::darkestSepia * 0.5f };
 					}
 				}
 			}
@@ -138,18 +137,18 @@ void Level::initTerrain()
 	for (int i = 0; i < _width; ++i)
 		for (int j = 0; j < _height; ++j)
 			_terrain[i][j]._void = true;
-	fill(1, 1, _width - 2, _height - 2, { BLOCK1, "Escape", true, true, TCODColor::desaturatedGreen, TCODColor::black, true });
+	fill(1, 1, _width - 2, _height - 2, { "block1", "Escape", true, true, TCODColor::desaturatedGreen, TCODColor::black, true });
 	for (int i = 2; i < _width - 2; ++i)
 		for (int j = 2; j < _height - 2; ++j)
 			switch (rng.getInt(0, 3)) {
 			case 0:
-				_terrain[i][j] = { '.', "Ground", true, true, TCODColor::chartreuse, {0, 13, 0 } }; break;
+				_terrain[i][j] = { "ground", "Grass", true, true, TCODColor::chartreuse, {0, 13, 0 } }; break;
 			case 1:
-				_terrain[i][j] = { ',', "Ground", true, true, TCODColor::chartreuse,{ 0, 13, 0 } }; break;
+				_terrain[i][j] = { "grass1", "Grass", true, true, TCODColor::chartreuse,{ 0, 13, 0 } }; break;
 			case 2:
-				_terrain[i][j] = { ';', "Ground", true, true, TCODColor::chartreuse,{ 0, 13, 0 } }; break;
+				_terrain[i][j] = { "grass2", "Grass", true, true, TCODColor::chartreuse,{ 0, 13, 0 } }; break;
 			case 3:
-				_terrain[i][j] = { '"', "Ground", true, true, TCODColor::chartreuse,{ 0, 13, 0 } }; break;
+				_terrain[i][j] = { "grass3", "Grass", true, true, TCODColor::chartreuse,{ 0, 13, 0 } }; break;
 			} 
 }
 
@@ -175,8 +174,8 @@ void Level::generateRecursive(int x, int y, Room lastRoom)
 	if (x < _width - MAX_ROOM_SIZE - dist && y < _height - MAX_ROOM_SIZE - dist && x > dist && y > dist) {
 		if (!checkVisited(x, y, width, height)) {
 
-			fill(x, y, width, height, { BLOCK3, "Wall", false, false, TCODColor::lightestSepia, TCODColor::darkestSepia * 0.5f });
-			fill(x + 1, y + 1, width - 2, height - 2, { FLOOR, "Floor", true, true, TCODColor::lightSepia, TCODColor::darkestSepia * 0.5f });
+			fill(x, y, width, height, { "block3", "Wall", false, false, TCODColor::lightestSepia, TCODColor::darkestSepia * 0.5f });
+			fill(x + 1, y + 1, width - 2, height - 2, { "floor", "Floor", true, true, TCODColor::lightSepia, TCODColor::darkestSepia * 0.5f });
 
 			for (int i = x + 1; i < x2 - 1; i++)
 				for (int j = y + 1; j < y2 - 1; j++)

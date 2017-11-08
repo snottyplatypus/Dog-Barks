@@ -1,13 +1,12 @@
 #pragma once
 #include <memory>
 #include "../components/RenderComponent.hpp"
-#include "Tile.hpp"
 
 struct CommandedSystem;
 
 struct Terrain {
 
-	Terrain(int tile = NOTHING, std::string name = "Nothing", bool isTransparent = true, bool isWalkable = false,
+	Terrain(std::string tile = "nothing", std::string name = "Nothing", bool isTransparent = true, bool isWalkable = false,
 			TCODColor fg = TCODColor::white, TCODColor bg = TCODColor::black, bool isEscape = false)
 		: _isTransparent(isTransparent), _isWalkable(isWalkable), _isEscape(isEscape), _actor(nullptr)
 	{

@@ -9,7 +9,7 @@
 #include <iostream>
 
 Config config;
-DataManager dataManager;
+DataManager data;
 TCODRandom rng;
 TCOD_key_t key;
 Level level;
@@ -20,7 +20,7 @@ float time;
 
 int main()
 {
-	dataManager.init();
+	data.init();
 	TCODConsole::setCustomFont(config.font.c_str(), TCOD_FONT_LAYOUT_ASCII_INROW, 16, 17);
 	TCODConsole::initRoot(config.screenWidth, config.screenHeight, "Dog Barks");
 	TCODSystem::setFps(60);

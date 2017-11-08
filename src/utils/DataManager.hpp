@@ -14,7 +14,8 @@ public:
 	DataManager();
 	~DataManager();
 	void init();
-
+	 
+	std::map<std::string, int> _tiles;
 	std::map<std::string, Weapon> _weapons;
 	std::map<std::string, BodyPart> _bodyParts;
 	std::map<std::string, LivingComponent> _species;
@@ -24,4 +25,4 @@ public:
 	std::string  font;
 };
 
-extern DataManager dataManager;
+extern DataManager data;

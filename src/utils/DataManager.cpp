@@ -5,6 +5,29 @@
 
 DataManager::DataManager()
 {
+#pragma once
+#include "../include/libtcod/libtcod.hpp"
+
+	_tiles["nothing"] = ' ';
+	_tiles["ground"] = '.';
+	_tiles["grass1"] = ',';
+	_tiles["grass2"] = ';';
+	_tiles["grass3"] = '"';
+	_tiles["floor"] = '+';
+	_tiles["block1"] = TCOD_CHAR_BLOCK1;
+	_tiles["block2"] = TCOD_CHAR_BLOCK2;
+	_tiles["block3"] = TCOD_CHAR_BLOCK3;
+	_tiles["door"] = '/';
+	_tiles["cursor"] = 'X';
+	_tiles["civilian"] = 256;
+	_tiles["civilian dead"] = 257;
+	_tiles["gang_a"] = 259;
+	_tiles["gang_a_dead"] = 260;
+	_tiles["gang_b"] = 262;
+	_tiles["gang_b_dead"] = 263;
+	_tiles["swat"] = 265;
+	_tiles["swat_dead"] = 266;
+
 	_weapons["Nothing"];
 	_player = std::make_shared<CommandedSystem>();
 }
@@ -55,6 +78,6 @@ void DataManager::init()
 	file = YAML::LoadFile("data/living/player.yaml");
 	_player->_inventory->_held = _weapons[file["PLAYER"]["weapon"].as<std::string>()];
 	*_player->_body = _species[file["PLAYER"]["species"].as<std::string>()];
-	_player->_renderer->_tile = GANG_A;
+	_player->_renderer->_tile = "gang_a";
 	_player->_renderer->_name = "You";
 }

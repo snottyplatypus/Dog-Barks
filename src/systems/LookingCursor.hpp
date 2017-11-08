@@ -1,13 +1,12 @@
 #pragma once
 #include "CommandedSystem.hpp"
-#include "../level/Tile.hpp"
 #include "../utils/EventManager.hpp"
 
 struct LookingCursor : public CommandedSystem
 {
 	LookingCursor(int x = 1, int y = 1) 
 	{
-		_renderer->_tile = CURSOR;
+		_renderer->_tile = "cursor";
 		_id = "cursor";
 		_inventory = nullptr;
 		_body = nullptr;

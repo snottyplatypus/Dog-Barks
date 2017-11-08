@@ -1,6 +1,5 @@
 #pragma once
 #include "../include/libtcod/libtcod.hpp"
-#include "../level/Tile.hpp"
 #include "../components/PositionComponent.hpp"
 
 class PhysicalLine : public TCODLineListener {

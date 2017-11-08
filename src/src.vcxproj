@@ -156,13 +156,13 @@
     <ClInclude Include="level\Level.hpp" />
     <ClInclude Include="level\Terrain.hpp" />
     <ClInclude Include="systems\CameraSystem.hpp" />
-    <ClInclude Include="level\Tile.hpp" />
     <ClInclude Include="systems\CommandedSystem.hpp" />
     <ClInclude Include="systems\GameObjectSystem.hpp" />
     <ClInclude Include="utils\Global.hpp" />
     <ClInclude Include="utils\Event.hpp" />
     <ClInclude Include="utils\EventManager.hpp" />
     <ClInclude Include="utils\Line.hpp" />
+    <ClInclude Include="utils\Util.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\item\item_weapon.yaml" />

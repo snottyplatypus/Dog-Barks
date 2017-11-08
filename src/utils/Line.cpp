@@ -1,14 +1,19 @@
 #include "Line.hpp"
+#include "../include/libtcod/libtcod.hpp"
 #include "../level/Level.hpp"
+#include "DataManager.hpp"
 
 bool PhysicalLine::putPoint(int x, int y)
 {
 	_lastPos = { x, y };
 	switch (TCODConsole::root->getChar(x, y))
 	{
-	case BLOCK3:
-	case GANG_B:
-	case DOOR:
+	case TCOD_CHAR_BLOCK3:
+	case 256:
+	case 259:
+	case 262:
+	case 265:
+	case '/':
 		return false;
 		break;
 	default:
@@ -22,10 +27,12 @@ bool BloodLine::putPoint(int x, int y)
 {
 	switch (TCODConsole::root->getChar(x + _mod._x, y + _mod._y))
 	{
-	case BLOCK3:
-	case BLOCK2:
-	case GANG_B:
-	case DOOR:
+	case TCOD_CHAR_BLOCK3:
+	case 256:
+	case 259:
+	case 262:
+	case 265:
+	case '/':
 		return false;
 		break;
 	default:
