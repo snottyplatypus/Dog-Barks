@@ -33,6 +33,7 @@ void Gui::attackMenu(CommandedSystem& origin, CommandedSystem& target)
 
 	switch (_state) {
 	case SELECTING_TARGET:
+		TCODConsole::root->print(0, 10, "Select target:");
 		TCODConsole::root->print(0, 11, "a - %s", target._renderer->_name.c_str());
 		if (_choice == 'a') {
 			_attackSelect->_name = target._renderer->_name;
@@ -41,6 +42,7 @@ void Gui::attackMenu(CommandedSystem& origin, CommandedSystem& target)
 		}
 		break;
 	case SELECTING_BODYPART:
+		TCODConsole::root->print(0, 10, "Select target:");
 		for (int i = 0; i < target._body->_body.size(); i++)
 			TCODConsole::root->print(0, 11 + i, "%c - %s", 'a' + i, parts['a' + i].c_str());
 		if (parts.find(_choice) != parts.end()) {
@@ -51,6 +53,7 @@ void Gui::attackMenu(CommandedSystem& origin, CommandedSystem& target)
 		break;
 	case SELECTING_BULLETS:
 		_attackSelect->_bullets = std::max(std::min(_attackSelect->_bullets, origin._inventory->_held._mag), 1);
+		TCODConsole::root->print(0, 10, "Rounds to shoot:");
 		TCODConsole::root->print(0, 11, "%d - +/-", _attackSelect->_bullets);
 		if (_choice == '+') {
 			_attackSelect->_bullets++;
