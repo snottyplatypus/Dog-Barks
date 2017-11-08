@@ -1,4 +1,5 @@
 #include "Effect.hpp"
+#include "../utils/Geometry.hpp"
 #include <algorithm>
 
 void ShootEffect::update()
@@ -9,7 +10,17 @@ void ShootEffect::update()
 		_launch = false;
 	}
 	if (std::fmodf(time - _timer, _duration) <= _duration / 2.0f && _stop < _repeat) {
-		TCODLine::line(_from._x, _from._y, _to._x, _to._y, &_line);
+		PositionComponent aux = { db::vec_2p(_from, _to) };
+		PositionComponent off;
+		if (aux._x != 0 && aux._x > 0)
+			off._x = aux._x / aux._x;
+		else if (aux._x != 0 && aux._x < 0)
+			off._x = -1;
+		if (aux._y != 0 && aux._y > 0)
+			off._y = aux._y / aux._y;
+		else if (aux._y != 0 && aux._y < 0)
+			off._y = -1;
+		TCODLine::line(_from._x + off._x, _from._y + off._y, _to._x, _to._y, &_line);
 		_inc = true;
 	}
 	if (std::fmodf(time - _timer, _duration) >= _duration / 2.0f && _inc) {

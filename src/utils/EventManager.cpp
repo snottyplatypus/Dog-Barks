@@ -130,7 +130,7 @@ void EventManager::onDeath(CommandedSystem& system)
 		system._renderer->_fg = TCODColor::darkRed;
 		if (system._renderer->_name.find(" - dead") == std::string::npos)
 			system._renderer->_name += " - dead";
-		if (system._renderer->_name.find("_dead") == std::string::npos)
+		if (system._renderer->_tile.find("_dead") == std::string::npos)
 			system._renderer->_tile += "_dead";
 	}
 }
