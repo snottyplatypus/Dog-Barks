@@ -129,6 +129,7 @@ void Level::generateLevel()
 	}
 
 	_actors.push_back(std::make_shared<CommandedSystem>(_rooms[0]._x + _rooms[0]._width / 2, _rooms[0]._y + _rooms[0]._height / 2));
+	_actors.back()->_renderer->_tile = "gang_b";
 	_actors.back()->init();
 }
 

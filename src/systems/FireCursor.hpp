@@ -44,7 +44,6 @@ struct FireCursor : public CommandedSystem
 			off._y = aux._y / aux._y;
 		else if (aux._y != 0 && aux._y < 0)
 			off._y = -1;
-		std::cout << off._x << " " << off._y << std::endl;
 		_lastPos._x = _fireLine._lastPos._x - mod._x;
 		_lastPos._y = _fireLine._lastPos._y - mod._y;
 		TCODLine::line(origin._x + mod._x + off._x, origin._y + mod._y + off._y, _pos->_x + mod._x, _pos->_y + mod._y, &_fireLine);
