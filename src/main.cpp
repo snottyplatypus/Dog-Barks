@@ -21,7 +21,7 @@ float time;
 int main()
 {
 	dataManager.init();
-	TCODConsole::setCustomFont(config.font.c_str(), TCOD_FONT_LAYOUT_ASCII_INROW, 16, 16);
+	TCODConsole::setCustomFont(config.font.c_str(), TCOD_FONT_LAYOUT_ASCII_INROW, 16, 17);
 	TCODConsole::initRoot(config.screenWidth, config.screenHeight, "Dog Barks");
 	TCODSystem::setFps(60);
 	level.init();

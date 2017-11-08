@@ -8,7 +8,7 @@
 
 struct CommandedSystem : public GameObjectSystem, public std::enable_shared_from_this<CommandedSystem>
 {
-	CommandedSystem(int x = 1, int y = 1, int tile = ACTOR, std::string name = "Actor") : _updated(false)
+	CommandedSystem(int x = 1, int y = 1, int tile = GANG_B, std::string name = "Actor") : _updated(false)
 	{
 		_pos->_x = x;
 		_pos->_y = y;

@@ -55,6 +55,6 @@ void DataManager::init()
 	file = YAML::LoadFile("data/living/player.yaml");
 	_player->_inventory->_held = _weapons[file["PLAYER"]["weapon"].as<std::string>()];
 	*_player->_body = _species[file["PLAYER"]["species"].as<std::string>()];
-	_player->_renderer->_tile = PLAYER;
+	_player->_renderer->_tile = GANG_A;
 	_player->_renderer->_name = "You";
 }

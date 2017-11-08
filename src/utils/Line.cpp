@@ -7,7 +7,7 @@ bool PhysicalLine::putPoint(int x, int y)
 	switch (TCODConsole::root->getChar(x, y))
 	{
 	case BLOCK3:
-	case ACTOR:
+	case GANG_B:
 	case DOOR:
 		return false;
 		break;
@@ -24,7 +24,7 @@ bool BloodLine::putPoint(int x, int y)
 	{
 	case BLOCK3:
 	case BLOCK2:
-	case ACTOR:
+	case GANG_B:
 	case DOOR:
 		return false;
 		break;

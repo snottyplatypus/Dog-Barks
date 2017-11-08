@@ -48,10 +48,12 @@ void EventManager::onNotify(Event event, CommandedSystem& object)
 		}
 		break;
 	case CANCEL:
-		if (level._gameState == CURSOR_MODE_L)
+		switch (level._gameState) {
+		case CURSOR_MODE_L:
+		case CURSOR_MODE_F:
 			level._gameState = PLAYER_TURN;
-		if (level._gameState == CURSOR_MODE_F)
-			level._gameState = PLAYER_TURN;
+			break;
+		}
 	}
 
 }
@@ -127,5 +129,19 @@ void EventManager::onDeath(CommandedSystem& system)
 		system._renderer->_fg = TCODColor::darkRed;
 		if (system._renderer->_name.find(" - dead") == std::string::npos)
 			system._renderer->_name += " - dead";
+		switch (system._renderer->_tile) {
+		case CIVILIAN:
+			system._renderer->_tile = CIVILIAN_DEAD;
+			break;
+		case GANG_A:
+			system._renderer->_tile = GANG_A_DEAD;
+			break;
+		case GANG_B:
+			system._renderer->_tile = GANG_B_DEAD;
+			break;
+		case POLICEMAN:
+			system._renderer->_tile = POLICEMAN_DEAD;
+			break;
+		}
 	}
 }

@@ -40,8 +40,14 @@ void ShootEffect::create(PositionComponent& from, PositionComponent& to, Positio
 void BloodEffect::create(PositionComponent& from, PositionComponent& dir, PositionComponent& mod, int time)
 {
 	_line._mod = mod;
-	dir._x = std::min(dir._x, 3);
-	dir._y = std::min(dir._y, 3);
+	if (dir._x > 0)
+		dir._x = std::min(dir._x, 3);
+	else
+		dir._x = std::max(dir._x, -3);
+	if (dir._y > 0)
+		dir._y = std::min(dir._y, 3);
+	else
+		dir._y = std::max(dir._y, -3);
 	for (int i = 0; i < time; i++) {
 		PositionComponent to = from + dir + PositionComponent{ rng.getInt(-2, 2), rng.getInt(-2, 2) };
 		TCODLine::line(from._x, from._y, to._x, to._y, &_line);
