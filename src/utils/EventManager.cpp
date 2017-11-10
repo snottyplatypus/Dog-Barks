@@ -104,19 +104,20 @@ void EventManager::onLook(LookingEvent event)
 	auto object = level._terrain[event._x][event._y]._actor;
 	auto origin = level._terrain[event._from._x][event._from._y]._actor;
 	std::vector<std::string> looking;
+	if (origin->_computing->_map->isInFov(event._x, event._y)) {
+		if (event._id == LOOKING_TERRAIN)
+			looking.push_back(level._terrain[event._x][event._y]._renderer->_name);
 
-	if(event._id == LOOKING_TERRAIN)
-		looking.push_back(level._terrain[event._x][event._y]._renderer->_name);
+		if (level._terrain[event._x][event._y]._actor != nullptr)
+			looking.push_back(level._terrain[event._x][event._y]._actor->_renderer->_name);
 
-	if (level._terrain[event._x][event._y]._actor != nullptr)
-		looking.push_back(level._terrain[event._x][event._y]._actor->_renderer->_name);
+		if (event._id == LOOKING_TERRAIN)
+			gui.lookingInfo(looking);
 
-	if(event._id == LOOKING_TERRAIN)
-		gui.lookingInfo(looking);
-
-	if (event._id == AIMING) {
-		if (object != nullptr) {
-			gui.attackMenu(*origin, *object);
+		if (event._id == AIMING) {
+			if (object != nullptr) {
+				gui.attackMenu(*origin, *object);
+			}
 		}
 	}
 }
