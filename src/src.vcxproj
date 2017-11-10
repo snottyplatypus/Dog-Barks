@@ -139,6 +139,7 @@
     <ClCompile Include="utils\Line.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="components\ComputingMapComponent.hpp" />
     <ClInclude Include="components\InventoryComponent.hpp" />
     <ClInclude Include="components\LivingComponent.hpp" />
     <ClInclude Include="level\Item.hpp" />

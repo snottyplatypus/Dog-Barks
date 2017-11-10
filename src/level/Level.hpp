@@ -33,6 +33,8 @@ public:
 	~Level();
 	void init();
 	void update();
+	void renderFov(CommandedSystem& system);
+	void updateComputingMap(CommandedSystem& system);
 	void generateLevel();
 	void initTerrain();
 	void generateRecursive(int x, int y, Room lastRoom);

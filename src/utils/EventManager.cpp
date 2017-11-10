@@ -26,11 +26,11 @@ void EventManager::onNotify(Event event, CommandedSystem& object)
 			}
 		}
 		else if (level._gameState == OTHERS_TURN) {
-			bool upd = true;
+			bool updated = true;
 			for (auto i : level._actors)
 				if (!i->_updated)
-					upd = false; 
-			if(upd)
+					updated = false; 
+			if(updated)
 				level._gameState = PLAYER_UPDATE;
 		}
 		break;

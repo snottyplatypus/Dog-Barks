@@ -21,7 +21,8 @@ void Level::init()
 {
 	_player = data._player;
 	_player->_id = "player";
-	_player->init();
+	_player->init(_width, _height);
+	updateComputingMap(*_player);
 	
 	_camera.lockOn({ config.screenWidth / 2 - _width / 2, config.screenHeight / 2 - _height / 2 });
 
@@ -32,12 +33,15 @@ void Level::update()
 {
 	switch (_gameState) {
 	case PLAYER_UPDATE:
+		updateComputingMap(*_player);
 		_player->update();
 		_gameState = PLAYER_TURN;
 		break;
 	case OTHERS_UPDATE:
-		for (auto i : _actors)
+		for (auto i : _actors) {
+			updateComputingMap(*i);
 			i->update();
+		}
 		_gameState = OTHERS_TURN;
 		break;
 	case PLAYER_TURN:
@@ -58,10 +62,8 @@ void Level::update()
 		break;
 	}
 
-	if (gui._state != NOTHING_SPECIAL) {
+	if (gui._state != NOTHING_SPECIAL)
 		inputHandler.onMenu(gui);
-		//std::cout << static_cast<char>(gui._choice);
-	}
 
 	_terrain[_player->_pos->_x][_player->_pos->_y]._actor = _player;
 	_player->_renderer->_bg = _terrain[_player->_pos->_x][_player->_pos->_y]._renderer->_bg;
@@ -70,14 +72,8 @@ void Level::update()
 		_terrain[i->_pos->_x][i->_pos->_y]._actor = i;
 		i->_renderer->_bg = _terrain[i->_pos->_x][i->_pos->_y]._renderer->_bg;
 	}
-	for (int i = 0; i < _width; ++i) {
-		for (int j = 0; j < _height; ++j) {
-			if (_terrain[i][j]._actor == nullptr)
-				_terrain[i][j]._renderer->update({ i + _camera._pos->_x, j + _camera._pos->_y });
-			else
-				_terrain[i][j]._actor->_renderer->update({ i + _camera._pos->_x, j + _camera._pos->_y });
-		}
-	}
+	
+	renderFov(*_player);
 
 	if (_gameState == CURSOR_MODE_L) {
 		_lookingCursor._renderer->_bg = _terrain[_lookingCursor._pos->_x][_lookingCursor._pos->_y]._renderer->_bg;
@@ -89,6 +85,29 @@ void Level::update()
 
 	_effect.update();
 
+}
+
+void Level::renderFov(CommandedSystem& system)
+{
+	for (int i = 0; i < _width; i++) {
+		for (int j = 0; j < _height; j++) {
+			if (system._computing->_map->isInFov(i, j)) {
+				if (_terrain[i][j]._actor == nullptr)
+					_terrain[i][j]._renderer->update({ i + _camera._pos->_x, j + _camera._pos->_y });
+				else
+					_terrain[i][j]._actor->_renderer->update({ i + _camera._pos->_x, j + _camera._pos->_y });
+			}
+			else
+				_terrain[i][j]._renderer->update({ i + _camera._pos->_x, j + _camera._pos->_y }, 0.1f);
+		}
+	}
+}
+
+void Level::updateComputingMap(CommandedSystem& system)
+{
+	for (int i(0); i < _width; i++)
+		for (int j(0); j < _height; j++)
+			system._computing->_map->setProperties(i, j, _terrain[i][j]._isTransparent, _terrain[i][j]._isWalkable);
 }
 
 void Level::generateLevel()
@@ -136,7 +155,7 @@ void Level::generateLevel()
 
 	_actors.push_back(std::make_shared<CommandedSystem>(_rooms[0]._x + _rooms[0]._width / 2, _rooms[0]._y + _rooms[0]._height / 2));
 	_actors.back()->_renderer->_tile = "gang_b";
-	_actors.back()->init();
+	_actors.back()->init(_width, _height);
 }
 
 void Level::initTerrain()

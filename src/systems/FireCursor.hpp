@@ -17,6 +17,7 @@ struct FireCursor : public CommandedSystem
 		_renderer->_bg = TCODColor::desaturatedYellow;
 		_inventory = nullptr;
 		_body = nullptr;
+		_computing = nullptr;
 	}
 
 	~FireCursor() {}

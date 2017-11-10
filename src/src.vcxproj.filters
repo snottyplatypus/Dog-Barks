@@ -113,6 +113,9 @@
     <ClInclude Include="utils\Util.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="components\ComputingMapComponent.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="data\config.yaml" />

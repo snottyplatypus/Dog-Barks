@@ -15,6 +15,11 @@ struct RenderComponent {
 		TCODConsole::root->putCharEx(pos._x, pos._y, data._tiles[_tile], _fg, _bg);
 	}
 
+	void update(PositionComponent pos, float colorMod) const
+	{
+		TCODConsole::root->putCharEx(pos._x, pos._y, data._tiles[_tile], _fg * colorMod, _bg * colorMod);
+	}
+
 	void update(PositionComponent& pos, PositionComponent& mod) const
 	{
 		TCODConsole::root->putCharEx(pos._x + mod._x, pos._y + mod._y, data._tiles[_tile], _fg, _bg);
