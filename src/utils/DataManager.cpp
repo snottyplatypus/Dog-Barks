@@ -60,7 +60,6 @@ void DataManager::init()
 		_bodyParts[name]._hp = file[i]["hp"].as<int>();
 		_bodyParts[name]._abilityName = file[i]["ability"].as<std::string>();
 		_bodyParts[name]._ability = true;
-		_bodyParts[name]._size = file[i]["size"].as<int>();
 		_bodyParts[name]._bleeding = false;
 		_bodyParts[name]._shot = false;
 	}
