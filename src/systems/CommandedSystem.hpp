@@ -10,7 +10,7 @@
 
 struct CommandedSystem : public GameObjectSystem, public std::enable_shared_from_this<CommandedSystem>
 {
-	CommandedSystem(int x = 1, int y = 1, std::string tile = "gang_b", std::string name = "Actor") : _updated(false)
+	CommandedSystem(int x = 1, int y = 1, std::string tile = "gang_b", std::string name = "actor") : _updated(false)
 	{
 		_pos->_x = x;
 		_pos->_y = y;
@@ -19,7 +19,7 @@ struct CommandedSystem : public GameObjectSystem, public std::enable_shared_from
 		_id = "actor";
 		_inventory = std::make_shared<InventoryComponent>();
 		_body = std::make_shared<LivingComponent>(data._species["human"]);
-		_inventory->_held = data._weapons["Shotgun"];
+		_inventory->_held = data._weapons["shotgun"];
 		_computing = std::make_shared<ComputingMap>();
 	}
 

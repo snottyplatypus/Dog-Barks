@@ -12,13 +12,10 @@ enum GuiState
 	SELECTING_TARGET,
 	SELECTING_BODYPART,
 	SELECTING_BULLETS,
+	INSPECTING,
 };
 
-struct Selection
-{
-};
-
-struct AttackSelection : public Selection
+struct AttackSelection
 {
 	std::string _name = " ";
 	std::string _bodyPart = " ";
@@ -30,12 +27,12 @@ class Gui
 public:
 	Gui();
 	~Gui();
-	void lookingInfo(std::vector<std::string> info);
-	void attackMenu(CommandedSystem& origin, CommandedSystem &target);
+	void lookingInfo(PositionComponent target);
+	void attackMenu(CommandedSystem& origin, CommandedSystem& target);
 
-	GuiState _state;
+	int _state;
 	int _choice;
-	std::shared_ptr<AttackSelection> _attackSelect;
+	AttackSelection _attackSelect;
 };
 
 extern Gui gui;

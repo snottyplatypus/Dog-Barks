@@ -60,6 +60,7 @@ struct InputHandler
 		else if (key.vk == TCODK_ENTER)
 			gui._choice = 1;
 	}
+
 private:
 	std::map<int, std::shared_ptr<Command<GameObjectSystem>>> _move;
 	std::map<int, std::shared_ptr<Command<CommandedSystem>>> _interaction;

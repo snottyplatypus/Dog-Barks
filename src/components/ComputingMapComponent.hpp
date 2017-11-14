@@ -4,7 +4,7 @@
 
 struct ComputingMap
 {
-	ComputingMap() : _map(nullptr), _radius(15) {}
+	ComputingMap() : _map(nullptr), _radius(10) {}
 
 	~ComputingMap() {}
 

@@ -3,7 +3,7 @@
   parts:
     head: human_head
     chest: human_chest
-    arm left: human_arm
-    arm right: human_arm
-    leg left: human_leg
-    leg right: human_leg
+    left arm: human_arm
+    right arm: human_arm
+    left leg: human_leg
+    right leg: human_leg

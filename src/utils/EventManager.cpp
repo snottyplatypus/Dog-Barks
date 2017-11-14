@@ -39,6 +39,7 @@ void EventManager::onNotify(Event event, CommandedSystem& object)
 			level._gameState = CURSOR_MODE_L;
 			level._lookingCursor._pos->_x = level._player->_pos->_x;
 			level._lookingCursor._pos->_y = level._player->_pos->_y;
+			gui._state = START_MENU;
 		}
 		break;
 	case TRIGGER_FIRE_CURSOR:
@@ -51,7 +52,7 @@ void EventManager::onNotify(Event event, CommandedSystem& object)
 		break;
 	case TRIGGER_ENTER:
 		if (level._gameState == CURSOR_MODE_F) {
-			onAttack(object, level._fireCursor._lastPos, gui._attackSelect->_bodyPart, gui._attackSelect->_bullets);
+			onAttack(object, level._fireCursor._lastPos, gui._attackSelect._bodyPart, gui._attackSelect._bullets);
 			level._gameState = PLAYER_TURN;
 			gui._state = NOTHING_SPECIAL;
 		}
@@ -64,7 +65,6 @@ void EventManager::onNotify(Event event, CommandedSystem& object)
 			break;
 		}
 	}
-
 }
 
 void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiver, std::string part, int bullet)
@@ -77,11 +77,11 @@ void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiv
 			switch (db::str2int(level._terrain[receiver._x][receiver._y]._renderer->_tile.c_str()))
 			{
 			case db::str2int("block3"):
-				level._terrain[receiver._x][receiver._y] = { "block2", "Damaged wall", true, false, level._terrain[receiver._x][receiver._y]._renderer->_fg, level._terrain[receiver._x][receiver._y]._renderer->_bg };
+				level._terrain[receiver._x][receiver._y] = { "block2", "damaged wall", true, false, level._terrain[receiver._x][receiver._y]._renderer->_fg, level._terrain[receiver._x][receiver._y]._renderer->_bg };
 				break;
 			case db::str2int("block2"):
 			case db::str2int("door"):
-				level._terrain[receiver._x][receiver._y] = { "block3", "Destroyed wall", true, true, level._terrain[receiver._x][receiver._y]._renderer->_fg, level._terrain[receiver._x][receiver._y]._renderer->_bg };
+				level._terrain[receiver._x][receiver._y] = { "block3", "destroyed terrain", true, true, level._terrain[receiver._x][receiver._y]._renderer->_fg, level._terrain[receiver._x][receiver._y]._renderer->_bg };
 				break;
 			default:
 				break;
@@ -103,16 +103,9 @@ void EventManager::onLook(LookingEvent event)
 {
 	auto object = level._terrain[event._x][event._y]._actor;
 	auto origin = level._terrain[event._from._x][event._from._y]._actor;
-	std::vector<std::string> looking;
 	if (origin->_computing->_map->isInFov(event._x, event._y)) {
 		if (event._id == LOOKING_TERRAIN)
-			looking.push_back(level._terrain[event._x][event._y]._renderer->_name);
-
-		if (level._terrain[event._x][event._y]._actor != nullptr)
-			looking.push_back(level._terrain[event._x][event._y]._actor->_renderer->_name);
-
-		if (event._id == LOOKING_TERRAIN)
-			gui.lookingInfo(looking);
+			gui.lookingInfo({ event._x, event._y });
 
 		if (event._id == AIMING) {
 			if (object != nullptr) {
