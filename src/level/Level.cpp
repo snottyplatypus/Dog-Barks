@@ -11,6 +11,7 @@ Level::Level(const int width, const int height)
 	: _gameState(PLAYER_UPDATE), _width(width), _height(height), _terrain(boost::extents[_width][_height]),
 	  _generated(boost::extents[_width][_height]), _player(nullptr)
 {
+	_turnState = std::make_unique<PlayerTurn>();
 }
 
 Level::~Level()
@@ -27,40 +28,12 @@ void Level::init()
 	_camera.lockOn({ config.screenWidth / 2 - _width / 2, config.screenHeight / 2 - _height / 2 });
 
 	generateLevel();
+	_turnState->transit<PlayerTurn>(*this);
 }
 
 void Level::update()
 {
-	switch (_gameState) {
-	case PLAYER_UPDATE:
-		updateComputingMap(*_player);
-		_player->update();
-		_gameState = PLAYER_TURN;
-		break;
-	case OTHERS_UPDATE:
-		for (auto i : _actors) {
-			updateComputingMap(*i);
-			i->update();
-		}
-		_gameState = OTHERS_TURN;
-		break;
-	case PLAYER_TURN:
-		inputHandler.onObject(*_player);
-		_player->command();
-		break;
-	case OTHERS_TURN:
-		for (auto i : _actors)
-			i->command();
-		break;
-	case CURSOR_MODE_L:
-		inputHandler.onObject(_lookingCursor);
-		_lookingCursor.update(*_player);
-		break;
-	case CURSOR_MODE_F:
-		inputHandler.onObject(_fireCursor);
-		_fireCursor.update(*_player);
-		break;
-	}
+	_turnState->update(*this);
 
 	if (gui._state != NOTHING_SPECIAL)
 		inputHandler.onMenu(gui);
@@ -72,16 +45,8 @@ void Level::update()
 		_terrain[i->_pos->_x][i->_pos->_y]._actor = i;
 		i->_renderer->_bg = _terrain[i->_pos->_x][i->_pos->_y]._renderer->_bg;
 	}
-	
-	renderFov(*_player);
 
-	if (_gameState == CURSOR_MODE_L) {
-		_lookingCursor._renderer->_bg = _terrain[_lookingCursor._pos->_x][_lookingCursor._pos->_y]._renderer->_bg;
-		if (std::fmodf(time, 1.0f) >= 0.5f)
-			_lookingCursor._renderer->update(*_lookingCursor._pos, *_camera._pos);
-	}
-	if (_gameState == CURSOR_MODE_F)
-		_fireCursor.render(*_player->_pos, *_camera._pos);
+	renderFov(*_player);
 
 	_effect.update();
 

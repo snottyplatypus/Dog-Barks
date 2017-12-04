@@ -2,6 +2,7 @@
 #include <boost/multi_array.hpp>
 #include <vector>
 #include <unordered_map>
+#include "LevelState.hpp"
 #include "Terrain.hpp"
 #include "../systems/ComMandedSystem.hpp"
 #include "../systems/CameraSystem.hpp"
@@ -42,6 +43,7 @@ public:
 	bool checkVisited(int x, int y, int width, int height);
 	void setInBounds(int& x, int& y);
 
+	std::unique_ptr<LevelTurnState> _turnState;
 	GameState _gameState;
 	Effect _effect;
 

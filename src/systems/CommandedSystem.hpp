@@ -35,7 +35,7 @@ struct CommandedSystem : public GameObjectSystem, public std::enable_shared_from
 	{
 		_body->update();
 		if (!_body->_dead)
-			_computing->_map->computeFov(_pos->_x, _pos->_y, _computing->_radius);
+			_computing->_map->computeFov(_pos->_x, _pos->_y, _computing->_radius, true, FOV_SHADOW);
 	}
 
 	void command()

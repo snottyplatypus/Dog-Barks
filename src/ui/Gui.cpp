@@ -47,6 +47,8 @@ void Gui::lookingInfo(PositionComponent target)
 						TCODConsole::setColorControl(TCOD_COLCTRL_1, TCODColor::darkestRed, TCODColor::black);
 					else if (part._bleeding)
 						TCODConsole::setColorControl(TCOD_COLCTRL_1, TCODColor::darkRed, TCODColor::black);
+					else if (part._hp < data._bodyParts[part._name]._hp)
+						TCODConsole::setColorControl(TCOD_COLCTRL_1, TCODColor::yellow, TCODColor::black);
 					else
 						TCODConsole::setColorControl(TCOD_COLCTRL_1, TCODColor::white, TCODColor::black);
 					TCODConsole::root->print(0, 12 + i, "%c %s %c", TCOD_COLCTRL_1, info.c_str(), TCOD_COLCTRL_STOP);

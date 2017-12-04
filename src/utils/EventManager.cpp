@@ -19,56 +19,51 @@ void EventManager::onNotify(Event event, CommandedSystem& object)
 {
 	switch (event) {
 	case END_TURN:
-		if (level._gameState == PLAYER_TURN) {
+		if (level._turnState->_id == "PlayerTurn") { //TEMP UNTIL INTERACTION/MOVEMENT COST
 			if (object._id == "player") {
 				object._updated = false;
-				level._gameState = OTHERS_UPDATE;
+				level._turnState->transit<OtherTurn>(level);
 			}
 		}
-		else if (level._gameState == OTHERS_TURN) {
+		else if (level._turnState->_id == "OtherTurn") { //ALSO TEMP
 			bool updated = true;
 			for (auto i : level._actors)
 				if (!i->_updated)
-					updated = false; 
-			if(updated)
-				level._gameState = PLAYER_UPDATE;
+					updated = false;
+			if (updated)
+				level._turnState->transit<PlayerTurn>(level);
 		}
 		break;
 	case TRIGGER_LOOKING_CURSOR:
-		if (level._gameState == PLAYER_TURN) {
-			level._gameState = CURSOR_MODE_L;
-			level._lookingCursor._pos->_x = level._player->_pos->_x;
-			level._lookingCursor._pos->_y = level._player->_pos->_y;
-			gui._state = START_MENU;
-		}
+		level._turnState->transit<CursorModeL>(level);
+		level._lookingCursor._pos->_x = level._player->_pos->_x;
+		level._lookingCursor._pos->_y = level._player->_pos->_y;
+		gui._state = START_MENU;
 		break;
 	case TRIGGER_FIRE_CURSOR:
-		if (level._gameState == PLAYER_TURN) {
-			level._gameState = CURSOR_MODE_F;
-			level._fireCursor._pos->_x = level._player->_pos->_x;
-			level._fireCursor._pos->_y = level._player->_pos->_y;
-			gui._state = START_MENU;
-		}
+		level._turnState->transit<CursorModeF>(level);
+		level._fireCursor._pos->_x = level._player->_pos->_x;
+		level._fireCursor._pos->_y = level._player->_pos->_y;
+		gui._state = START_MENU;
 		break;
 	case TRIGGER_ENTER:
-		if (level._gameState == CURSOR_MODE_F) {
+		if (level._turnState->_id == "CursorModeF") {
+			std::cout << object._id;
 			onAttack(object, level._fireCursor._lastPos, gui._attackSelect._bodyPart, gui._attackSelect._bullets);
-			level._gameState = PLAYER_TURN;
+			level._turnState->exit(level);
 			gui._state = NOTHING_SPECIAL;
 		}
 		break;
 	case CANCEL:
-		switch (level._gameState) {
-		case CURSOR_MODE_L:
-		case CURSOR_MODE_F:
-			level._gameState = PLAYER_TURN;
-			break;
-		}
+		level._turnState->exit(level);
+		break;
 	}
 }
 
 void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiver, std::string part, int bullet)
 {
+	std::cout << attacker._pos->_x << " " << attacker._pos->_y << std::endl;
+	std::cout << receiver._x << " " << receiver._y << std::endl;
 	int modWeapon = 0;
 	int modHealth = 0;
 	float shot = (1 / static_cast<float>(bullet) * rng.getInt(0, 100) + modWeapon) * (1 - modHealth / 10);
@@ -81,7 +76,7 @@ void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiv
 				break;
 			case db::str2int("block2"):
 			case db::str2int("door"):
-				level._terrain[receiver._x][receiver._y] = { "block3", "destroyed terrain", true, true, level._terrain[receiver._x][receiver._y]._renderer->_fg, level._terrain[receiver._x][receiver._y]._renderer->_bg };
+				level._terrain[receiver._x][receiver._y] = { "block1", "destroyed terrain", true, true, level._terrain[receiver._x][receiver._y]._renderer->_fg, level._terrain[receiver._x][receiver._y]._renderer->_bg };
 				break;
 			default:
 				break;

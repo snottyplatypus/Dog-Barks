@@ -1,5 +1,6 @@
 #pragma once
 #include "../utils/EventManager.hpp"
+#include <iostream>
 
 template<typename T> struct Command
 {
@@ -15,7 +16,7 @@ template<typename T> struct Nothing : public Command<T>
 
 template<typename T> struct Cancel : public Command<T>
 {
-	void execute(T& system) override { eventManager.onNotify( CANCEL, system ); }
+	void execute(T& system) override { eventManager.onNotify(CANCEL, system); }
 };
 
 template<typename T> struct Enter : public Command<T>

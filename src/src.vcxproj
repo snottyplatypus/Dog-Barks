@@ -130,6 +130,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="components\LivingComponent.cpp" />
+    <ClCompile Include="level\LevelState.cpp" />
     <ClCompile Include="ui\Effect.cpp" />
     <ClCompile Include="utils\DataManager.cpp" />
     <ClCompile Include="ui\Gui.cpp" />
@@ -142,6 +143,7 @@
     <ClInclude Include="components\ComputingMapComponent.hpp" />
     <ClInclude Include="components\InventoryComponent.hpp" />
     <ClInclude Include="components\LivingComponent.hpp" />
+    <ClInclude Include="level\LevelState.hpp" />
     <ClInclude Include="level\Item.hpp" />
     <ClInclude Include="ui\Effect.hpp" />
     <ClInclude Include="utils\Config.hpp" />
