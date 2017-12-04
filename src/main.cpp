@@ -1,4 +1,4 @@
-#include "include/libtcod/libtcod.hpp"
+#include <libtcod/libtcod.hpp>
 #include "utils/Global.hpp"
 #include "level/Level.hpp"
 #include "utils/EventManager.hpp"

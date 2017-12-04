@@ -1,5 +1,4 @@
 #include "Line.hpp"
-#include "../include/libtcod/libtcod.hpp"
 #include "../level/Level.hpp"
 #include "DataManager.hpp"
 

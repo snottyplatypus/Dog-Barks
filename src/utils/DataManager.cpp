@@ -1,13 +1,11 @@
 #include "DataManager.hpp"
-#include "../include/yaml-cpp/yaml.h"
+#include <libtcod/libtcod.hpp>
+#include <yaml-cpp/yaml.h>
 #include "../systems/CommandedSystem.hpp"
 #include <iostream>
 
 DataManager::DataManager()
 {
-#pragma once
-#include "../include/libtcod/libtcod.hpp"
-
 	_tiles["nothing"] = ' ';
 	_tiles["ground"] = '.';
 	_tiles["grass1"] = ',';

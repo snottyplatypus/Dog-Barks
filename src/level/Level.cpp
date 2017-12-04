@@ -1,5 +1,5 @@
 #include "Level.hpp"
-#include "../include/libtcod/libtcod.hpp"
+#include <libtcod/libtcod.hpp>
 #include "../ui/Gui.hpp"
 #include "../utils/Global.hpp"
 #include "../utils/InputHandler.hpp"

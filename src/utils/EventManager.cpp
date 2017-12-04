@@ -1,5 +1,5 @@
 #include "EventManager.hpp"
-#include "../include/libtcod/libtcod.hpp"
+#include <libtcod/libtcod.hpp>
 #include "../systems/CommandedSystem.hpp"
 #include "../level/Level.hpp"
 #include "../utils/Util.hpp"

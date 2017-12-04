@@ -1,7 +1,7 @@
 #pragma once
 #include <map>
 #include <memory>
-#include "../include/libtcod/libtcod.hpp"
+#include <libtcod/libtcod.hpp>
 #include "../utils/EventManager.hpp"
 #include "../ui/Gui.hpp"
 #include "Global.hpp"
