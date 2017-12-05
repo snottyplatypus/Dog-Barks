@@ -8,7 +8,7 @@
 #include <cmath>
 
 Level::Level(const int width, const int height) 
-	: _gameState(PLAYER_UPDATE), _width(width), _height(height), _terrain(boost::extents[_width][_height]),
+	: _width(width), _height(height), _terrain(boost::extents[_width][_height]),
 	  _generated(boost::extents[_width][_height]), _player(nullptr)
 {
 	_turnState = std::make_unique<PlayerTurn>();

@@ -11,15 +11,6 @@
 #include "../systems/FireCursor.hpp"
 #include "../ui/Effect.hpp"
 
-enum GameState {
-	PLAYER_UPDATE,
-	OTHERS_UPDATE,
-	PLAYER_TURN,
-	OTHERS_TURN,
-	CURSOR_MODE_L,
-	CURSOR_MODE_F,
-};
-
 struct Room {
 	int _x;
 	int _y;
@@ -46,7 +37,6 @@ public:
 
 	std::unique_ptr<LevelTurnState> _turnState;
 	std::unique_ptr<LevelRenderState> _renderState;
-	GameState _gameState;
 	Effect _effect;
 
 	CameraSystem _camera;
