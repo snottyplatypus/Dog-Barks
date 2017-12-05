@@ -12,6 +12,7 @@ void PlayerTurn::enter(Level & level)
 void PlayerTurn::update(Level & level)
 {
 	inputHandler.onObject(*level._player);
+	inputHandler.onMenu(gui);
 	level._player->command();
 }
 
@@ -45,6 +46,7 @@ void CursorModeL::enter(Level & level)
 void CursorModeL::update(Level & level)
 {
 	inputHandler.onObject(level._lookingCursor);
+	inputHandler.onMenu(gui);
 	level._lookingCursor.update(*level._player);
 }
 
@@ -62,6 +64,7 @@ void CursorModeF::enter(Level & level)
 void CursorModeF::update(Level & level)
 {
 	inputHandler.onObject(level._fireCursor);
+	inputHandler.onMenu(gui);
 	level._fireCursor.update(*level._player);
 }
 

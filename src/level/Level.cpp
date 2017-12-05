@@ -36,9 +36,6 @@ void Level::update()
 {
 	_turnState->update(*this);
 
-	if (gui._state != NOTHING_SPECIAL)
-		inputHandler.onMenu(gui);
-
 	_terrain[_player->_pos->_x][_player->_pos->_y]._actor = _player;
 	_player->_renderer->_bg = _terrain[_player->_pos->_x][_player->_pos->_y]._renderer->_bg;
 
