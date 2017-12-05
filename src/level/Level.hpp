@@ -2,7 +2,8 @@
 #include <boost/multi_array.hpp>
 #include <vector>
 #include <unordered_map>
-#include "LevelState.hpp"
+#include "LevelTurnState.hpp"
+#include "LevelRenderState.hpp"
 #include "Terrain.hpp"
 #include "../systems/ComMandedSystem.hpp"
 #include "../systems/CameraSystem.hpp"
@@ -44,6 +45,7 @@ public:
 	void setInBounds(int& x, int& y);
 
 	std::unique_ptr<LevelTurnState> _turnState;
+	std::unique_ptr<LevelRenderState> _renderState;
 	GameState _gameState;
 	Effect _effect;
 

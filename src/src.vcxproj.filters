@@ -39,7 +39,10 @@
     <ClCompile Include="components\LivingComponent.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="level\LevelState.cpp">
+    <ClCompile Include="level\LevelTurnState.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="level\LevelRenderState.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -119,7 +122,10 @@
     <ClInclude Include="components\ComputingMapComponent.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="level\LevelState.hpp">
+    <ClInclude Include="level\LevelTurnState.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="level\LevelRenderState.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

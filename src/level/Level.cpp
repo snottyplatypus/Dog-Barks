@@ -12,6 +12,7 @@ Level::Level(const int width, const int height)
 	  _generated(boost::extents[_width][_height]), _player(nullptr)
 {
 	_turnState = std::make_unique<PlayerTurn>();
+	_renderState = std::make_unique<RenderBase>();
 }
 
 Level::~Level()
@@ -46,10 +47,7 @@ void Level::update()
 		i->_renderer->_bg = _terrain[i->_pos->_x][i->_pos->_y]._renderer->_bg;
 	}
 
-	renderFov(*_player);
-
-	_effect.update();
-
+	_renderState->update(*this);
 }
 
 void Level::renderFov(CommandedSystem& system)

@@ -48,7 +48,6 @@ void EventManager::onNotify(Event event, CommandedSystem& object)
 		break;
 	case TRIGGER_ENTER:
 		if (level._turnState->_id == "CursorModeF") {
-			std::cout << object._id;
 			onAttack(object, level._fireCursor._lastPos, gui._attackSelect._bodyPart, gui._attackSelect._bullets);
 			level._turnState->exit(level);
 			gui._state = NOTHING_SPECIAL;
@@ -62,8 +61,6 @@ void EventManager::onNotify(Event event, CommandedSystem& object)
 
 void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiver, std::string part, int bullet)
 {
-	std::cout << attacker._pos->_x << " " << attacker._pos->_y << std::endl;
-	std::cout << receiver._x << " " << receiver._y << std::endl;
 	int modWeapon = 0;
 	int modHealth = 0;
 	float shot = (1 / static_cast<float>(bullet) * rng.getInt(0, 100) + modWeapon) * (1 - modHealth / 10);
