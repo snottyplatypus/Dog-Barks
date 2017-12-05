@@ -50,6 +50,50 @@ public:
 	void react(CommandedSystem & object) override;
 };
 
+class MoveEvent : public BaseEvent
+{
+public:
+	MoveEvent(int x, int y) : _x(x), _y(y) {}
+	~MoveEvent() {}
+	void react(CommandedSystem & object) override;
+
+private:
+	int _x;
+	int _y;
+};
+
+class DeathEvent : public BaseEvent
+{
+public:
+	DeathEvent() {}
+	~DeathEvent() {}
+	void react(CommandedSystem & object) override;
+};
+
+class LookingEvent : public BaseEvent
+{
+public:
+	LookingEvent(int x, int y) : _x(x), _y(y) {}
+	~LookingEvent() {}
+	void react(CommandedSystem & object) override;
+
+private:
+	int _x;
+	int _y;
+};
+
+class AimingEvent : public BaseEvent
+{
+public:
+	AimingEvent(int x, int y) : _x(x), _y(y) {}
+	~AimingEvent() {}
+	void react(CommandedSystem & object) override;
+
+private:
+	int _x;
+	int _y;
+};
+
 enum Event
 {
 	NONE,
@@ -64,17 +108,10 @@ enum Event
 	AIMING,
 };
 
-struct MoveEvent
-{
-	int _id = MOVE;
-	int _x;
-	int _y;
-};
-
-struct LookingEvent
+/*struct LookingEvent
 {
 	int _id;
 	int _x;
 	int _y;
 	PositionComponent _from;
-};
+};*/

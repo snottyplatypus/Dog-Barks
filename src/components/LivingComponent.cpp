@@ -31,7 +31,7 @@ void LivingComponent::update()
 				_dead = true;
 	}
 	if (_dead)
-		eventManager.onDeath(*_system.lock());
+		eventManager.onNotify(std::make_unique<DeathEvent>(), *_system.lock());
 }
 
 void LivingComponent::handleDamage(Weapon& weapon, BodyPart& target, int bullet)

@@ -30,7 +30,7 @@ struct FireCursor : public CommandedSystem
 			_interaction->execute(origin);
 			_interaction = nullptr;
 		}
-		eventManager.onLook({ AIMING, _pos->_x, _pos->_y, *origin._pos });
+		eventManager.onNotify(std::make_unique<AimingEvent>(_pos->_x, _pos->_y), origin);
 	}
 
 	void render(PositionComponent& origin, PositionComponent& mod)

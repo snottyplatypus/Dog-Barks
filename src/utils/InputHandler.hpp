@@ -13,18 +13,18 @@ struct InputHandler
 	InputHandler() 
 	{
 		//Arrows
-		_move[TCODK_UP] = std::make_shared<MoveNorth<GameObjectSystem>>();
-		_move[TCODK_RIGHT] = std::make_shared<MoveEast<GameObjectSystem>>();
-		_move[TCODK_DOWN] = std::make_shared<MoveSouth<GameObjectSystem>>();
-		_move[TCODK_LEFT] = std::make_shared<MoveWest<GameObjectSystem>>();
-		_move['9'] = std::make_shared<MoveNE<GameObjectSystem>>();
-		_move['8'] = std::make_shared<MoveNorth<GameObjectSystem>>();
-		_move['7'] = std::make_shared<MoveNW<GameObjectSystem>>();
-		_move['6'] = std::make_shared<MoveEast<GameObjectSystem>>();
-		_move['4'] = std::make_shared<MoveWest<GameObjectSystem>>();
-		_move['3'] = std::make_shared<MoveSE<GameObjectSystem>>();
-		_move['2'] = std::make_shared<MoveSouth<GameObjectSystem>>();
-		_move['1'] = std::make_shared<MoveSW<GameObjectSystem>>();
+		_move[TCODK_UP] = std::make_shared<MoveNorth<CommandedSystem>>();
+		_move[TCODK_RIGHT] = std::make_shared<MoveEast<CommandedSystem>>();
+		_move[TCODK_DOWN] = std::make_shared<MoveSouth<CommandedSystem>>();
+		_move[TCODK_LEFT] = std::make_shared<MoveWest<CommandedSystem>>();
+		_move['9'] = std::make_shared<MoveNE<CommandedSystem>>();
+		_move['8'] = std::make_shared<MoveNorth<CommandedSystem>>();
+		_move['7'] = std::make_shared<MoveNW<CommandedSystem>>();
+		_move['6'] = std::make_shared<MoveEast<CommandedSystem>>();
+		_move['4'] = std::make_shared<MoveWest<CommandedSystem>>();
+		_move['3'] = std::make_shared<MoveSE<CommandedSystem>>();
+		_move['2'] = std::make_shared<MoveSouth<CommandedSystem>>();
+		_move['1'] = std::make_shared<MoveSW<CommandedSystem>>();
 		
 		//Cursors
 		_interaction['l'] = std::make_shared<LookingCursorMode<CommandedSystem>>();
@@ -60,7 +60,7 @@ struct InputHandler
 	}
 
 private:
-	std::map<int, std::shared_ptr<Command<GameObjectSystem>>> _move;
+	std::map<int, std::shared_ptr<Command<CommandedSystem>>> _move;
 	std::map<int, std::shared_ptr<Command<CommandedSystem>>> _interaction;
 };
 

@@ -12,6 +12,8 @@ struct CommandedSystem : public GameObjectSystem, public std::enable_shared_from
 {
 	CommandedSystem(int x = 1, int y = 1, std::string tile = "gang_b", std::string name = "actor") : _updated(false)
 	{
+		_move = nullptr;
+		_interaction = nullptr;
 		_pos->_x = x;
 		_pos->_y = y;
 		_renderer->_tile = tile;
@@ -61,6 +63,7 @@ struct CommandedSystem : public GameObjectSystem, public std::enable_shared_from
 
 	std::shared_ptr<InventoryComponent> _inventory;
 	std::shared_ptr<LivingComponent> _body;
+	std::shared_ptr<Command<CommandedSystem>> _move;
 	std::shared_ptr<Command<CommandedSystem>> _interaction;
 	std::shared_ptr<ComputingMap> _computing;
 	bool _updated;

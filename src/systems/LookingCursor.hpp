@@ -23,6 +23,6 @@ struct LookingCursor : public CommandedSystem
 			_interaction->execute(*this);
 			_interaction = nullptr;
 		}
-		eventManager.onLook({ LOOKING_TERRAIN, _pos->_x, _pos->_y, *origin._pos });
+		eventManager.onNotify(std::make_unique<LookingEvent>(_pos->_x, _pos->_y), origin);
 	}
 };

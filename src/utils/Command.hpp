@@ -26,42 +26,42 @@ template<typename T> struct Enter : public Command<T>
 
 template<typename T> struct MoveNorth : public Command<T>
 {
-	void execute(T& system) override { eventManager.onMove( {MOVE, 0, -1}, system ); }
+	void execute(T& system) override { eventManager.onNotify( std::make_unique<MoveEvent>(0, -1), system ); }
 };
 
 template<typename T> struct MoveEast : public Command<T>
 {
-	void execute(T& system) override { eventManager.onMove( { MOVE, 1, 0 }, system); }
+	void execute(T& system) override { eventManager.onNotify(std::make_unique<MoveEvent>(1, 0), system); }
 };
 
 template<typename T> struct MoveSouth : public Command<T>
 {
-	void execute(T& system) override { eventManager.onMove( { MOVE, 0, 1 }, system); }
+	void execute(T& system) override { eventManager.onNotify(std::make_unique<MoveEvent>(0, 1), system); }
 };
 
 template<typename T> struct MoveWest : public Command<T>
 {
-	void execute(T& system) override { eventManager.onMove( { MOVE, -1, 0 }, system); }
+	void execute(T& system) override { eventManager.onNotify(std::make_unique<MoveEvent>(-1, 0), system); }
 };
 
 template<typename T> struct MoveNE : public Command<T>
 {
-	void execute(T& system) override { eventManager.onMove( { MOVE, 1, -1 }, system); }
+	void execute(T& system) override { eventManager.onNotify(std::make_unique<MoveEvent>(1, -1), system); }
 };
 
 template<typename T> struct MoveSE : public Command<T>
 {
-	void execute(T& system) override { eventManager.onMove( { MOVE, 1, 1 }, system); }
+	void execute(T& system) override { eventManager.onNotify(std::make_unique<MoveEvent>(1, 1), system); }
 };
 
 template<typename T> struct MoveNW : public Command<T>
 {
-	void execute(T& system) override { eventManager.onMove( { MOVE, -1, -1 }, system); }
+	void execute(T& system) override { eventManager.onNotify(std::make_unique<MoveEvent>(-1, -1), system); }
 };
 
 template<typename T> struct MoveSW : public Command<T>
 {
-	void execute(T& system) override { eventManager.onMove( { MOVE, -1, 1 }, system); }
+	void execute(T& system) override { eventManager.onNotify(std::make_unique<MoveEvent>(-1, 1), system); }
 };
 
 template<typename T> struct LookingCursorMode : public Command<T>
