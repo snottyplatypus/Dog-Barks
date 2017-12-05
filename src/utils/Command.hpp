@@ -16,12 +16,12 @@ template<typename T> struct Nothing : public Command<T>
 
 template<typename T> struct Cancel : public Command<T>
 {
-	void execute(T& system) override { eventManager.onNotify(CANCEL, system); }
+	void execute(T& system) override { eventManager.onNotify(std::make_unique<TriggerCancel>(), system); }
 };
 
 template<typename T> struct Enter : public Command<T>
 {
-	void execute(T& system) override { eventManager.onNotify(TRIGGER_ENTER, system); }
+	void execute(T& system) override { eventManager.onNotify(std::make_unique<TriggerEnter>(), system); }
 };
 
 template<typename T> struct MoveNorth : public Command<T>
@@ -66,10 +66,10 @@ template<typename T> struct MoveSW : public Command<T>
 
 template<typename T> struct LookingCursorMode : public Command<T>
 {
-	void execute(T& system) override { eventManager.onNotify( TRIGGER_LOOKING_CURSOR, system ); }
+	void execute(T& system) override { eventManager.onNotify(std::make_unique<TriggerLookingMode>(), system ); }
 };
 
-template<typename T> struct FireCursorMode : public Command<T>
+template<typename T> struct AimingCursorMode : public Command<T>
 {
-	void execute(T& system) override { eventManager.onNotify( TRIGGER_FIRE_CURSOR, system ); }
+	void execute(T& system) override { eventManager.onNotify(std::make_unique<TriggerAimingMode>(), system ); }
 };

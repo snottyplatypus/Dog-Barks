@@ -110,10 +110,6 @@ void Gui::attackMenu(CommandedSystem& origin, CommandedSystem& target)
 			_attackSelect._bullets--;
 			_choice = 0;
 		}
-		if (_choice == 1) {
-			eventManager.onNotify(TRIGGER_ENTER, origin);
-			_choice = 0;
-		}
 		break;
 	}
 }

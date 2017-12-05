@@ -45,6 +45,9 @@
     <ClCompile Include="level\LevelRenderState.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="utils\Event.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="components\RenderComponent.hpp">

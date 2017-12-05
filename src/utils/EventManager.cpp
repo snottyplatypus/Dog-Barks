@@ -15,48 +15,9 @@ EventManager::~EventManager()
 {
 }
 
-void EventManager::onNotify(Event event, CommandedSystem& object)
+void EventManager::onNotify(std::unique_ptr<BaseEvent> event, CommandedSystem& object)
 {
-	switch (event) {
-	case END_TURN:
-		if (level._turnState->_id == "PlayerTurn") { //TEMP UNTIL INTERACTION/MOVEMENT COST
-			if (object._id == "player") {
-				object._updated = false;
-				level._turnState->transit<OtherTurn>(level);
-			}
-		}
-		else if (level._turnState->_id == "OtherTurn") { //ALSO TEMP
-			bool updated = true;
-			for (auto i : level._actors)
-				if (!i->_updated)
-					updated = false;
-			if (updated)
-				level._turnState->transit<PlayerTurn>(level);
-		}
-		break;
-	case TRIGGER_LOOKING_CURSOR:
-		level._turnState->transit<CursorModeL>(level);
-		level._lookingCursor._pos->_x = level._player->_pos->_x;
-		level._lookingCursor._pos->_y = level._player->_pos->_y;
-		gui._state = START_MENU;
-		break;
-	case TRIGGER_FIRE_CURSOR:
-		level._turnState->transit<CursorModeF>(level);
-		level._fireCursor._pos->_x = level._player->_pos->_x;
-		level._fireCursor._pos->_y = level._player->_pos->_y;
-		gui._state = START_MENU;
-		break;
-	case TRIGGER_ENTER:
-		if (level._turnState->_id == "CursorModeF") {
-			onAttack(object, level._fireCursor._lastPos, gui._attackSelect._bodyPart, gui._attackSelect._bullets);
-			level._turnState->exit(level);
-			gui._state = NOTHING_SPECIAL;
-		}
-		break;
-	case CANCEL:
-		level._turnState->exit(level);
-		break;
-	}
+	event->react(object);
 }
 
 void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiver, std::string part, int bullet)

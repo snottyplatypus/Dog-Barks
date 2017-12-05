@@ -28,7 +28,7 @@ struct InputHandler
 		
 		//Cursors
 		_interaction['l'] = std::make_shared<LookingCursorMode<CommandedSystem>>();
-		_interaction['f'] = std::make_shared<FireCursorMode<CommandedSystem>>();
+		_interaction['f'] = std::make_shared<AimingCursorMode<CommandedSystem>>();
 
 		//Pause menu & cancel
 		_interaction[TCODK_ESCAPE] = std::make_shared<Cancel<CommandedSystem>>();
@@ -57,8 +57,6 @@ struct InputHandler
 	{
 		if (key.vk == TCODK_TEXT)
 			gui._choice = key.text[0];
-		else if (key.vk == TCODK_ENTER)
-			gui._choice = 1;
 	}
 
 private:

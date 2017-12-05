@@ -44,18 +44,18 @@ struct CommandedSystem : public GameObjectSystem, public std::enable_shared_from
 			_move->execute(*this);
 			_move = nullptr;
 			_updated = true;
-			eventManager.onNotify(END_TURN, *this);
+			eventManager.onNotify(std::make_unique<EndTurn>(), *this);
 		}
 		if (_interaction != nullptr) {
 			_interaction->execute(*this);
 			_interaction = nullptr;
 			_updated = true;
-			eventManager.onNotify(END_TURN, *this);
+			eventManager.onNotify(std::make_unique<EndTurn>(), *this);
 		}
 		// TEMP UNTIL AI
 		if (_id != "player") {
 			_updated = true;
-			eventManager.onNotify(END_TURN, *this);
+			eventManager.onNotify(std::make_unique<EndTurn>(), *this);
 		}
 	}
 
