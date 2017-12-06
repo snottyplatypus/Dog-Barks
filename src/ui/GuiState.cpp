@@ -67,7 +67,6 @@ void InspectingTerrain::exit(Gui & gui)
 
 void AimTarget::update(Gui & gui)
 {
-	std::cout << _target._pos->_x << std::endl;
 	std::map<char, std::string> parts;
 	for (int i = 0; i < _target._body->_body.size(); i++)
 		parts['a' + i] = _target._body->_body[i]._name;
