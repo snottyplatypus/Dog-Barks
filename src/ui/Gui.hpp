@@ -1,19 +1,10 @@
 #pragma once
 #include <libtcod/libtcod.hpp>
 #include "../systems/CommandedSystem.hpp"
+#include "GuiState.hpp"
 #include <memory>
 #include <vector>
 #include <string>
-
-enum GuiState
-{
-	NOTHING_SPECIAL,
-	START_MENU,
-	SELECTING_TARGET,
-	SELECTING_BODYPART,
-	SELECTING_BULLETS,
-	INSPECTING,
-};
 
 struct AttackSelection
 {
@@ -27,10 +18,9 @@ class Gui
 public:
 	Gui();
 	~Gui();
-	void lookingInfo(PositionComponent target);
-	void attackMenu(CommandedSystem& origin, CommandedSystem& target);
+	void update();
 
-	int _state;
+	std::unique_ptr<GuiState> _state;
 	int _choice;
 	AttackSelection _attackSelect;
 };

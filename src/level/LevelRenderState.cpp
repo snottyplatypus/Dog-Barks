@@ -9,6 +9,7 @@ void RenderBase::update(Level & level)
 {
 	level.renderFov(*level._player);
 	level._effect.update();
+	gui.update();
 }
 
 void RenderBase::exit(Level & level)
@@ -30,6 +31,7 @@ void RenderCursorModeL::update(Level & level)
 void RenderCursorModeL::exit(Level & level)
 {
 	transit<RenderBase>(level);
+	gui._state->exit(gui);
 }
 
 void RenderCursorModeF::enter(Level & level)
@@ -45,4 +47,5 @@ void RenderCursorModeF::update(Level & level)
 void RenderCursorModeF::exit(Level & level)
 {
 	transit<RenderBase>(level);
+	gui._state->exit(gui);
 }

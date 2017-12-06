@@ -132,6 +132,7 @@
     <ClCompile Include="components\LivingComponent.cpp" />
     <ClCompile Include="level\LevelRenderState.cpp" />
     <ClCompile Include="level\LevelTurnState.cpp" />
+    <ClCompile Include="ui\GuiState.cpp" />
     <ClCompile Include="ui\Effect.cpp" />
     <ClCompile Include="utils\DataManager.cpp" />
     <ClCompile Include="ui\Gui.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="level\LevelRenderState.hpp" />
     <ClInclude Include="level\LevelTurnState.hpp" />
     <ClInclude Include="level\Item.hpp" />
+    <ClInclude Include="ui\GuiState.hpp" />
     <ClInclude Include="ui\Effect.hpp" />
     <ClInclude Include="utils\Config.hpp" />
     <ClInclude Include="utils\DataManager.hpp" />

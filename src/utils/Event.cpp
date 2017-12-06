@@ -2,6 +2,7 @@
 #include "EventManager.hpp"
 #include "../level/Level.hpp"
 #include "../ui/Gui.hpp"
+#include "../ui/GuiState.hpp"
 #include <iostream>
 
 void EndTurn::react(CommandedSystem & object)
@@ -27,7 +28,7 @@ void TriggerLookingMode::react(CommandedSystem & object)
 	level._turnState->transit<CursorModeL>(level);
 	level._lookingCursor._pos->_x = level._player->_pos->_x;
 	level._lookingCursor._pos->_y = level._player->_pos->_y;
-	gui._state = START_MENU;
+	gui._state->transit<LookingTerrain>(gui);
 }
 
 void TriggerAimingMode::react(CommandedSystem & object)
@@ -35,7 +36,7 @@ void TriggerAimingMode::react(CommandedSystem & object)
 	level._turnState->transit<CursorModeF>(level);
 	level._fireCursor._pos->_x = level._player->_pos->_x;
 	level._fireCursor._pos->_y = level._player->_pos->_y;
-	gui._state = START_MENU;
+	gui._state->transit<AimTarget>(gui);
 }
 
 void TriggerEnter::react(CommandedSystem & object)
@@ -43,7 +44,6 @@ void TriggerEnter::react(CommandedSystem & object)
 	if (level._turnState->_id == "CursorModeF") {
 		eventManager.onAttack(object, level._fireCursor._lastPos, gui._attackSelect._bodyPart, gui._attackSelect._bullets);
 		level._turnState->exit(level);
-		gui._state = NOTHING_SPECIAL;
 	}
 }
 
@@ -72,7 +72,10 @@ void MoveEvent::react(CommandedSystem & object)
 		if (!level._terrain[object._pos->_x + _x][object._pos->_y + _y]._void) {
 			object._pos->_x += _x;
 			object._pos->_y += _y;
-			gui._state = START_MENU;
+			if (gui._state->_id == "InspectingTerrain")
+				gui._state->transit<LookingTerrain>(gui);
+			else if (gui._state->_id == "AimPart" || gui._state->_id == "AimRound")
+				gui._state->transit<AimTarget>(gui);
 		}
 	}
 
@@ -91,15 +94,17 @@ void DeathEvent::react(CommandedSystem & object)
 
 void LookingEvent::react(CommandedSystem & object)
 {
-	if (object._computing->_map->isInFov(_x, _y))
-		gui.lookingInfo({ _x, _y });
+	if (gui._state->_id == "LookingTerrain")
+		if (object._computing->_map->isInFov(_x, _y))
+			gui._state = std::make_unique<LookingTerrain>(PositionComponent{ _x, _y });
 }
 
 void AimingEvent::react(CommandedSystem & object)
 {
-	auto target = level._terrain[_x][_y]._actor;
-	if (object._computing->_map->isInFov(_x, _y)) {
-		if (target != nullptr)
-			gui.attackMenu(object, *target);
+	if (gui._state->_id == "AimTarget" || gui._state->_id == "Nothing") {
+		auto target = level._terrain[_x][_y]._actor;
+		if (object._computing->_map->isInFov(_x, _y))
+			if (target != nullptr)
+				gui._state = std::make_unique<AimTarget>(*target, object._inventory->_held._mag);
 	}
 }

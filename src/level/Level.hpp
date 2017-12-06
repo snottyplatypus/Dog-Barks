@@ -10,6 +10,7 @@
 #include "../systems/LookingCursor.hpp"
 #include "../systems/FireCursor.hpp"
 #include "../ui/Effect.hpp"
+#include "../ui/Gui.hpp"
 
 struct Room {
 	int _x;

@@ -93,25 +93,3 @@ private:
 	int _x;
 	int _y;
 };
-
-enum Event
-{
-	NONE,
-	CANCEL,
-	MOVE,
-	END_TURN,
-	TRIGGER_ENTER,
-	TRIGGER_LOOKING_CURSOR,
-	TRIGGER_FIRE_CURSOR,
-	LOOKING_TERRAIN,
-	LOOKING_ACTOR,
-	AIMING,
-};
-
-/*struct LookingEvent
-{
-	int _id;
-	int _x;
-	int _y;
-	PositionComponent _from;
-};*/

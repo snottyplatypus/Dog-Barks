@@ -1,6 +1,10 @@
 #pragma once
-#include "GameObjectSystem.hpp"
+#include <memory>
+#include <string>
+#include "../utils/Command.hpp"
 #include "../utils/EventManager.hpp"
+#include "../components/PositionComponent.hpp"
+#include "../components/RenderComponent.hpp"
 #include "../components/InventoryComponent.hpp"
 #include "../components/LivingComponent.hpp"
 #include "../components/ComputingMapComponent.hpp"
@@ -8,17 +12,19 @@
 #include <string>
 #include "../utils/DataManager.hpp"
 
-struct CommandedSystem : public GameObjectSystem, public std::enable_shared_from_this<CommandedSystem>
+struct CommandedSystem : public std::enable_shared_from_this<CommandedSystem>
 {
 	CommandedSystem(int x = 1, int y = 1, std::string tile = "gang_b", std::string name = "actor") : _updated(false)
 	{
+		_pos = std::make_shared<PositionComponent>();
+		_renderer = std::make_shared<RenderComponent>();
+		_id = "object";
 		_move = nullptr;
 		_interaction = nullptr;
 		_pos->_x = x;
 		_pos->_y = y;
 		_renderer->_tile = tile;
 		_renderer->_name = name;
-		_id = "actor";
 		_inventory = std::make_shared<InventoryComponent>();
 		_body = std::make_shared<LivingComponent>(data._species["human"]);
 		_inventory->_held = data._weapons["shotgun"];
@@ -61,6 +67,9 @@ struct CommandedSystem : public GameObjectSystem, public std::enable_shared_from
 		}
 	}
 
+	std::string _id;
+	std::shared_ptr<PositionComponent> _pos;
+	std::shared_ptr<RenderComponent> _renderer;
 	std::shared_ptr<InventoryComponent> _inventory;
 	std::shared_ptr<LivingComponent> _body;
 	std::shared_ptr<Command<CommandedSystem>> _move;
