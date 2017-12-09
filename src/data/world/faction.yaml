@@ -1,0 +1,31 @@
+- CIVILIAN:
+  name: civilian
+  relations:
+    civilian: neutral
+    gang_a: neutral
+    gang_b: neutral
+    police: neutral
+
+- GANG_A:
+  name: gang_a
+  relations:
+    civilian: neutral
+    gang_a: friendly
+    gang_b: hostile
+    police: hostile
+
+- GANG_B:
+  name: gang_b
+  relations:
+    civilian: neutral
+    gang_a: hostile
+    gang_b: friendly
+    police: hostile
+
+- POLICE:
+  name: police
+  relations:
+    cvilian: friendly
+    gang_a: hostile
+    gang_b: hostile
+    police: friendly

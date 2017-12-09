@@ -5,6 +5,10 @@
 
 void PlayerTurn::enter(Level & level)
 {
+	for (auto i : level._actors) {
+		level._terrain[i->_pos->_x][i->_pos->_y]._actor = i;
+		i->_renderer->_bg = level._terrain[i->_pos->_x][i->_pos->_y]._renderer->_bg;
+	}
 	level.updateComputingMap(*level._player);
 	level._player->update();
 }
@@ -23,15 +27,20 @@ void PlayerTurn::exit(Level & level)
 void OtherTurn::enter(Level & level)
 {
 	for (auto i : level._actors) {
-		level.updateComputingMap(*i);
-		i->update();
+		level._terrain[i->_pos->_x][i->_pos->_y]._actor = i;
+		i->_renderer->_bg = level._terrain[i->_pos->_x][i->_pos->_y]._renderer->_bg;
+	}
+	for (std::size_t i = 1; i < level._actors.size(); ++i) {
+		level.updateComputingMap(*level._actors[i]);
+		level._actors[i]->update();
 	}
 }
 
 void OtherTurn::update(Level & level)
 {
-	for (auto i : level._actors)
-		i->command();
+	for (std::size_t i = 1; i < level._actors.size(); ++i) {
+		level._actors[i]->command();
+	}
 }
 
 void OtherTurn::exit(Level & level)

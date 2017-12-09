@@ -6,6 +6,7 @@
 #include <map>
 
 struct CommandedSystem;
+struct Faction;
 
 class DataManager
 {
@@ -20,6 +21,7 @@ public:
 	std::map<std::string, BodyPart> _bodyParts;
 	std::map<std::string, LivingComponent> _species;
 	std::map<std::string, CommandedSystem> _actors;
+	std::map<std::string, Faction> _factions;
 	std::shared_ptr<CommandedSystem> _player;
 
 	std::string  font;

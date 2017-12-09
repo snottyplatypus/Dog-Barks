@@ -11,6 +11,7 @@ struct LookingCursor : public CommandedSystem
 		_inventory = nullptr;
 		_body = nullptr;
 		_computing = nullptr;
+		_ai = std::make_shared<AiComponent>();
 	}
 
 	~LookingCursor() {}

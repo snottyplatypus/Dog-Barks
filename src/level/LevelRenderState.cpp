@@ -24,7 +24,7 @@ void RenderCursorModeL::update(Level & level)
 {
 	RenderBase::update(level);
 	level._lookingCursor._renderer->_bg = level._terrain[level._lookingCursor._pos->_x][level._lookingCursor._pos->_y]._renderer->_bg;
-	if (std::fmodf(time, 1.0f) >= 0.5f)
+	if (std::fmodf(time, 0.6f) >= 0.3f)
 		level._lookingCursor._renderer->update(*level._lookingCursor._pos, *level._camera._pos);
 }
 

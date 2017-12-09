@@ -8,64 +8,19 @@
 #include "../components/InventoryComponent.hpp"
 #include "../components/LivingComponent.hpp"
 #include "../components/ComputingMapComponent.hpp"
+#include "../components/ai/AiComponent.hpp"
+#include "../world/Faction.hpp"
+#include "../utils/DataManager.hpp"
 #include <iostream>
 #include <string>
-#include "../utils/DataManager.hpp"
 
 struct CommandedSystem : public std::enable_shared_from_this<CommandedSystem>
 {
-	CommandedSystem(int x = 1, int y = 1, std::string tile = "gang_b", std::string name = "actor") : _updated(false)
-	{
-		_pos = std::make_shared<PositionComponent>();
-		_renderer = std::make_shared<RenderComponent>();
-		_id = "object";
-		_move = nullptr;
-		_interaction = nullptr;
-		_pos->_x = x;
-		_pos->_y = y;
-		_renderer->_tile = tile;
-		_renderer->_name = name;
-		_inventory = std::make_shared<InventoryComponent>();
-		_body = std::make_shared<LivingComponent>(data._species["human"]);
-		_inventory->_held = data._weapons["shotgun"];
-		_computing = std::make_shared<ComputingMap>();
-	}
-
-	~CommandedSystem() {}
-
-	void init(int width, int height)
-	{
-		_body->init(shared_from_this());
-		_computing->init(width, height);
-	}
-
-	void update() 
-	{
-		_body->update();
-		if (!_body->_dead)
-			_computing->_map->computeFov(_pos->_x, _pos->_y, _computing->_radius, true, FOV_SHADOW);
-	}
-
-	void command()
-	{
-		if (_move != nullptr) {
-			_move->execute(*this);
-			_move = nullptr;
-			_updated = true;
-			eventManager.onNotify(std::make_unique<EndTurn>(), *this);
-		}
-		if (_interaction != nullptr) {
-			_interaction->execute(*this);
-			_interaction = nullptr;
-			_updated = true;
-			eventManager.onNotify(std::make_unique<EndTurn>(), *this);
-		}
-		// TEMP UNTIL AI
-		if (_id != "player") {
-			_updated = true;
-			eventManager.onNotify(std::make_unique<EndTurn>(), *this);
-		}
-	}
+	CommandedSystem(int x = 1, int y = 1, std::string tile = "gang_b", std::string name = "actor", Faction faction = Faction());
+	~CommandedSystem();
+	void init(int width, int height);
+	void update();
+	void command();
 
 	std::string _id;
 	std::shared_ptr<PositionComponent> _pos;
@@ -75,5 +30,7 @@ struct CommandedSystem : public std::enable_shared_from_this<CommandedSystem>
 	std::shared_ptr<Command<CommandedSystem>> _move;
 	std::shared_ptr<Command<CommandedSystem>> _interaction;
 	std::shared_ptr<ComputingMap> _computing;
+	std::shared_ptr<AiComponent> _ai;
+	Faction _faction;
 	bool _updated;
 };

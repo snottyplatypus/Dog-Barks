@@ -2,6 +2,7 @@
 #include <libtcod/libtcod.hpp>
 #include <yaml-cpp/yaml.h>
 #include "../systems/CommandedSystem.hpp"
+#include "../world/Faction.hpp"
 #include <iostream>
 
 DataManager::DataManager()
@@ -26,6 +27,7 @@ DataManager::DataManager()
 	_tiles["swat"] = 265;
 	_tiles["swat_dead"] = 266;
 
+	_factions["None"];
 	_weapons["Nothing"];
 	_player = std::make_shared<CommandedSystem>();
 }
@@ -72,9 +74,21 @@ void DataManager::init()
 		}
 	}
 
+	file = YAML::LoadFile("data/world/faction.yaml");
+	for (std::size_t i = 0; i < file.size(); i++) {
+		std::string name = file[i]["name"].as<std::string>();
+		_factions[name]._name = name;
+		for (auto j = _factions.begin(); j != _factions.end(); ++j)
+			for (std::size_t k = 0; k < file.size(); k++)
+				if (j->second._name == file[k]["name"].as<std::string>())
+					for (YAML::const_iterator it = file[k]["relations"].begin(); it != file[k]["relations"].end(); ++it)
+						j->second._relations[it->first.as<std::string>()] = it->second.as<std::string>();
+	}
+
 	file = YAML::LoadFile("data/living/player.yaml");
 	_player->_inventory->_held = _weapons[file["PLAYER"]["weapon"].as<std::string>()];
 	*_player->_body = _species[file["PLAYER"]["species"].as<std::string>()];
 	_player->_renderer->_tile = file["PLAYER"]["tile"].as<std::string>();
 	_player->_renderer->_name = "you";
+	_player->_faction = _factions[file["PLAYER"]["faction"].as<std::string>()];
 }

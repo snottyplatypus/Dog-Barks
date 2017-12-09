@@ -129,6 +129,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="components\ai\AiState.cpp" />
+    <ClCompile Include="components\ai\AiComponent.cpp" />
+    <ClCompile Include="systems\CommandedSystem.cpp" />
     <ClCompile Include="components\LivingComponent.cpp" />
     <ClCompile Include="level\LevelRenderState.cpp" />
     <ClCompile Include="level\LevelTurnState.cpp" />
@@ -143,6 +146,9 @@
     <ClCompile Include="utils\Line.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="components\ai\AiState.hpp" />
+    <ClInclude Include="components\ai\AiComponent.hpp" />
+    <ClInclude Include="world\Faction.hpp" />
     <ClInclude Include="components\ComputingMapComponent.hpp" />
     <ClInclude Include="components\InventoryComponent.hpp" />
     <ClInclude Include="components\LivingComponent.hpp" />
@@ -178,6 +184,7 @@
     <None Include="data\config.yaml" />
     <None Include="data\living\player.yaml" />
     <None Include="data\living\species.yaml" />
+    <None Include="data\world\faction.yaml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

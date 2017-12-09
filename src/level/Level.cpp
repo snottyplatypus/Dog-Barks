@@ -24,6 +24,7 @@ void Level::init()
 	_player->_id = "player";
 	_player->init(_width, _height);
 	updateComputingMap(*_player);
+	_actors.push_back(_player);
 	
 	_camera.lockOn({ config.screenWidth / 2 - _width / 2, config.screenHeight / 2 - _height / 2 });
 
@@ -33,15 +34,12 @@ void Level::init()
 
 void Level::update()
 {
-	_turnState->update(*this);
-
-	_terrain[_player->_pos->_x][_player->_pos->_y]._actor = _player;
-	_player->_renderer->_bg = _terrain[_player->_pos->_x][_player->_pos->_y]._renderer->_bg;
-
 	for (auto i : _actors) {
 		_terrain[i->_pos->_x][i->_pos->_y]._actor = i;
 		i->_renderer->_bg = _terrain[i->_pos->_x][i->_pos->_y]._renderer->_bg;
 	}
+
+	_turnState->update(*this);
 
 	_renderState->update(*this);
 }
@@ -115,6 +113,8 @@ void Level::generateLevel()
 	_actors.push_back(std::make_shared<CommandedSystem>(_rooms[0]._x + _rooms[0]._width / 2, _rooms[0]._y + _rooms[0]._height / 2));
 	_actors.back()->_renderer->_tile = "gang_b";
 	_actors.back()->init(_width, _height);
+	_actors.back()->_ai->_state->transit<WanderingState>(*_actors.back());
+	_actors.back()->_faction = data._factions["gang_b"];
 }
 
 void Level::initTerrain()

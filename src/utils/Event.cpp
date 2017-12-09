@@ -15,8 +15,8 @@ void EndTurn::react(CommandedSystem & object)
 	}
 	else if (level._turnState->_id == "OtherTurn") { //ALSO TEMP
 		bool updated = true;
-		for (auto i : level._actors)
-			if (!i->_updated)
+		for (std::size_t i = 1; i < level._actors.size(); ++i)
+			if (!level._actors[i] ->_updated)
 				updated = false;
 		if (updated)
 			level._turnState->transit<PlayerTurn>(level);
@@ -25,18 +25,22 @@ void EndTurn::react(CommandedSystem & object)
 
 void TriggerLookingMode::react(CommandedSystem & object)
 {
-	level._turnState->transit<CursorModeL>(level);
-	level._lookingCursor._pos->_x = level._player->_pos->_x;
-	level._lookingCursor._pos->_y = level._player->_pos->_y;
-	gui._state->transit<LookingTerrain>(gui);
+	if (gui._state->_id == "Nothing") {
+		level._turnState->transit<CursorModeL>(level);
+		level._lookingCursor._pos->_x = level._player->_pos->_x;
+		level._lookingCursor._pos->_y = level._player->_pos->_y;
+		gui._state->transit<LookingTerrain>(gui);
+	}
 }
 
 void TriggerAimingMode::react(CommandedSystem & object)
 {
-	level._turnState->transit<CursorModeF>(level);
-	level._fireCursor._pos->_x = level._player->_pos->_x;
-	level._fireCursor._pos->_y = level._player->_pos->_y;
-	gui._state->transit<AimTarget>(gui);
+	if (gui._state->_id == "Nothing") {
+		level._turnState->transit<CursorModeF>(level);
+		level._fireCursor._pos->_x = level._player->_pos->_x;
+		level._fireCursor._pos->_y = level._player->_pos->_y;
+		gui._state->transit<AimTarget>(gui);
+	}
 }
 
 void TriggerEnter::react(CommandedSystem & object)
@@ -44,6 +48,8 @@ void TriggerEnter::react(CommandedSystem & object)
 	if (level._turnState->_id == "CursorModeF") {
 		eventManager.onAttack(object, level._fireCursor._lastPos, gui._attackSelect._bodyPart, gui._attackSelect._bullets);
 		level._turnState->exit(level);
+		object._updated = true;
+		eventManager.onNotify(std::make_unique<EndTurn>(), object);
 	}
 }
 

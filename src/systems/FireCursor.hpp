@@ -18,6 +18,7 @@ struct FireCursor : public CommandedSystem
 		_inventory = nullptr;
 		_body = nullptr;
 		_computing = nullptr;
+		_ai = std::make_shared<AiComponent>();
 	}
 
 	~FireCursor() {}
@@ -48,7 +49,7 @@ struct FireCursor : public CommandedSystem
 		_lastPos._x = _fireLine._lastPos._x - mod._x;
 		_lastPos._y = _fireLine._lastPos._y - mod._y;
 		TCODLine::line(origin._x + mod._x + off._x, origin._y + mod._y + off._y, _pos->_x + mod._x, _pos->_y + mod._y, &_fireLine);
-		if (std::fmodf(time, 1.0f) >= 0.5f)
+		if (std::fmodf(time, 0.6f) >= 0.3f)
 			_renderer->update(*_pos, mod);
 	}
 

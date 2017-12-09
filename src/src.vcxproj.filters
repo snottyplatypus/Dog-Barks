@@ -51,6 +51,15 @@
     <ClCompile Include="ui\GuiState.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="components\ai\AiComponent.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="components\ai\AiState.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="systems\CommandedSystem.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="components\RenderComponent.hpp">
@@ -137,6 +146,15 @@
     <ClInclude Include="ui\GuiState.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="components\ai\AiComponent.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="components\ai\AiState.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="world\Faction.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="data\config.yaml" />
@@ -144,5 +162,6 @@
     <None Include="data\item\item_weapon.yaml" />
     <None Include="data\living\species.yaml" />
     <None Include="data\living\player.yaml" />
+    <None Include="data\world\faction.yaml" />
   </ItemGroup>
 </Project>
