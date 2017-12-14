@@ -1,4 +1,6 @@
 #include "AiComponent.hpp"
+#include "AiState.hpp"
+#include "../systems/CommandedSystem.hpp"
 
 AiComponent::AiComponent()
 {

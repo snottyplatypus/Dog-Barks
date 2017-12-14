@@ -2,6 +2,7 @@
 #include <libtcod/libtcod.hpp>
 #include "../utils/Global.hpp"
 #include "../utils/InputHandler.hpp"
+#include "../components/ai/AiState.hpp"
 #include <algorithm>
 #include <iostream>
 #include <cmath>

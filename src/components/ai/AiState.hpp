@@ -1,7 +1,9 @@
 #pragma once
+#include "../components/PositionComponent.hpp"
+#include "../systems/CommandedSystem.hpp"
+#include <memory>
 #include <string>
-
-struct CommandedSystem;
+#include <vector>
 
 class AiState
 {
@@ -9,9 +11,15 @@ public:
 	virtual ~AiState() {}
 	virtual void enter(CommandedSystem & system) = 0;
 	virtual void update(CommandedSystem & system) = 0;
+	std::vector<std::shared_ptr<CommandedSystem>> hostileInFov(CommandedSystem & system);
 	template <class T> void transit(CommandedSystem & system)
 	{
 		system._ai->_state = std::make_unique<T>();
+		system._ai->_state->enter(system);
+	}
+	template <class T> void transit(CommandedSystem & system, CommandedSystem & target)
+	{
+		system._ai->_state = std::make_unique<T>(target);
 		system._ai->_state->enter(system);
 	}
 
@@ -39,17 +47,32 @@ public:
 class SurprisedState : public AiState
 {
 public:
-	SurprisedState() { _id = "Surprised"; }
+	SurprisedState(const CommandedSystem & target) : _target(target) { _id = "Surprised"; }
 	~SurprisedState() {}
 	void enter(CommandedSystem & system) override;
 	void update(CommandedSystem & system) override;
+
+	CommandedSystem _target;
 };
 
 class AttackingState : public AiState
 {
 public:
-	AttackingState() { _id = "Surprised"; }
+	AttackingState(const CommandedSystem & target) : _target(target) { _id = "Surprised"; }
 	~AttackingState() {}
 	void enter(CommandedSystem & system) override;
 	void update(CommandedSystem & system) override;
+
+	CommandedSystem _target;
+};
+
+class ChasingState : public AiState
+{
+public:
+	ChasingState(const CommandedSystem & target) : _target(*target._pos) { _id = "Chasing"; }
+	~ChasingState() {}
+	void enter(CommandedSystem & system) override;
+	void update(CommandedSystem & system) override;
+
+	PositionComponent _target;
 };

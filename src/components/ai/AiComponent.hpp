@@ -1,6 +1,8 @@
 #pragma once
 #include <memory>
-#include "AiState.hpp"
+
+class AiState;
+struct CommandedSystem;
 
 class AiComponent
 {
