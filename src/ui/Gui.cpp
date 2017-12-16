@@ -17,6 +17,5 @@ Gui::~Gui()
 
 void Gui::update()
 {
-	//std::cout << _state->_id;
 	_state->update(*this);
 }

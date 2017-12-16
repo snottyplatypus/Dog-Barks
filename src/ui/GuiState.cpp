@@ -55,6 +55,7 @@ void InspectingTerrain::update(Gui & gui)
 					TCODConsole::setColorControl(TCOD_COLCTRL_1, TCODColor::white, TCODColor::black);
 				TCODConsole::root->print(0, 12 + i, "%c %s %c", TCOD_COLCTRL_1, info.c_str(), TCOD_COLCTRL_STOP);
 			}
+			TCODConsole::root->print(0, 13 + static_cast<int>(body->_parts.size()), "Holding a %s", terrain._actor->_inventory->_held._name);
 		}
 	}
 }

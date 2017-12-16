@@ -3,7 +3,9 @@
 #include "../../systems/CommandedSystem.hpp"
 #include "../level/Level.hpp"
 #include "../utils/Global.hpp"
+#include "../utils/Geometry.hpp"
 #include <string>
+#include <algorithm>
 #include <iostream>
 
 std::vector<std::shared_ptr<CommandedSystem>> AiState::hostileInFov(CommandedSystem & system)
@@ -19,6 +21,11 @@ std::vector<std::shared_ptr<CommandedSystem>> AiState::hostileInFov(CommandedSys
 			}
 		}
 	}
+	std::sort(nearby.begin(), nearby.end(), 
+		[&](const std::shared_ptr<CommandedSystem> a, const std::shared_ptr<CommandedSystem> b) -> bool 
+	{ 
+		return db::dist<double>(*system._pos, *a->_pos) < db::dist<double>(*system._pos, *a->_pos);
+	});
 	return nearby;
 }
 
