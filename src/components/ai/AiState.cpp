@@ -14,7 +14,7 @@ std::vector<std::shared_ptr<CommandedSystem>> AiState::hostileInFov(CommandedSys
 			if (system._computing->_map->isInFov(i, j)) {
 				auto k = level._terrain[i][j]._actor;
 				if (k != nullptr)
-					if (system._faction._relations[k->_faction._name] == "hostile")
+					if (system._faction._relations[k->_faction._name] == "hostile" && !k->_body->_dead)
 						nearby.push_back(k);
 			}
 		}
@@ -41,7 +41,6 @@ void SurprisedState::enter(CommandedSystem & system)
 
 void SurprisedState::update(CommandedSystem & system)
 {
-	std::cout << system._renderer->_name << " surprised\n";
 	auto nearby = hostileInFov(system);
 	if (nearby.empty())
 		transit<ChasingState>(system, _target);
@@ -60,7 +59,6 @@ void AttackingState::update(CommandedSystem & system)
 		transit<ChasingState>(system, _target);
 	else {
 		_target = *nearby.front();
-		std::cout << system._renderer->_name << " attacking " << _target._renderer->_name << std::endl;
 		std::string part = _target._body->_parts[rng.getInt(0, static_cast<int>(_target._body->_parts.size() - 1))]._name;
 		int bullets = rng.getInt(1, system._inventory->_held._mag);
 		system._interaction = std::make_shared<Attack<CommandedSystem>>(*_target._pos, part, 1);
@@ -74,7 +72,6 @@ void ChasingState::enter(CommandedSystem & system)
 
 void ChasingState::update(CommandedSystem & system)
 {
-	std::cout << system._renderer->_name << " chasing " << _target._x << " " << _target._y << std::endl;
 	auto nearby = hostileInFov(system);
 	if (!nearby.empty())
 		transit<AttackingState>(system, *nearby.front());

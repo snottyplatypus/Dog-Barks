@@ -37,13 +37,15 @@ bool BloodLine::putPoint(int x, int y)
 	default:
 		break;
 	}
-	level._terrain[x][y] = {
-							level._terrain[x][y]._renderer->_tile,
-							level._terrain[x][y]._renderer->_name,
-							level._terrain[x][y]._isTransparent,
-							level._terrain[x][y]._isWalkable,
-							TCODColor::darkerRed,
-							TCODColor::darkestRed
-							};
+	if (x > 0 && y > 0) {
+		level._terrain[x][y] = {
+								level._terrain[x][y]._renderer->_tile,
+								level._terrain[x][y]._renderer->_name,
+								level._terrain[x][y]._isTransparent,
+								level._terrain[x][y]._isWalkable,
+								TCODColor::darkerRed,
+								TCODColor::darkestRed
+		};
+	}
 	return true;
 }
