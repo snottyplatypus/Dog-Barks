@@ -50,4 +50,5 @@ void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiv
 	else {
 		level._effect._shootEffect->create(*attacker._pos, receiver, *level._camera._pos, PositionComponent{ rng.getInt(-2, 2), rng.getInt(-2, 2) });
 	}
+	onNotify(std::make_unique<EndTurn>(), attacker);
 }

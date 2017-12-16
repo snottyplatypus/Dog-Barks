@@ -42,8 +42,8 @@ void InspectingTerrain::update(Gui & gui)
 	if (terrain._actor != nullptr) {
 		if (terrain._actor->_renderer->_name == infos[_choice]) {
 			auto body = terrain._actor->_body;
-			for (int i = 0; i < body->_body.size(); i++) {
-				auto part = body->_body[i];
+			for (int i = 0; i < body->_parts.size(); i++) {
+				auto part = body->_parts[i];
 				std::string info = part._name;
 				if (!part._ability)
 					TCODConsole::setColorControl(TCOD_COLCTRL_1, TCODColor::darkestRed, TCODColor::black);
@@ -68,8 +68,8 @@ void InspectingTerrain::exit(Gui & gui)
 void AimTarget::update(Gui & gui)
 {
 	std::map<char, std::string> parts;
-	for (int i = 0; i < _target._body->_body.size(); i++)
-		parts['a' + i] = _target._body->_body[i]._name;
+	for (int i = 0; i < _target._body->_parts.size(); i++)
+		parts['a' + i] = _target._body->_parts[i]._name;
 
 	TCODConsole::root->print(0, 10, "Select target:");
 	TCODConsole::root->print(0, 11, "a - %s", _target._renderer->_name.c_str());
@@ -95,14 +95,14 @@ void AimTarget::exit(Gui & gui)
 void AimPart::update(Gui & gui)
 {
 	std::map<char, std::string> parts;
-	for (int i = 0; i < _target._body->_body.size(); i++)
-		parts['a' + i] = _target._body->_body[i]._name;
+	for (int i = 0; i < _target._body->_parts.size(); i++)
+		parts['a' + i] = _target._body->_parts[i]._name;
 
 	TCODConsole::root->print(0, 10, "Select target:");
-	for (int i = 0; i < _target._body->_body.size(); i++) {
-		if (!_target._body->_body[i]._ability)
+	for (int i = 0; i < _target._body->_parts.size(); i++) {
+		if (!_target._body->_parts[i]._ability)
 			TCODConsole::setColorControl(TCOD_COLCTRL_1, TCODColor::darkestRed, TCODColor::black);
-		else if (_target._body->_body[i]._bleeding)
+		else if (_target._body->_parts[i]._bleeding)
 			TCODConsole::setColorControl(TCOD_COLCTRL_1, TCODColor::darkRed, TCODColor::black);
 		else
 			TCODConsole::setColorControl(TCOD_COLCTRL_1, TCODColor::white, TCODColor::black);

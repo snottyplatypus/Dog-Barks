@@ -58,7 +58,7 @@ public:
 class AttackingState : public AiState
 {
 public:
-	AttackingState(const CommandedSystem & target) : _target(target) { _id = "Surprised"; }
+	AttackingState(const CommandedSystem & target) : _target(target) { _id = "Attacking"; }
 	~AttackingState() {}
 	void enter(CommandedSystem & system) override;
 	void update(CommandedSystem & system) override;

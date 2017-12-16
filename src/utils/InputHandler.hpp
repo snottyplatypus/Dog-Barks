@@ -13,22 +13,23 @@ struct InputHandler
 	InputHandler() 
 	{
 		//Arrows
-		_move[TCODK_UP] = std::make_shared<MoveNorth<CommandedSystem>>();
-		_move[TCODK_RIGHT] = std::make_shared<MoveEast<CommandedSystem>>();
-		_move[TCODK_DOWN] = std::make_shared<MoveSouth<CommandedSystem>>();
-		_move[TCODK_LEFT] = std::make_shared<MoveWest<CommandedSystem>>();
-		_move['9'] = std::make_shared<MoveNE<CommandedSystem>>();
-		_move['8'] = std::make_shared<MoveNorth<CommandedSystem>>();
-		_move['7'] = std::make_shared<MoveNW<CommandedSystem>>();
-		_move['6'] = std::make_shared<MoveEast<CommandedSystem>>();
-		_move['4'] = std::make_shared<MoveWest<CommandedSystem>>();
-		_move['3'] = std::make_shared<MoveSE<CommandedSystem>>();
-		_move['2'] = std::make_shared<MoveSouth<CommandedSystem>>();
-		_move['1'] = std::make_shared<MoveSW<CommandedSystem>>();
+		_move[TCODK_UP] = std::make_shared<Move<CommandedSystem>>(0, -1);
+		_move[TCODK_RIGHT] = std::make_shared<Move<CommandedSystem>>(1, 0);
+		_move[TCODK_DOWN] = std::make_shared<Move<CommandedSystem>>(0, 1);
+		_move[TCODK_LEFT] = std::make_shared<Move<CommandedSystem>>(-1, 0);
+		_move['9'] = std::make_shared<Move<CommandedSystem>>(1, -1);
+		_move['8'] = std::make_shared<Move<CommandedSystem>>(0, -1);
+		_move['7'] = std::make_shared<Move<CommandedSystem>>(-1, -1);
+		_move['6'] = std::make_shared<Move<CommandedSystem>>(1, 0);
+		_move['4'] = std::make_shared<Move<CommandedSystem>>(-1, 0);
+		_move['3'] = std::make_shared<Move<CommandedSystem>>(1, 1);
+		_move['2'] = std::make_shared<Move<CommandedSystem>>(0, 1);
+		_move['1'] = std::make_shared<Move<CommandedSystem>>(-1, 1);
 		
-		//Cursors
+		//interactions
 		_interaction['l'] = std::make_shared<LookingCursorMode<CommandedSystem>>();
 		_interaction['f'] = std::make_shared<AimingCursorMode<CommandedSystem>>();
+		_interaction['.'] = std::make_shared<Nothing<CommandedSystem>>();
 
 		//Pause menu & cancel
 		_interaction[TCODK_ESCAPE] = std::make_shared<Cancel<CommandedSystem>>();
@@ -59,7 +60,6 @@ struct InputHandler
 			gui._choice = key.text[0];
 	}
 
-private:
 	std::map<int, std::shared_ptr<Command<CommandedSystem>>> _move;
 	std::map<int, std::shared_ptr<Command<CommandedSystem>>> _interaction;
 };

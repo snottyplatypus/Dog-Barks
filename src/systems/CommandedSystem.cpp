@@ -1,5 +1,6 @@
 #include "CommandedSystem.hpp"
 
+
 CommandedSystem::CommandedSystem(int x, int y, std::string tile, std::string name, Faction faction) 
 	: _updated(false), _faction(faction)
 {
@@ -32,10 +33,10 @@ void CommandedSystem::init(int width, int height)
 void CommandedSystem::update()
 {
 	_body->update();
-	if (!_body->_dead)
+	if (!_body->_dead) {
 		_computing->_map->computeFov(_pos->_x, _pos->_y, _computing->_radius, true, FOV_SHADOW);
-	if (!_body->_dead)
 		_ai->update(*this);
+	}
 }
 
 void CommandedSystem::command()

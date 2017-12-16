@@ -69,8 +69,8 @@ void DataManager::init()
 		std::string name = file[i]["name"].as<std::string>();
 		_species[name]._species = name;
 		for (YAML::const_iterator it = file[i]["parts"].begin(); it != file[i]["parts"].end(); ++it) {
-			_species[name]._body.push_back(_bodyParts[it->second.as<std::string>()]);
-			_species[name]._body.back()._name = it->first.as<std::string>();
+			_species[name]._parts.push_back(_bodyParts[it->second.as<std::string>()]);
+			_species[name]._parts.back()._name = it->first.as<std::string>();
 		}
 	}
 

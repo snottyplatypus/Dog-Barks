@@ -5,7 +5,7 @@
 #include "LevelTurnState.hpp"
 #include "LevelRenderState.hpp"
 #include "Terrain.hpp"
-#include "../systems/ComMandedSystem.hpp"
+#include "../systems/CommandedSystem.hpp"
 #include "../systems/CameraSystem.hpp"
 #include "../systems/LookingCursor.hpp"
 #include "../systems/FireCursor.hpp"

@@ -32,9 +32,9 @@ struct LivingComponent
 
 	std::string _species;
 	std::map<std::string, int> _keys;
-	std::vector<BodyPart> _body;
+	std::vector<BodyPart> _parts;
 	bool _dead;
 	std::weak_ptr<CommandedSystem> _system;
 
-	BodyPart& operator[] (std::string key) { return _body[_keys[key]]; }
+	BodyPart& operator[] (std::string key) { return _parts[_keys[key]]; }
 };

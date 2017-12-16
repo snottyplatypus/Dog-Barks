@@ -3,6 +3,7 @@
 #include "../level/Level.hpp"
 #include "../ui/Gui.hpp"
 #include "../ui/GuiState.hpp"
+#include "../components/ai/AiState.hpp"
 #include <iostream>
 
 void EndTurn::react(CommandedSystem & object)
@@ -49,7 +50,6 @@ void TriggerEnter::react(CommandedSystem & object)
 		eventManager.onAttack(object, level._fireCursor._lastPos, gui._attackSelect._bodyPart, gui._attackSelect._bullets);
 		level._turnState->exit(level);
 		object._updated = true;
-		eventManager.onNotify(std::make_unique<EndTurn>(), object);
 	}
 }
 
@@ -95,6 +95,7 @@ void DeathEvent::react(CommandedSystem & object)
 			object._renderer->_name += " - dead";
 		if (object._renderer->_tile.find("_dead") == std::string::npos)
 			object._renderer->_tile += "_dead";
+		object._ai->_state = std::make_unique<NoAi>();
 	}
 }
 
