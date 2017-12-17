@@ -52,6 +52,8 @@ void DataManager::init()
 		_weapons[name]._projectiles = file[i]["projectiles"].as<int>();
 		_weapons[name]._damage = file[i]["damage"].as<int>();
 	}
+	for (auto i : _weapons)
+		_wKeys.push_back(i.first);
 
 	file = YAML::LoadFile("data/living/body_part.yaml");
 	for (std::size_t i = 0; i < file.size(); i++) {

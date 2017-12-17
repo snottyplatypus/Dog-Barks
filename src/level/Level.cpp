@@ -11,6 +11,7 @@ Level::Level(const int width, const int height)
 	: _width(width), _height(height), _terrain(boost::extents[_width][_height]),
 	  _generated(boost::extents[_width][_height]), _player(nullptr)
 {
+	_gameState = std::make_unique<GenerateState>();
 	_turnState = std::make_unique<PlayerTurn>();
 	_renderState = std::make_unique<RenderBase>();
 }
@@ -21,28 +22,12 @@ Level::~Level()
 
 void Level::init()
 {
-	_player = data._player;
-	_player->_id = "player";
-	_player->init(_width, _height);
-	updateComputingMap(*_player);
-	_actors.push_back(_player);
-	
-	_camera.lockOn({ config.screenWidth / 2 - _width / 2, config.screenHeight / 2 - _height / 2 });
-
-	generateLevel();
-	_turnState->transit<PlayerTurn>(*this);
+	_gameState->enter(*this);
 }
 
 void Level::update()
 {
-	for (auto i : _actors) {
-		_terrain[i->_pos->_x][i->_pos->_y]._actor = i;
-		i->_renderer->_bg = _terrain[i->_pos->_x][i->_pos->_y]._renderer->_bg;
-	}
-
-	_turnState->update(*this);
-
-	_renderState->update(*this);
+	_gameState->update(*this);
 }
 
 void Level::renderFov(CommandedSystem& system)
@@ -117,29 +102,12 @@ void Level::generateLevel()
 			_actors.push_back(std::make_shared<CommandedSystem>(i._x + rng.getInt(1, i._width - 2), i._y + rng.getInt(1, i._height - 2)));
 			_actors.back()->_renderer->_tile = "gang_b";
 			_actors.back()->init(_width, _height);
-			_actors.back()->_ai->_state->transit<NoAi>(*_actors.back());
-			_actors.back()->_faction = data._factions["gang_b"];
-		}
-	}
-	
-	int nOfficer = rng.getInt(MIN_OFFICER, MAX_OFFICER);
-	for (int i = 0; i < nOfficer; i++) {
-		_actors.push_back(std::make_shared<CommandedSystem>(2 + i, 2));
-		_actors.back()->_renderer->_tile = "swat";
-		_actors.back()->init(_width, _height);
-		_actors.back()->_faction = data._factions["swat"];
-		_actors.back()->_renderer->_name = "swatman";
-		bool hostile = false;
-		for (auto i : level._actors) {
-			if (_actors.back()->_faction._relations[i->_faction._name] == "hostile" && !i->_body->_dead) {
-				_actors.back()->_ai->_state->transit<RaidingState>(*_actors.back(), *i);
-				hostile = true;
-			}
-		}
-		if (!hostile)
 			_actors.back()->_ai->_state->transit<WanderingState>(*_actors.back());
+			_actors.back()->_faction = data._factions["gang_b"];
+			int index = rng.getInt(1, static_cast<int>(data._wKeys.size()) - 1);
+			_actors.back()->_inventory->_held = data._weapons[data._wKeys[index]];
+		}
 	}
-	
 }
 
 void Level::initTerrain()

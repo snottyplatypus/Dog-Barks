@@ -37,7 +37,7 @@ bool BloodLine::putPoint(int x, int y)
 	default:
 		break;
 	}
-	if (x > 0 && y > 0) {
+	if (x > 0 && y > 0 && x < level._width && y < level._height) {
 		level._terrain[x][y] = {
 								level._terrain[x][y]._renderer->_tile,
 								level._terrain[x][y]._renderer->_name,

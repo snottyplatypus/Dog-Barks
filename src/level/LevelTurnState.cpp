@@ -11,6 +11,7 @@ void PlayerTurn::enter(Level & level)
 	}
 	level.updateComputingMap(*level._player);
 	level._player->update();
+	level.timeToAssault--;
 }
 
 void PlayerTurn::update(Level & level)

@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include "LevelTurnState.hpp"
 #include "LevelRenderState.hpp"
+#include "LevelGameState.hpp"
 #include "Terrain.hpp"
 #include "../systems/CommandedSystem.hpp"
 #include "../systems/CameraSystem.hpp"
@@ -36,6 +37,7 @@ public:
 	bool checkVisited(int x, int y, int width, int height);
 	void setInBounds(int& x, int& y);
 
+	std::unique_ptr<LevelGameState> _gameState;
 	std::unique_ptr<LevelTurnState> _turnState;
 	std::unique_ptr<LevelRenderState> _renderState;
 	Effect _effect;
@@ -50,6 +52,8 @@ public:
 
 	int _width;
 	int _height;
+
+	int timeToAssault;
 
 private:
 	boost::multi_array<bool, 2> _generated;
