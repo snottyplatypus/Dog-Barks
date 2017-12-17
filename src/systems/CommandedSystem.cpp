@@ -37,6 +37,8 @@ void CommandedSystem::update()
 		_computing->_map->computeFov(_pos->_x, _pos->_y, _computing->_radius, true, FOV_SHADOW);
 		_ai->update(*this);
 	}
+	else
+		_updated = true;
 }
 
 void CommandedSystem::command()
@@ -48,12 +50,10 @@ void CommandedSystem::command()
 		eventManager.onNotify(std::make_unique<EndTurn>(), *this);
 	}
 	if (_interaction != nullptr) {
+		_updated = true;
 		_interaction->execute(*this);
 		_interaction = nullptr;
 	}
-	// TEMP UNTIL AI
-	if (_id != "player") {
-		_updated = true;
+	if (_body->_dead && _id != "player")
 		eventManager.onNotify(std::make_unique<EndTurn>(), *this);
-	}
 }

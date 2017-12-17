@@ -4,17 +4,18 @@
 #include "../ui/Gui.hpp"
 #include "../ui/GuiState.hpp"
 #include "../components/ai/AiState.hpp"
+#include "../utils/EventManager.hpp"
 #include <iostream>
 
 void EndTurn::react(CommandedSystem & object)
 {
-	if (level._turnState->_id == "PlayerTurn") { //TEMP UNTIL INTERACTION/MOVEMENT COST
+	if (level._turnState->_id == "PlayerTurn") {
 		if (object._id == "player") {
 			object._updated = false;
 			level._turnState->transit<OtherTurn>(level);
 		}
 	}
-	else if (level._turnState->_id == "OtherTurn") { //ALSO TEMP
+	else if (level._turnState->_id == "OtherTurn") {
 		bool updated = true;
 		for (std::size_t i = 1; i < level._actors.size(); ++i)
 			if (!level._actors[i] ->_updated)
@@ -47,8 +48,8 @@ void TriggerAimingMode::react(CommandedSystem & object)
 void TriggerEnter::react(CommandedSystem & object)
 {
 	if (level._turnState->_id == "CursorModeF") {
-		eventManager.onAttack(object, level._fireCursor._lastPos, gui._attackSelect._bodyPart, gui._attackSelect._bullets);
 		level._turnState->exit(level);
+		eventManager.onAttack(object, level._fireCursor._lastPos, gui._attackSelect._bodyPart, gui._attackSelect._bullets);
 		object._updated = true;
 	}
 }
@@ -84,7 +85,6 @@ void MoveEvent::react(CommandedSystem & object)
 				gui._state->transit<AimTarget>(gui);
 		}
 	}
-
 }
 
 void DeathEvent::react(CommandedSystem & object)

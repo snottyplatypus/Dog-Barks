@@ -4,7 +4,7 @@
     civilian: neutral
     gang_a: neutral
     gang_b: neutral
-    police: neutral
+    swat: neutral
 
 - GANG_A:
   name: gang_a
@@ -12,7 +12,7 @@
     civilian: neutral
     gang_a: friendly
     gang_b: hostile
-    police: hostile
+    swat: hostile
 
 - GANG_B:
   name: gang_b
@@ -20,12 +20,12 @@
     civilian: neutral
     gang_a: hostile
     gang_b: friendly
-    police: hostile
+    swat: hostile
 
-- POLICE:
-  name: police
+- SWAT:
+  name: swat
   relations:
     cvilian: friendly
-    gang_a: hostile
+    gang_a: neutral
     gang_b: hostile
-    police: friendly
+    swat: friendly

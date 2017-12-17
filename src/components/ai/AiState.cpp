@@ -65,10 +65,19 @@ void AttackingState::update(CommandedSystem & system)
 	if (nearby.empty())
 		transit<ChasingState>(system, _target);
 	else {
-		_target = *nearby.front();
-		std::string part = _target._body->_parts[rng.getInt(0, static_cast<int>(_target._body->_parts.size() - 1))]._name;
-		int bullets = rng.getInt(1, system._inventory->_held._mag);
-		system._interaction = std::make_shared<Attack<CommandedSystem>>(*_target._pos, part, 1);
+		if (rng.getFloat(0, 1) > 0.7f && db::dist<int>(*system._pos, *_target._pos) > 1) {
+			system._computing->_path->compute(system._pos->_x, system._pos->_y, _target._pos->_x, _target._pos->_y);
+			int dx = system._pos->_x;
+			int dy = system._pos->_y;
+			system._computing->_path->walk(&dx, &dy, true);
+			system._move = std::make_shared<Move<CommandedSystem>>(dx - system._pos->_x, dy - system._pos->_y);
+		}
+		else {
+			_target = *nearby.front();
+			std::string part = _target._body->_parts[rng.getInt(0, static_cast<int>(_target._body->_parts.size() - 1))]._name;
+			int bullets = rng.getInt(1, system._inventory->_held._mag);
+			system._interaction = std::make_shared<Attack<CommandedSystem>>(*_target._pos, part, 1);
+		}
 	}
 }
 
@@ -90,4 +99,42 @@ void ChasingState::update(CommandedSystem & system)
 	}
 	else
 		transit<WanderingState>(system);
+}
+
+void RaidingState::enter(CommandedSystem & system)
+{
+}
+
+void RaidingState::update(CommandedSystem & system)
+{
+	auto nearby = hostileInFov(system);
+	if (!_target._body->_dead && system._computing->_map->isInFov(_target._pos->_x, _target._pos->_y)) {
+		std::string part = _target._body->_parts[rng.getInt(0, static_cast<int>(_target._body->_parts.size() - 1))]._name;
+		int bullets = rng.getInt(1, system._inventory->_held._mag);
+		system._interaction = std::make_shared<Attack<CommandedSystem>>(*_target._pos, part, 1);
+	}
+	else if (!nearby.empty()) {
+		_target = *nearby.front();
+		std::string part = _target._body->_parts[rng.getInt(0, static_cast<int>(_target._body->_parts.size() - 1))]._name;
+		int bullets = rng.getInt(1, system._inventory->_held._mag);
+		system._interaction = std::make_shared<Attack<CommandedSystem>>(*_target._pos, part, 1);
+	}
+	else if (!_target._body->_dead) {
+		system._computing->_path->compute(system._pos->_x, system._pos->_y, _target._pos->_x, _target._pos->_y);
+		int dx = system._pos->_x;
+		int dy = system._pos->_y;
+		system._computing->_path->walk(&dx, &dy, true);
+		system._move = std::make_shared<Move<CommandedSystem>>(dx - system._pos->_x, dy - system._pos->_y);
+	}
+	else {
+		bool remaining = false;
+		for (auto i : level._actors) {
+			if (system._faction._relations[i->_faction._name] == "hostile" && !i->_body->_dead) {
+				transit<RaidingState>(system, *i);
+				remaining = true;
+			}
+		}
+		if (!remaining)
+			transit<WanderingState>(system);
+	}
 }

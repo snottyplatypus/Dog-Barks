@@ -29,18 +29,18 @@ void OtherTurn::enter(Level & level)
 	for (auto i : level._actors) {
 		level._terrain[i->_pos->_x][i->_pos->_y]._actor = i;
 		i->_renderer->_bg = level._terrain[i->_pos->_x][i->_pos->_y]._renderer->_bg;
-	}
-	for (std::size_t i = 1; i < level._actors.size(); ++i) {
-		level.updateComputingMap(*level._actors[i]);
-		level._actors[i]->update();
+		if (i->_id != "player") {
+			level.updateComputingMap(*i);
+			i->update();
+		}
 	}
 }
 
 void OtherTurn::update(Level & level)
 {
-	for (std::size_t i = 1; i < level._actors.size(); ++i) {
-		level._actors[i]->command();
-	}
+	for (auto i : level._actors)
+		if (i->_id != "player")
+			i->command();
 }
 
 void OtherTurn::exit(Level & level)

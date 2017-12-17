@@ -76,3 +76,14 @@ public:
 
 	PositionComponent _target;
 };
+
+class RaidingState : public AiState
+{
+public:
+	RaidingState(const CommandedSystem & target) : _target(target) { _id = "Raiding	"; }
+	~RaidingState() {}
+	void enter(CommandedSystem & system) override;
+	void update(CommandedSystem & system) override;
+
+	CommandedSystem _target;
+};

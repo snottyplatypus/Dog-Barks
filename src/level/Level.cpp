@@ -49,14 +49,14 @@ void Level::renderFov(CommandedSystem& system)
 {
 	for (int i = 0; i < _width; i++) {
 		for (int j = 0; j < _height; j++) {
-			if (system._computing->_map->isInFov(i, j)) {
+			//if (system._computing->_map->isInFov(i, j)) {
 				if (_terrain[i][j]._actor == nullptr)
 					_terrain[i][j]._renderer->update({ i + _camera._pos->_x, j + _camera._pos->_y });
 				else
 					_terrain[i][j]._actor->_renderer->update({ i + _camera._pos->_x, j + _camera._pos->_y });
-			}
-			else
-				_terrain[i][j]._renderer->update({ i + _camera._pos->_x, j + _camera._pos->_y }, 0.1f);
+			//}
+			//else
+				//_terrain[i][j]._renderer->update({ i + _camera._pos->_x, j + _camera._pos->_y }, 0.1f);
 		}
 	}
 }
@@ -110,12 +110,36 @@ void Level::generateLevel()
 			}
 		}
 	}
+	
+	for (auto i : _rooms) {
+		int nActor = rng.getInt(0, MAX_ENEMY_PER_ROOM);
+		for (int j = 0; j < nActor; j++) {
+			_actors.push_back(std::make_shared<CommandedSystem>(i._x + rng.getInt(1, i._width - 2), i._y + rng.getInt(1, i._height - 2)));
+			_actors.back()->_renderer->_tile = "gang_b";
+			_actors.back()->init(_width, _height);
+			_actors.back()->_ai->_state->transit<WanderingState>(*_actors.back());
+			_actors.back()->_faction = data._factions["gang_b"];
+		}
+	}
 
-	_actors.push_back(std::make_shared<CommandedSystem>(_rooms[0]._x + _rooms[0]._width / 2, _rooms[0]._y + _rooms[0]._height / 2));
-	_actors.back()->_renderer->_tile = "gang_b";
-	_actors.back()->init(_width, _height);
-	_actors.back()->_ai->_state->transit<WanderingState>(*_actors.back());
-	_actors.back()->_faction = data._factions["gang_b"];
+	int nOfficer = rng.getInt(MIN_OFFICER, MAX_OFFICER);
+	for (int i = 0; i < nOfficer; i++) {
+		_actors.push_back(std::make_shared<CommandedSystem>(2 + i, 2));
+		_actors.back()->_renderer->_tile = "swat";
+		_actors.back()->init(_width, _height);
+		_actors.back()->_faction = data._factions["swat"];
+		_actors.back()->_renderer->_name = "swatman";
+		bool hostile = false;
+		for (auto i : level._actors) {
+			if (_actors.back()->_faction._relations[i->_faction._name] == "hostile" && !i->_body->_dead) {
+				_actors.back()->_ai->_state->transit<RaidingState>(*_actors.back(), *i);
+				hostile = true;
+			}
+		}
+		if (!hostile)
+			_actors.back()->_ai->_state->transit<WanderingState>(*_actors.back());
+	}
+
 }
 
 void Level::initTerrain()
