@@ -64,12 +64,19 @@ void MoveEvent::react(CommandedSystem & object)
 	if (object._id != "cursor") {
 		if (!object._body->_dead) {
 			if (level._terrain[object._pos->_x + _x][object._pos->_y + _y]._isWalkable) {
+				auto obj = level._terrain[object._pos->_x][object._pos->_y]._actor;
 				if (level._terrain[object._pos->_x + _x][object._pos->_y + _y]._actor != nullptr) {
-					level._terrain[object._pos->_x + _x][object._pos->_y + _y]._actor->_pos->_x -= _x;
-					level._terrain[object._pos->_x + _x][object._pos->_y + _y]._actor->_pos->_y -= _y;
-					level._terrain[object._pos->_x + _x][object._pos->_y + _y]._actor = nullptr;
+					auto temp = std::make_shared<CommandedSystem>(*level._terrain[object._pos->_x + _x][object._pos->_y + _y]._actor);
+					level._terrain[object._pos->_x + _x][object._pos->_y + _y]._actor = obj;
+					level._terrain[object._pos->_x][object._pos->_y]._actor = temp;
+					temp->_pos->_x -= _x;
+					temp->_pos->_y -= _y;
 				}
-				level._terrain[object._pos->_x][object._pos->_y]._actor = nullptr;
+				else {
+					level._terrain[object._pos->_x][object._pos->_y]._actor = nullptr;
+					level._terrain[object._pos->_x + _x][object._pos->_y + _y]._actor = obj;
+				}
+
 				object._pos->_x += _x;
 				object._pos->_y += _y;
 			}

@@ -29,6 +29,11 @@ std::vector<std::shared_ptr<CommandedSystem>> AiState::hostileInFov(CommandedSys
 	return nearby;
 }
 
+void NoAi::update(CommandedSystem & system)
+{
+	system._move = std::make_shared<Move<CommandedSystem>>(0, 0);
+}
+
 void WanderingState::enter(CommandedSystem & system)
 {
 }

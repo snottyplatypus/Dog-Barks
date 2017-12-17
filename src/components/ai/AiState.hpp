@@ -1,6 +1,7 @@
 #pragma once
 #include "../components/PositionComponent.hpp"
 #include "../systems/CommandedSystem.hpp"
+#include "../utils/EventManager.hpp"
 #include <memory>
 #include <string>
 #include <vector>
@@ -32,7 +33,7 @@ public:
 	NoAi() { _id = "NoAi"; }
 	~NoAi() {}
 	void enter(CommandedSystem & system) override {}
-	void update(CommandedSystem & system) override {}
+	void update(CommandedSystem & system) override;
 };
 
 class WanderingState : public AiState

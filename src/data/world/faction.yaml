@@ -26,6 +26,6 @@
   name: swat
   relations:
     cvilian: friendly
-    gang_a: neutral
+    gang_a: hostile
     gang_b: hostile
     swat: friendly

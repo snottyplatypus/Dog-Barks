@@ -117,11 +117,11 @@ void Level::generateLevel()
 			_actors.push_back(std::make_shared<CommandedSystem>(i._x + rng.getInt(1, i._width - 2), i._y + rng.getInt(1, i._height - 2)));
 			_actors.back()->_renderer->_tile = "gang_b";
 			_actors.back()->init(_width, _height);
-			_actors.back()->_ai->_state->transit<WanderingState>(*_actors.back());
+			_actors.back()->_ai->_state->transit<NoAi>(*_actors.back());
 			_actors.back()->_faction = data._factions["gang_b"];
 		}
 	}
-
+	
 	int nOfficer = rng.getInt(MIN_OFFICER, MAX_OFFICER);
 	for (int i = 0; i < nOfficer; i++) {
 		_actors.push_back(std::make_shared<CommandedSystem>(2 + i, 2));
@@ -139,7 +139,7 @@ void Level::generateLevel()
 		if (!hostile)
 			_actors.back()->_ai->_state->transit<WanderingState>(*_actors.back());
 	}
-
+	
 }
 
 void Level::initTerrain()
