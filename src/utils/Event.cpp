@@ -13,6 +13,7 @@ void EndTurn::react(CommandedSystem & object)
 		if (object._id == "player") {
 			object._updated = false;
 			level._turnState->transit<OtherTurn>(level);
+			level.timeToAssault--;
 		}
 	}
 	else if (level._turnState->_id == "OtherTurn") {
@@ -57,7 +58,6 @@ void TriggerEnter::react(CommandedSystem & object)
 void TriggerCancel::react(CommandedSystem & object)
 {
 	level._turnState->exit(level);
-	gui._state->exit(gui);
 }
 
 void MoveEvent::react(CommandedSystem & object)

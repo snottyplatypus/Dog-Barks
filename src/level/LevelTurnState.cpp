@@ -13,7 +13,6 @@ void PlayerTurn::enter(Level & level)
 	}
 	level.updateComputingMap(*level._player);
 	level._player->update();
-	level.timeToAssault--;
 	if (level._terrain[level._player->_pos->_x][level._player->_pos->_y]._isEscape)
 		gui._state->transit<Escape>(gui);
 	else if (gui._state->_id == "Escape")
@@ -29,6 +28,7 @@ void PlayerTurn::update(Level & level)
 
 void PlayerTurn::exit(Level & level)
 {
+	gui._state->exit(gui);
 }
 
 void OtherTurn::enter(Level & level)
@@ -70,6 +70,7 @@ void CursorModeL::exit(Level & level)
 {
 	transit<PlayerTurn>(level);
 	level._renderState->exit(level);
+	gui._state->exit(gui);
 }
 
 void CursorModeF::enter(Level & level)
@@ -88,4 +89,5 @@ void CursorModeF::exit(Level & level)
 {
 	transit<PlayerTurn>(level);
 	level._renderState->exit(level);
+	gui._state->exit(gui);
 }
