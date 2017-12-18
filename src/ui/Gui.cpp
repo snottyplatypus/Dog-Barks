@@ -8,7 +8,7 @@
 
 Gui::Gui()
 {
-	_state = std::make_unique<NothingState>();
+	_state = std::make_unique<DefaultState>();
 }
 
 Gui::~Gui()

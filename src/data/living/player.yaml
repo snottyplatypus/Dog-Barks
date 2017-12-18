@@ -1,5 +1,6 @@
 PLAYER:
-  weapon: shotgun
+  name: You
   species: human
   tile: gang_a
   faction: gang_a
+  weapon: shotgun

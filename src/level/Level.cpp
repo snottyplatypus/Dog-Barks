@@ -34,14 +34,26 @@ void Level::renderFov(CommandedSystem& system)
 {
 	for (int i = 0; i < _width; i++) {
 		for (int j = 0; j < _height; j++) {
-			//if (system._computing->_map->isInFov(i, j)) {
+			if (system._computing->_map->isInFov(i, j)) {
 				if (_terrain[i][j]._actor == nullptr)
 					_terrain[i][j]._renderer->update({ i + _camera._pos->_x, j + _camera._pos->_y });
 				else
 					_terrain[i][j]._actor->_renderer->update({ i + _camera._pos->_x, j + _camera._pos->_y });
-			//}
-			//else
-				//_terrain[i][j]._renderer->update({ i + _camera._pos->_x, j + _camera._pos->_y }, 0.1f);
+			}
+			else
+				_terrain[i][j]._renderer->update({ i + _camera._pos->_x, j + _camera._pos->_y }, 0.1f);
+		}
+	}
+}
+
+void Level::renderAll()
+{
+	for (int i = 0; i < _width; i++) {
+		for (int j = 0; j < _height; j++) {
+		if (_terrain[i][j]._actor == nullptr)
+			_terrain[i][j]._renderer->update({ i + _camera._pos->_x, j + _camera._pos->_y });
+		else
+			_terrain[i][j]._actor->_renderer->update({ i + _camera._pos->_x, j + _camera._pos->_y });
 		}
 	}
 }

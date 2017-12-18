@@ -29,6 +29,7 @@ public:
 	void init();
 	void update();
 	void renderFov(CommandedSystem& system);
+	void renderAll();
 	void updateComputingMap(CommandedSystem& system);
 	void generateLevel();
 	void initTerrain();

@@ -19,7 +19,6 @@ public:
 	Gui();
 	~Gui();
 	void update();
-
 	std::unique_ptr<GuiState> _state;
 	int _choice;
 	AttackSelection _attackSelect;

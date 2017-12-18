@@ -2,6 +2,7 @@
 #include "Level.hpp"
 #include "../utils/Global.hpp"
 #include "../components/ai/AiState.hpp"
+#include <libtcod/libtcod.hpp>
 #include <iostream>
 
 void GenerateState::enter(Level & level)
@@ -25,7 +26,7 @@ void GenerateState::update(Level & level)
 
 void RaidState::enter(Level & level)
 {
-	level.timeToAssault = rng.getInt(1, 10);
+	level.timeToAssault = rng.getInt(30, 60);
 }
 
 void RaidState::update(Level & level)
@@ -38,6 +39,7 @@ void RaidState::update(Level & level)
 	level._renderState->update(level);
 	if (level.timeToAssault <= 0)
 		transit<AssaultState>(level);
+	TCODConsole::root->printEx(config.screenWidth / 2, 2, TCODConsole::root->getBackgroundFlag(), TCOD_CENTER, "Time until assault : %i", level.timeToAssault);
 }
 
 void AssaultState::enter(Level & level)
@@ -71,4 +73,5 @@ void AssaultState::update(Level & level)
 	}
 	level._turnState->update(level);
 	level._renderState->update(level);
+	TCODConsole::root->printEx(config.screenWidth / 2, 2, TCODConsole::root->getBackgroundFlag(), TCOD_CENTER, "Dog barks !");
 }

@@ -23,18 +23,18 @@ public:
 	std::string _id;
 };
 
-class NothingState : public GuiState
+class DefaultState : public GuiState
 {
 public:
-	NothingState() { _id = "Nothing"; }
-	~NothingState() {}
+	DefaultState() { _id = "Nothing"; }
+	~DefaultState() {}
 	void enter(Gui & gui) override {}
-	void update(Gui & gui) override {}
+	void update(Gui & gui) override;
 	void next(Gui & gui) override {}
 	void exit(Gui & gui) override {}
 };
 
-class LookingTerrain : public GuiState
+class LookingTerrain : public DefaultState
 {
 public:
 	LookingTerrain(PositionComponent target = { 0, 0 }) : _target(target) { _id = "LookingTerrain"; }
@@ -48,7 +48,7 @@ private:
 	PositionComponent _target;
 };
 
-class InspectingTerrain : public GuiState
+class InspectingTerrain : public DefaultState
 {
 public:
 	InspectingTerrain(PositionComponent target, char choice) : _target(target), _choice(choice) { _id = "InspectingTerrain"; }
@@ -63,7 +63,7 @@ private:
 	char _choice;
 };
 
-class AimTarget : public GuiState
+class AimTarget : public DefaultState
 {
 public:
 	AimTarget(CommandedSystem target = CommandedSystem(), int mag = 0) : _target(target), _mag(mag) { _id = "AimTarget"; }
@@ -78,7 +78,7 @@ private:
 	int _mag;
 };
 
-class AimPart : public GuiState
+class AimPart : public DefaultState
 {
 public:
 	AimPart(CommandedSystem target = CommandedSystem(), int mag = 0) : _target(target), _mag(mag) { _id = "AimPart"; }
@@ -93,7 +93,7 @@ private:
 	int _mag;
 };
 
-class AimRound : public GuiState
+class AimRound : public DefaultState
 {
 public:
 	AimRound(CommandedSystem target = CommandedSystem(), int mag = 0) : _target(target), _mag(mag) { _id = "AimRound"; }
