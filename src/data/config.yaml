@@ -3,3 +3,46 @@ width: 80
 height: 50
 #the path to the font file from executable
 font: assets/font10x10.png
+
+#map generation parameters
+MIN_ROOM_SIZE: 4
+MAX_ROOM_SIZE: 9
+DISTANCE_BORDERS: 4
+MAX_ENEMY_PER_ROOM: 3
+MIN_OFFICER: 5
+MAX_OFFICER: 10
+
+#key binding
+bindings:
+  move_SW: 1
+  move_S: 2
+  move_SE: 3
+  move_W: 4
+  move_E: 6
+  move_NW: 7
+  move_N: 8
+  move_NE: 9
+  look: l
+  shoot: f
+  do_nothing: .
+
+tiles:
+  nothing: 32 #char ' '
+  ground: 46 #char '.'
+  grass1: 44 #char ','
+  grass2: 59 #char ';'
+  grass3: 34 #char '"'
+  floor:  43 #char '+'
+  block1: 176
+  block2: 177
+  block3: 178
+  door: 47 #char '+'
+  cursor: 88 #char 'X'
+  civilian: 256
+  civilian_dead: 257
+  gang_a: 259
+  gang_a_dead: 260
+  gang_b: 262
+  gang_b_dead: 263
+  swat: 265
+  swat_dead: 266

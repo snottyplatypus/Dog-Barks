@@ -10,32 +10,34 @@
 
 struct InputHandler
 {
-	InputHandler() 
+	InputHandler() {}
+	~InputHandler() {}
+
+	void init()
 	{
 		//Arrows
 		_move[TCODK_UP] = std::make_shared<Move<CommandedSystem>>(0, -1);
 		_move[TCODK_RIGHT] = std::make_shared<Move<CommandedSystem>>(1, 0);
 		_move[TCODK_DOWN] = std::make_shared<Move<CommandedSystem>>(0, 1);
 		_move[TCODK_LEFT] = std::make_shared<Move<CommandedSystem>>(-1, 0);
-		_move['9'] = std::make_shared<Move<CommandedSystem>>(1, -1);
-		_move['8'] = std::make_shared<Move<CommandedSystem>>(0, -1);
-		_move['7'] = std::make_shared<Move<CommandedSystem>>(-1, -1);
-		_move['6'] = std::make_shared<Move<CommandedSystem>>(1, 0);
-		_move['4'] = std::make_shared<Move<CommandedSystem>>(-1, 0);
-		_move['3'] = std::make_shared<Move<CommandedSystem>>(1, 1);
-		_move['2'] = std::make_shared<Move<CommandedSystem>>(0, 1);
-		_move['1'] = std::make_shared<Move<CommandedSystem>>(-1, 1);
-		
+		_move[config.binding["move_NE"]] = std::make_shared<Move<CommandedSystem>>(1, -1);
+		_move[config.binding["move_N"]] = std::make_shared<Move<CommandedSystem>>(0, -1);
+		_move[config.binding["move_NW"]] = std::make_shared<Move<CommandedSystem>>(-1, -1);
+		_move[config.binding["move_E"]] = std::make_shared<Move<CommandedSystem>>(1, 0);
+		_move[config.binding["move_W"]] = std::make_shared<Move<CommandedSystem>>(-1, 0);
+		_move[config.binding["move_SE"]] = std::make_shared<Move<CommandedSystem>>(1, 1);
+		_move[config.binding["move_S"]] = std::make_shared<Move<CommandedSystem>>(0, 1);
+		_move[config.binding["move_SW"]] = std::make_shared<Move<CommandedSystem>>(-1, 1);
+
 		//interactions
-		_interaction['l'] = std::make_shared<LookingCursorMode<CommandedSystem>>();
-		_interaction['f'] = std::make_shared<AimingCursorMode<CommandedSystem>>();
-		_interaction['.'] = std::make_shared<Nothing<CommandedSystem>>();
+		_interaction[config.binding["look"]] = std::make_shared<LookingCursorMode<CommandedSystem>>();
+		_interaction[config.binding["shoot"]] = std::make_shared<AimingCursorMode<CommandedSystem>>();
+		_interaction[config.binding["do_nothing"]] = std::make_shared<Nothing<CommandedSystem>>();
 
 		//Pause menu & cancel
 		_interaction[TCODK_ESCAPE] = std::make_shared<Cancel<CommandedSystem>>();
 		_interaction[TCODK_ENTER] = std::make_shared<Enter<CommandedSystem>>();
 	}
-	~InputHandler() {}
 
 	void onObject(CommandedSystem& system)
 	{

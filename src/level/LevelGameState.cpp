@@ -44,7 +44,7 @@ void RaidState::update(Level & level)
 
 void AssaultState::enter(Level & level)
 {
-	int nOfficer = rng.getInt(MIN_OFFICER, MAX_OFFICER);
+	int nOfficer = rng.getInt(config.MIN_OFFICER, config.MAX_OFFICER);
 	for (int i = 0; i < nOfficer; i++) {
 		level._actors.push_back(std::make_shared<CommandedSystem>(2 + i, 2));
 		level._actors.back()->_renderer->_tile = "swat";

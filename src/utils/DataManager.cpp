@@ -7,29 +7,6 @@
 
 DataManager::DataManager()
 {
-	_tiles["nothing"] = ' ';
-	_tiles["ground"] = '.';
-	_tiles["grass1"] = ',';
-	_tiles["grass2"] = ';';
-	_tiles["grass3"] = '"';
-	_tiles["floor"] = '+';
-	_tiles["block1"] = TCOD_CHAR_BLOCK1;
-	_tiles["block2"] = TCOD_CHAR_BLOCK2;
-	_tiles["block3"] = TCOD_CHAR_BLOCK3;
-	_tiles["door"] = '/';
-	_tiles["cursor"] = 'X';
-	_tiles["civilian"] = 256;
-	_tiles["civilian dead"] = 257;
-	_tiles["gang_a"] = 259;
-	_tiles["gang_a_dead"] = 260;
-	_tiles["gang_b"] = 262;
-	_tiles["gang_b_dead"] = 263;
-	_tiles["swat"] = 265;
-	_tiles["swat_dead"] = 266;
-
-	_factions["None"];
-	_weapons["Nothing"];
-	_player = std::make_shared<CommandedSystem>();
 }
 
 DataManager::~DataManager()
@@ -42,6 +19,16 @@ void DataManager::init()
 	config.screenWidth = file["width"].as<int>();
 	config.screenHeight = file["height"].as<int>();
 	config.font = file["font"].as<std::string>();
+	config.MIN_ROOM_SIZE = file["MIN_ROOM_SIZE"].as<int>();
+	config.MAX_ROOM_SIZE = file["MAX_ROOM_SIZE"].as<int>();
+	config.DISTANCE_BORDERS = file["DISTANCE_BORDERS"].as<int>();
+	config.MAX_ENEMY_PER_ROOM = file["MAX_ENEMY_PER_ROOM"].as<int>();
+	config.MIN_OFFICER = file["MIN_OFFICER"].as<int>();
+	config.MAX_OFFICER = file["MAX_OFFICER"].as<int>();
+	for (YAML::const_iterator it = file["bindings"].begin(); it != file["bindings"].end(); ++it)
+		config.binding[it->first.as<std::string>()] = it->second.as<char>();
+	for (YAML::const_iterator it = file["tiles"].begin(); it != file["tiles"].end(); ++it)
+		_tiles[it->first.as<std::string>()] = it->second.as<int>();
 
 	file = YAML::LoadFile("data/item/item_weapon.yaml");
 	for (std::size_t i = 0; i < file.size(); i++) {
@@ -87,6 +74,7 @@ void DataManager::init()
 						j->second._relations[it->first.as<std::string>()] = it->second.as<std::string>();
 	}
 
+	_player = std::make_shared<CommandedSystem>();
 	file = YAML::LoadFile("data/living/player.yaml");
 	_player->_inventory->_held = _weapons[file["PLAYER"]["weapon"].as<std::string>()];
 	*_player->_body = _species[file["PLAYER"]["species"].as<std::string>()];

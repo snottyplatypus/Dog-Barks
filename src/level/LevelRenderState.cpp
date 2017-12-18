@@ -13,7 +13,7 @@ void RenderBase::update(Level & level)
 		level.renderFov(*level._player);
 	else {
 		level.renderAll();
-		TCODConsole::root->printEx(config.screenWidth / 2, config.screenHeight -2, TCODConsole::root->getBackgroundFlag(), TCOD_CENTER, "You are dead.");
+		TCODConsole::root->printEx(config.screenWidth / 2, config.screenHeight -2, TCODConsole::root->getBackgroundFlag(), TCOD_CENTER, "You are deceased.");
 	}
 	for (auto i : level._actors)
 		if (i->_ai->_state->_id == "Surprised")

@@ -69,13 +69,13 @@ void Level::generateLevel()
 {
 	std::fill(_generated.origin(), _generated.origin() + _generated.size(), false);
 	initTerrain();
-	generateRecursive(_width / 2 - (MAX_ROOM_SIZE - 2) / 2, _height / 2 - (MAX_ROOM_SIZE - 2) / 2, { 0, 0 });
+	generateRecursive(_width / 2 - (config.MAX_ROOM_SIZE - 2) / 2, _height / 2 - (config.MAX_ROOM_SIZE - 2) / 2, { 0, 0 });
 
 	std::sort(_rooms.begin(), _rooms.end(), [](const Room& a, const Room& b) -> bool { return a._x < b._x; });
 	std::sort(_rooms.begin(), _rooms.end(), [](const Room& a, const Room& b) -> bool { return a._y < b._y; });
 
 	_player->_pos->_x = _rooms[0]._x + 1;
-	_player->_pos->_y = _rooms[0]._y - DISTANCE_BORDERS / 2;
+	_player->_pos->_y = _rooms[0]._y - config.DISTANCE_BORDERS / 2;
 	
 	for (auto i : _rooms) {
 		for (auto j : _rooms) {
@@ -109,7 +109,7 @@ void Level::generateLevel()
 	}
 	
 	for (auto i : _rooms) {
-		int nActor = rng.getInt(0, MAX_ENEMY_PER_ROOM);
+		int nActor = rng.getInt(0, config.MAX_ENEMY_PER_ROOM);
 		for (int j = 0; j < nActor; j++) {
 			_actors.push_back(std::make_shared<CommandedSystem>(i._x + rng.getInt(1, i._width - 2), i._y + rng.getInt(1, i._height - 2)));
 			_actors.back()->_renderer->_tile = "gang_b";
@@ -144,8 +144,8 @@ void Level::initTerrain()
 
 void Level::generateRecursive(int x, int y, Room lastRoom)
 {
-	int width = rng.getInt(MIN_ROOM_SIZE, MAX_ROOM_SIZE);
-	int height = rng.getInt(MIN_ROOM_SIZE, MAX_ROOM_SIZE);
+	int width = rng.getInt(config.MIN_ROOM_SIZE, config.MAX_ROOM_SIZE);
+	int height = rng.getInt(config.MIN_ROOM_SIZE, config.MAX_ROOM_SIZE);
 
 	if (x == lastRoom._x + 1)
 		x = x - width;
@@ -159,9 +159,9 @@ void Level::generateRecursive(int x, int y, Room lastRoom)
 	width = x2 - x;
 	height = y2 - y;
 
-	int dist = DISTANCE_BORDERS - 1;
+	int dist = config.DISTANCE_BORDERS - 1;
 
-	if (x < _width - MAX_ROOM_SIZE - dist && y < _height - MAX_ROOM_SIZE - dist && x > dist && y > dist) {
+	if (x < _width - config.MAX_ROOM_SIZE - dist && y < _height - config.MAX_ROOM_SIZE - dist && x > dist && y > dist) {
 		if (!checkVisited(x, y, width, height)) {
 
 			fill(x, y, width, height, { "block3", "wall", false, false, TCODColor::lightestSepia, TCODColor::darkestSepia * 0.5f });
@@ -199,8 +199,8 @@ bool Level::checkVisited(int x, int y, int width, int height)
 
 void Level::setInBounds(int& x, int& y)
 {
-	x = std::max(x, DISTANCE_BORDERS - 1);
-	y = std::max(y, DISTANCE_BORDERS - 1);
-	x = std::min(x, _width + DISTANCE_BORDERS - 1);
-	y = std::min(y, _height + DISTANCE_BORDERS - 1);
+	x = std::max(x, config.DISTANCE_BORDERS - 1);
+	y = std::max(y, config.DISTANCE_BORDERS - 1);
+	x = std::min(x, _width + config.DISTANCE_BORDERS - 1);
+	y = std::min(y, _height + config.DISTANCE_BORDERS - 1);
 }
