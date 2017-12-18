@@ -13,7 +13,6 @@ void EndTurn::react(CommandedSystem & object)
 		if (object._id == "player") {
 			object._updated = false;
 			level._turnState->transit<OtherTurn>(level);
-			level.timeToAssault--;
 		}
 	}
 	else if (level._turnState->_id == "OtherTurn") {

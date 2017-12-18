@@ -17,6 +17,7 @@ void PlayerTurn::enter(Level & level)
 		gui._state->transit<Escape>(gui);
 	else if (gui._state->_id == "Escape")
 		gui._state->exit(gui);
+	level.timeToAssault--;
 }
 
 void PlayerTurn::update(Level & level)
@@ -68,7 +69,7 @@ void CursorModeL::update(Level & level)
 
 void CursorModeL::exit(Level & level)
 {
-	transit<PlayerTurn>(level);
+	level._turnState = std::make_unique<PlayerTurn>();
 	level._renderState->exit(level);
 	gui._state->exit(gui);
 }
@@ -87,7 +88,7 @@ void CursorModeF::update(Level & level)
 
 void CursorModeF::exit(Level & level)
 {
-	transit<PlayerTurn>(level);
+	level._turnState = std::make_unique<PlayerTurn>();
 	level._renderState->exit(level);
 	gui._state->exit(gui);
 }
