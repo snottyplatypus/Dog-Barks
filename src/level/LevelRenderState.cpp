@@ -29,6 +29,7 @@ void RenderBase::exit(Level & level)
 
 void RenderCursorModeL::enter(Level & level)
 {
+	gui._state->transit<LookingTerrain>(gui);
 }
 
 void RenderCursorModeL::update(Level & level)
@@ -42,11 +43,11 @@ void RenderCursorModeL::update(Level & level)
 void RenderCursorModeL::exit(Level & level)
 {
 	transit<RenderBase>(level);
-	gui._state->exit(gui);
 }
 
 void RenderCursorModeF::enter(Level & level)
 {
+	gui._state->transit<AimTarget>(gui);
 }
 
 void RenderCursorModeF::update(Level & level)
@@ -58,5 +59,4 @@ void RenderCursorModeF::update(Level & level)
 void RenderCursorModeF::exit(Level & level)
 {
 	transit<RenderBase>(level);
-	gui._state->exit(gui);
 }

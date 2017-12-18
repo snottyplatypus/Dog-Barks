@@ -41,3 +41,12 @@ public:
 	void enter(Level& level) override;
 	void update(Level& level) override;
 };
+
+class EscapedState : public LevelGameState
+{
+public:
+	EscapedState() {}
+	~EscapedState() {}
+	void enter(Level& level) override;
+	void update(Level& level) override;
+};

@@ -1,7 +1,9 @@
 #include "GuiState.hpp"
 #include "../level/Level.hpp"
 #include "../utils/Config.hpp"
+#include "../utils/EventManager.hpp"
 #include <algorithm>
+#include <string>
 #include <iostream>
 
 void DefaultState::update(Gui & gui)
@@ -176,6 +178,33 @@ void AimRound::next(Gui & gui)
 }
 
 void AimRound::exit(Gui & gui)
+{
+	transit<DefaultState>(gui);
+}
+
+void Escape::update(Gui & gui)
+{
+	DefaultState::update(gui);
+	std::string message = "Do you want to escape ?";
+	TCODConsole::root->printFrame(config.screenWidth / 2 - static_cast<int>(message.size() / 2) - 1, config.screenHeight / 2 - 1, static_cast<int>(message.size()) + 2, 5);
+	TCODConsole::root->printEx(config.screenWidth / 2, config.screenHeight / 2, TCODConsole::root->getBackgroundFlag(), TCOD_CENTER, message.c_str());
+	TCODConsole::root->printEx(config.screenWidth / 2, config.screenHeight / 2 + 2, TCODConsole::root->getBackgroundFlag(), TCOD_CENTER, " a- Yes  b- No ");
+	if (gui._choice == 'a') {
+		gui._choice = 0;
+		next(gui);
+	}
+	else if (gui._choice == 'b') {
+		gui._choice = 0;
+		exit(gui);
+	}
+}
+
+void Escape::next(Gui & gui)
+{
+	eventManager.onNotify(std::make_unique<EscapeEvent>(), *level._player);
+}
+
+void Escape::exit(Gui & gui)
 {
 	transit<DefaultState>(gui);
 }

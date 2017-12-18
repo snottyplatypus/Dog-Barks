@@ -107,3 +107,14 @@ private:
 	CommandedSystem _target;
 	int _mag;
 };
+
+class Escape : public DefaultState
+{
+public:
+	Escape() { _id = "Escape"; }
+	~Escape() {}
+	void enter(Gui & gui) override {}
+	void update(Gui & gui) override;
+	void next(Gui & gui) override;
+	void exit(Gui & gui) override;
+};

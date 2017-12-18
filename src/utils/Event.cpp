@@ -31,17 +31,17 @@ void TriggerLookingMode::react(CommandedSystem & object)
 		level._turnState->transit<CursorModeL>(level);
 		level._lookingCursor._pos->_x = level._player->_pos->_x;
 		level._lookingCursor._pos->_y = level._player->_pos->_y;
-		gui._state->transit<LookingTerrain>(gui);
 	}
 }
 
 void TriggerAimingMode::react(CommandedSystem & object)
 {
 	if (gui._state->_id == "Nothing") {
-		level._turnState->transit<CursorModeF>(level);
-		level._fireCursor._pos->_x = level._player->_pos->_x;
-		level._fireCursor._pos->_y = level._player->_pos->_y;
-		gui._state->transit<AimTarget>(gui);
+		if (!level._player->_body->_dead) {
+			level._turnState->transit<CursorModeF>(level);
+			level._fireCursor._pos->_x = level._player->_pos->_x;
+			level._fireCursor._pos->_y = level._player->_pos->_y;
+		}
 	}
 }
 
@@ -57,6 +57,7 @@ void TriggerEnter::react(CommandedSystem & object)
 void TriggerCancel::react(CommandedSystem & object)
 {
 	level._turnState->exit(level);
+	gui._state->exit(gui);
 }
 
 void MoveEvent::react(CommandedSystem & object)
@@ -121,4 +122,9 @@ void AimingEvent::react(CommandedSystem & object)
 			if (target != nullptr)
 				gui._state = std::make_unique<AimTarget>(*target, object._inventory->_held._mag);
 	}
+}
+
+void EscapeEvent::react(CommandedSystem & object)
+{
+	level._gameState->transit<EscapedState>(level);
 }

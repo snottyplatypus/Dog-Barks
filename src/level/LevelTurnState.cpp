@@ -1,6 +1,8 @@
 #include "LevelTurnState.hpp"
 #include "Level.hpp"
 #include "../utils/InputHandler.hpp"
+#include "../ui/Gui.hpp"
+#include "../ui/GuiState.hpp"
 #include <memory>
 
 void PlayerTurn::enter(Level & level)
@@ -12,6 +14,10 @@ void PlayerTurn::enter(Level & level)
 	level.updateComputingMap(*level._player);
 	level._player->update();
 	level.timeToAssault--;
+	if (level._terrain[level._player->_pos->_x][level._player->_pos->_y]._isEscape)
+		gui._state->transit<Escape>(gui);
+	else if (gui._state->_id == "Escape")
+		gui._state->exit(gui);
 }
 
 void PlayerTurn::update(Level & level)

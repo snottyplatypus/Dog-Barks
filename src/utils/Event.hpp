@@ -93,3 +93,11 @@ private:
 	int _x;
 	int _y;
 };
+
+class EscapeEvent : public BaseEvent
+{
+public:
+	EscapeEvent() {}
+	~EscapeEvent() {}
+	void react(CommandedSystem & object) override;
+};

@@ -26,6 +26,7 @@ bindings:
   shoot: f
   do_nothing: .
 
+#tile binding according to font position
 tiles:
   nothing: 32 #char ' '
   ground: 46 #char '.'
@@ -33,11 +34,11 @@ tiles:
   grass2: 59 #char ';'
   grass3: 34 #char '"'
   floor:  43 #char '+'
+  door: 47 #char '+'
+  cursor: 88 #char 'X'
   block1: 176
   block2: 177
   block3: 178
-  door: 47 #char '+'
-  cursor: 88 #char 'X'
   civilian: 256
   civilian_dead: 257
   gang_a: 259

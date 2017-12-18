@@ -75,3 +75,12 @@ void AssaultState::update(Level & level)
 	level._renderState->update(level);
 	TCODConsole::root->printEx(config.screenWidth / 2, 2, TCODConsole::root->getBackgroundFlag(), TCOD_CENTER, "Dog barks !");
 }
+
+void EscapedState::enter(Level & level)
+{
+}
+
+void EscapedState::update(Level & level)
+{
+	TCODConsole::root->printEx(config.screenWidth / 2, config.screenHeight / 2, TCODConsole::root->getBackgroundFlag(), TCOD_CENTER, "You escaped !");
+}

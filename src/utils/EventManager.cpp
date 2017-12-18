@@ -26,6 +26,11 @@ void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiv
 	int modHealth = 0;
 	float shot = (1 / static_cast<float>(bullet) * rng.getInt(0, 100) + modWeapon) * (1 - modHealth / 10);
 	if (db::dist_sq<float>(*attacker._pos, receiver) <= shot) {
+		if (level._terrain[receiver._x][receiver._y]._actor != nullptr) {
+			auto temp = level._terrain[receiver._x][receiver._y]._actor->_body;
+			temp->handleDamage(attacker._inventory->_held, (*temp)[part], bullet);
+			level._effect._bloodEffect->create(receiver, db::vec_2p(*attacker._pos, receiver), *level._camera._pos, (attacker._inventory->_held._projectiles / 2 + 1) * 1);
+		}
 		if (attacker._inventory->_held._canDestroyWall) {
 			switch (db::str2int(level._terrain[receiver._x][receiver._y]._renderer->_tile.c_str()))
 			{
@@ -39,11 +44,6 @@ void EventManager::onAttack(CommandedSystem& attacker, PositionComponent& receiv
 			default:
 				break;
 			}
-		}
-		if (level._terrain[receiver._x][receiver._y]._actor != nullptr) {
-			auto temp = level._terrain[receiver._x][receiver._y]._actor->_body;
-			temp->handleDamage(attacker._inventory->_held, (*temp)[part], bullet);
-			level._effect._bloodEffect->create(receiver, db::vec_2p(*attacker._pos, receiver), *level._camera._pos, (attacker._inventory->_held._projectiles / 2 + 1) * 1);
 		}
 		level._effect._shootEffect->create(*attacker._pos, receiver, *level._camera._pos);
 	}
